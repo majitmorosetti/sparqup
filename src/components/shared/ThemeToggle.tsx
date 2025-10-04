@@ -1,63 +1,66 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useMemo } from "react"
-import { motion, useReducedMotion } from "motion/react"
-import { Moon, Sun } from "lucide-react"
+import { useEffect, useState, useMemo } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { Moon, Sun } from "lucide-react";
 
 type Props = {
   /** Échelle globale (1 = taille d’origine). 0.6 = -40% */
-  scale?: number
-}
+  scale?: number;
+};
 
 export default function ThemeToggle({ scale = 1 }: Props) {
-  const [mounted, setMounted] = useState(false)
-  const [isDark, setIsDark] = useState(false)
-  const reduce = useReducedMotion?.() ?? false
+  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+  const reduce = useReducedMotion?.() ?? false;
 
   /* Dimensions basées sur la taille d’origine, mises à l’échelle */
   const dims = useMemo(() => {
-    const r = (v: number) => Math.max(1, Math.round(v * scale)) // arrondi propre, min 1px
-    const TRACK_W = r(56)      // w-14
-    const TRACK_H = r(32)      // h-8
-    const PAD      = r(2)      // p-0.5
-    const KNOB     = r(24)     // h-6 w-6
-    const RANGE    = Math.max(8, TRACK_W - PAD * 2 - KNOB) // mouvement utile
-    const ICON     = r(14)     // h-3.5 w-3.5
-    const ICON_OFF = r(6)      // left/right 1.5
-    return { TRACK_W, TRACK_H, PAD, KNOB, RANGE, ICON, ICON_OFF }
-  }, [scale])
+    const r = (v: number) => Math.max(1, Math.round(v * scale)); // arrondi propre, min 1px
+    const TRACK_W = r(56); // w-14
+    const TRACK_H = r(32); // h-8
+    const PAD = r(2); // p-0.5
+    const KNOB = r(24); // h-6 w-6
+    const RANGE = Math.max(8, TRACK_W - PAD * 2 - KNOB); // mouvement utile
+    const ICON = r(14); // h-3.5 w-3.5
+    const ICON_OFF = r(6); // left/right 1.5
+    return { TRACK_W, TRACK_H, PAD, KNOB, RANGE, ICON, ICON_OFF };
+  }, [scale]);
 
   useEffect(() => {
-    setMounted(true)
-    const el = document.documentElement
-    const stored = localStorage.getItem("theme")
-    const next = stored ? stored === "dark" : el.classList.contains("dark")
-    el.classList.toggle("dark", next)
-    setIsDark(next)
-  }, [])
+    setMounted(true);
+    const el = document.documentElement;
+    const stored = localStorage.getItem("theme");
+    const next = stored ? stored === "dark" : el.classList.contains("dark");
+    el.classList.toggle("dark", next);
+    setIsDark(next);
+  }, []);
 
   const commitTheme = (next: boolean) => {
-    const el = document.documentElement
-    el.classList.toggle("dark", next)
-    localStorage.setItem("theme", next ? "dark" : "light")
-    setIsDark(next)
-  }
+    const el = document.documentElement;
+    el.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+    setIsDark(next);
+  };
 
-  const toggle = () => commitTheme(!isDark)
+  const toggle = () => commitTheme(!isDark);
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
-  const startX = isDark ? dims.RANGE : 0
-  const threshold = dims.RANGE / 2
+  const startX = isDark ? dims.RANGE : 0;
+  const threshold = dims.RANGE / 2;
 
   return (
     <button
       type="button"
       onClick={toggle}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle() }
-        if (e.key === "ArrowLeft")  commitTheme(false)
-        if (e.key === "ArrowRight") commitTheme(true)
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggle();
+        }
+        if (e.key === "ArrowLeft") commitTheme(false);
+        if (e.key === "ArrowRight") commitTheme(true);
       }}
       role="switch"
       aria-checked={isDark}
@@ -81,13 +84,19 @@ export default function ThemeToggle({ scale = 1 }: Props) {
         className="pointer-events-none absolute top-1/2 -translate-y-1/2 transition-opacity"
         style={{ left: dims.ICON_OFF, opacity: isDark ? 0 : 1 }}
       >
-        <Sun style={{ width: dims.ICON, height: dims.ICON }} className="text-amber-500" />
+        <Sun
+          style={{ width: dims.ICON, height: dims.ICON }}
+          className="text-amber-500"
+        />
       </span>
       <span
         className="pointer-events-none absolute top-1/2 -translate-y-1/2 transition-opacity"
         style={{ right: dims.ICON_OFF, opacity: isDark ? 1 : 0 }}
       >
-        <Moon style={{ width: dims.ICON, height: dims.ICON }} className="text-sky-100" />
+        <Moon
+          style={{ width: dims.ICON, height: dims.ICON }}
+          className="text-sky-100"
+        />
       </span>
 
       {/* knob */}
@@ -98,8 +107,8 @@ export default function ThemeToggle({ scale = 1 }: Props) {
         dragMomentum={false}
         dragConstraints={{ left: 0, right: dims.RANGE }}
         onDragEnd={(_, info) => {
-          const finalX = startX + info.offset.x
-          commitTheme(finalX > threshold)
+          const finalX = startX + info.offset.x;
+          commitTheme(finalX > threshold);
         }}
         animate={{ x: startX }}
         whileTap={reduce ? {} : { scale: 0.96 }}
@@ -109,5 +118,5 @@ export default function ThemeToggle({ scale = 1 }: Props) {
         <span className="absolute inset-0 rounded-full bg-gradient-to-b from-black/0 to-black/5" />
       </motion.span>
     </button>
-  )
+  );
 }

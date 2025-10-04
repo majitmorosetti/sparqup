@@ -1,20 +1,35 @@
-"use client"
+"use client";
+import { Metric } from "./types";
+import { Gauge, Timer, Activity, ExternalLink } from "lucide-react";
 
-import { Metric } from "./types"
+const Icon = ({ name }: { name?: Metric["icon"] }) => {
+  switch (name) {
+    case "gauge":
+      return <Gauge className="h-3.5 w-3.5" />;
+    case "timer":
+      return <Timer className="h-3.5 w-3.5" />;
+    case "activity":
+      return <Activity className="h-3.5 w-3.5" />;
+    case "external-link":
+      return <ExternalLink className="h-3.5 w-3.5" />;
+    default:
+      return null;
+  }
+};
+
 export default function MetricsGrid({ metrics }: { metrics: Metric[] }) {
   return (
-    <ul
-      className={[
-        "grid min-w-0 flex-1",
-        "gap-x-4 gap-y-1.5 md:gap-x-6 md:gap-y-2.5",
-        "[grid-template-columns:repeat(auto-fit,minmax(150px,1fr))]",
-        "md:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]",
-      ].join(" ")}
-      aria-label="Métriques"
-    >
+    <ul className="grid min-w-0 flex-1 gap-x-4 gap-y-1.5 md:gap-x-6 md:gap-y-2.5 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))] md:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
       {metrics.map((m, i) => (
-        <li key={m.label + i} className="flex items-baseline gap-2 text-foreground">
-          {m.icon ? <span className="opacity-75">{m.icon}</span> : null}
+        <li
+          key={m.label + i}
+          className="flex items-baseline gap-2 text-foreground"
+        >
+          {m.icon ? (
+            <span className="opacity-75">
+              <Icon name={m.icon} />
+            </span>
+          ) : null}
           <span className="text-[12px] leading-5 opacity-70">{m.label}</span>
           <span
             className={[
@@ -31,5 +46,5 @@ export default function MetricsGrid({ metrics }: { metrics: Metric[] }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }

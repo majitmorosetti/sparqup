@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 /* --- défaut : clair --- */
 :root {
   --background: #ffffff;
@@ -19,7 +18,6 @@
 
 /* Mode sombre auto par préférence système (tu peux passer en “class” si tu veux) */
 
-
 /* --- dark forcé (toggle) --- */
 .dark {
   --background: #0a0a0a;
@@ -27,7 +25,8 @@
 }
 
 /* PAS de couleurs ni de font ici: on les met en classes Tailwind dans layout.tsx */
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -42,20 +41,20 @@ html, body {
   /* couleurs calculées à partir des tokens existants */
   --surface-1: color-mix(in oklab, var(--background), var(--foreground) 4%);
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 7%);
-  --border:    color-mix(in oklab, var(--foreground), transparent 88%);
-  --muted:     color-mix(in oklab, var(--foreground), var(--background) 70%);
+  --border: color-mix(in oklab, var(--foreground), transparent 88%);
+  --muted: color-mix(in oklab, var(--foreground), var(--background) 70%);
 }
 .dark {
   --surface-1: color-mix(in oklab, var(--background), var(--foreground) 8%);
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 12%);
-  --border:    color-mix(in oklab, var(--foreground), transparent 82%);
-  --muted:     color-mix(in oklab, var(--foreground), var(--background) 60%);
+  --border: color-mix(in oklab, var(--foreground), transparent 82%);
+  --muted: color-mix(in oklab, var(--foreground), var(--background) 60%);
 }
 
 /* Expose-les à Tailwind (comme tu l’as déjà fait pour background/foreground) */
 @theme inline {
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
-  --color-border:    var(--border);
-  --color-muted:     var(--muted);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
 }

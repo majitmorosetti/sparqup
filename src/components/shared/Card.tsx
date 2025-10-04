@@ -1,11 +1,14 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react"
+import { ReactNode } from "react";
 
 export function Card({
   children,
   className = "",
-}: { children: ReactNode; className?: string }) {
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <div
       className={[
@@ -18,13 +21,17 @@ export function Card({
     >
       {children}
     </div>
-  )
+  );
 }
 
 export function CardTitle({ children }: { children: ReactNode }) {
-  return <h3 className="text-base md:text-lg font-medium text-foreground">{children}</h3>
+  return (
+    <h3 className="text-base md:text-lg font-medium text-foreground">
+      {children}
+    </h3>
+  );
 }
 
 export function CardText({ children }: { children: ReactNode }) {
-  return <p className="mt-1 text-sm text-muted">{children}</p>
+  return <p className="mt-1 text-sm text-muted">{children}</p>;
 }

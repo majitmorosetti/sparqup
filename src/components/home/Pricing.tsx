@@ -1,4 +1,4 @@
-import Container from "@/components/shared/Container"
+import Container from "@/components/shared/Container";
 
 const tiers = [
   {
@@ -31,7 +31,7 @@ const tiers = [
       "Formation & accompagnement",
     ],
   },
-]
+];
 
 export default function Pricing() {
   return (
@@ -44,12 +44,14 @@ export default function Pricing() {
               <h3 className="text-lg font-semibold">{t.name}</h3>
               <p className="mt-2 text-sm text-neutral-600">{t.price}</p>
               <ul className="mt-4 space-y-2 text-sm">
-                {t.points.map((p) => (<li key={p}>• {p}</li>))}
+                {t.points.map((p) => (
+                  <li key={p}>• {p}</li>
+                ))}
               </ul>
             </div>
           ))}
         </div>
       </Container>
     </section>
-  )
+  );
 }

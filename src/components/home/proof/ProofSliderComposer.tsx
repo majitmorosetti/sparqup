@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useMemo, type ReactNode } from "react"
-import ProofSlider from "./ProofSlider"
-import type { Slide } from "./types"
+import { useMemo } from "react";
+import ProofSlider from "./ProofSlider";
+import type { Slide } from "./types";
 
 // DATA (pure, sans React)
-import { showcases } from "@/lib/showcases"
-import type { ShowcaseData, IconKey } from "@/types/proof-data"
+import { showcases } from "@/lib/showcases";
+import type { ShowcaseData, IconKey } from "@/types/proof-data";
 
-// Icônes UI
-import { Gauge, Timer, Activity } from "lucide-react"
-
-const iconMap: Record<IconKey, ReactNode> = {
-  gauge: <Gauge className="h-3.5 w-3.5" />,
-  timer: <Timer className="h-3.5 w-3.5" />,
-  activity: <Activity className="h-3.5 w-3.5" />,
-}
+const iconMap: Record<
+  IconKey,
+  "gauge" | "timer" | "activity" | "external-link"
+> = {
+  gauge: "gauge",
+  timer: "timer",
+  activity: "activity",
+};
 
 function toSlides(data: ShowcaseData[]): Slide[] {
   return data.map((d) => ({
@@ -28,23 +28,23 @@ function toSlides(data: ShowcaseData[]): Slide[] {
       icon: m.icon ? iconMap[m.icon] : undefined,
     })),
     extras: d.extras,
-  }))
+  }));
 }
 
 export default function ProofSliderComposer({
   title = "Showcases & performances",
-  look = "theme",           // "none" | "theme" | "screenshot" (on applique de toute façon un fond brand-aware)
-  contentMaxWidth = 560,    // largeur interne compacte
-  autoPlayMs = 7000,        // avance douce (désactive en mettant undefined)
-  showNav = true,           // chips de navigation
+  look = "theme", // "none" | "theme" | "screenshot" (on applique de toute façon un fond brand-aware)
+  contentMaxWidth = 560, // largeur interne compacte
+  autoPlayMs = 7000, // avance douce (désactive en mettant undefined)
+  showNav = true, // chips de navigation
 }: {
-  title?: string
-  look?: "none" | "theme" | "screenshot"
-  contentMaxWidth?: number
-  autoPlayMs?: number
-  showNav?: boolean
+  title?: string;
+  look?: "none" | "theme" | "screenshot";
+  contentMaxWidth?: number;
+  autoPlayMs?: number;
+  showNav?: boolean;
 }) {
-  const slides: Slide[] = useMemo(() => toSlides(showcases), [])
+  const slides: Slide[] = useMemo(() => toSlides(showcases), []);
   return (
     <ProofSlider
       title={title}
@@ -54,5 +54,5 @@ export default function ProofSliderComposer({
       slides={slides}
       showNav={showNav}
     />
-  )
+  );
 }

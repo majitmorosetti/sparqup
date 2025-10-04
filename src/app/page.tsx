@@ -1,15 +1,15 @@
-import Hero from "@/components/home/Hero"
-import ProofSlider from "@/components/home/proof/ProofSlider"
-import Pillars from "@/components/home/Pillars"
-import PricingTeaser from "@/components/home/PricingTeaser"
-import { Gauge, Timer, Activity, ExternalLink } from "lucide-react"
-
+import Hero from "@/components/home/Hero";
+import ProofSlider from "@/components/home/proof/ProofSlider";
+import Pillars from "@/components/home/Pillars";
+import PricingTeaser from "@/components/home/PricingTeaser";
+import Features from "@/components/home/Features";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      {/* <ProofSlider
+      <Features />
+      <ProofSlider
         title="Showcases & performances"
         look="screenshot"
         contentMaxWidth={560}
@@ -19,10 +19,10 @@ export default function HomePage() {
             site: { name: "faceplastie.com", url: "https://faceplastie.com" },
             screenshot: { provider: "mshots", width: 640 },
             metrics: [
-              { label: "Lighthouse (mobile)", value: "92", icon: <Gauge className="h-3.5 w-3.5" /> },
-              { label: "Desktop", value: "99", icon: <Gauge className="h-3.5 w-3.5" /> },
-              { label: "LCP", value: "1.8s", icon: <Timer className="h-3.5 w-3.5" /> },
-              { label: "CLS", value: "0.01", icon: <Activity className="h-3.5 w-3.5" /> },
+              { label: "Lighthouse (mobile)", value: "92", icon: "gauge" },
+              { label: "Desktop", value: "99", icon: "gauge" },
+              { label: "LCP", value: "1.8s", icon: "timer" },
+              { label: "CLS", value: "0.01", icon: "activity" },
             ],
             extras: [{ label: "Étude de cas", href: "/portfolio" }],
           },
@@ -43,9 +43,9 @@ export default function HomePage() {
             ],
           },
         ]}
-      /> */}
+      />
       <Pillars />
       <PricingTeaser />
     </>
-  )
+  );
 }

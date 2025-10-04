@@ -4,5 +4,5 @@ export default function Portfolio() {
       <h1 className="text-3xl font-semibold">Portfolio</h1>
       <p className="mt-4 text-neutral-600">3 études de cas démo à venir.</p>
     </div>
-  )
+  );
 }

@@ -1,11 +1,20 @@
-import Container from "@/components/shared/Container"
+import Container from "@/components/shared/Container";
 
 export default function UseCases() {
   const items = [
-    { title: "E-commerce prêt à vendre", desc: "Shopify/Next.js, fiches produits, tunnel clair, paiements Stripe (au besoin)." },
-    { title: "Génération de leads locale", desc: "Site vitrine + SEO local + pages services + prise de RDV." },
-    { title: "Automatisations intelligentes", desc: "Leads vers CRM, réponses rapides aux FAQs, reportings hebdo utiles." },
-  ]
+    {
+      title: "E-commerce prêt à vendre",
+      desc: "Shopify/Next.js, fiches produits, tunnel clair, paiements Stripe (au besoin).",
+    },
+    {
+      title: "Génération de leads locale",
+      desc: "Site vitrine + SEO local + pages services + prise de RDV.",
+    },
+    {
+      title: "Automatisations intelligentes",
+      desc: "Leads vers CRM, réponses rapides aux FAQs, reportings hebdo utiles.",
+    },
+  ];
   return (
     <section className="py-16">
       <Container>
@@ -20,5 +29,5 @@ export default function UseCases() {
         </div>
       </Container>
     </section>
-  )
+  );
 }

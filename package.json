@@ -12,7 +12,7 @@
     "format": "prettier -w ."
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "eslint --fix --cache --max-warnings=0",
+    "*.{ts,tsx,js,jsx}": "eslint --fix --no-cache --max-warnings=0",
     "*.{md,css,json,yml,yaml}": "prettier -w"
   },
   "dependencies": {
@@ -33,10 +33,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "husky": "^8.0.0"
+    "typescript": "^5"
   }
 }

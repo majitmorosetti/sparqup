@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
-import Link from "next/link"
-import HeroMockTilt from "@/components/home/HeroMockTilt"
+import { motion } from "motion/react";
+import Link from "next/link";
+import HeroMockTilt from "@/components/home/HeroMockTilt";
 
 export default function Hero() {
   return (
@@ -28,7 +28,9 @@ export default function Hero() {
         {/* Kicker */}
         <motion.p
           className="text-sm font-medium tracking-wide text-foreground/70"
-          initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
           Conception web • Digitalisation • Automatisation
         </motion.p>
@@ -36,23 +38,25 @@ export default function Hero() {
         {/* H1 */}
         <motion.h1
           className="mt-2 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
         >
-          Un site moderne, des process intelligents, plus de clients.
+          Des sites qui convertissent. Des process qui s’automatisent.
         </motion.h1>
 
         {/* Visuel juste sous le H1 — même fond car le fond est porté par la section */}
         <div className="mt-6 md:mt-7">
           <HeroMockTilt
             src="/media/mockups/hero-dashboard.webp"
-            alt=""                   // décoratif : le sens est donné par le H1/texte
+            alt="" // décoratif : le sens est donné par le H1/texte
             width={1280}
             height={800}
             perspective={900}
             tiltMaxX={18}
             tiltMaxY={22}
             inertia={0.12}
-            mobileScrollTilt          // tilt au scroll sur mobile
+            mobileScrollTilt // tilt au scroll sur mobile
             floatAmpDeg={1.0}
             floatHz={0.085}
             magnet
@@ -60,7 +64,7 @@ export default function Hero() {
             glare
             glareStrength={0.24}
             roundedClass="rounded-2xl"
-            priority={false}          // on laisse le texte gagner le LCP
+            priority={false} // on laisse le texte gagner le LCP
             className="mx-auto max-w-[620px]"
             idleWobbleDeg={0.6}
             idleWobbleEverySec={3}
@@ -70,15 +74,19 @@ export default function Hero() {
         {/* Texte + CTAs */}
         <motion.p
           className="mt-6 max-w-2xl text-foreground/80"
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          J’aide PME/TPE et startups à lancer des sites Next.js rapides, SEO solides,
-          et des automatisations “invisibles”.
+          Vitrines modernes + digitalisation + automatisations Make/Zapier,
+          adaptées à votre budget.
         </motion.p>
 
         <motion.div
           className="mt-7 flex flex-wrap gap-3"
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.18 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.18 }}
         >
           <Link
             href="/contact"
@@ -97,11 +105,13 @@ export default function Hero() {
         {/* Micro-preuve optionnelle */}
         <motion.div
           className="mt-5 text-sm text-foreground/70"
-          initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.22 }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.22 }}
         >
           Scores Lighthouse 90+ • LCP &lt; 2.2s • SEO prêt
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

@@ -6,5 +6,5 @@ export default function Contact() {
         Écrivez-nous à contact@sparqup.com ou réservez un appel sur Calendly.
       </p>
     </div>
-  )
+  );
 }

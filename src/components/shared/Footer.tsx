@@ -1,4 +1,4 @@
-import Container from "@/components/shared/Container"
+import Container from "@/components/shared/Container";
 
 export default function Footer() {
   return (
@@ -11,5 +11,5 @@ export default function Footer() {
         </div>
       </Container>
     </footer>
-  )
+  );
 }
