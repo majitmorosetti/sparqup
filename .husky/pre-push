@@ -1,4 +1,14 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+set -e
 
-pnpm typecheck
+# Vérifie pnpm
+pnpm -v >/dev/null 2>&1 || { echo "pnpm not found"; exit 1; }
+
+# Typecheck "pur" (sans .next)
+pnpm exec tsc -p tsconfig.typecheck.json --noEmit
+
+# Lint sans cache
+pnpm exec eslint . --no-cache --max-warnings=0
+
+# Build Next (inclut son propre typecheck d’App Router)
+pnpm build

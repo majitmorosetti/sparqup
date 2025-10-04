@@ -1,5 +1,2 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Utiliser PNPM pour résoudre les binaires du projet
 pnpm exec lint-staged --concurrent false
