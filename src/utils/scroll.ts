@@ -9,7 +9,7 @@ export const isScrollableY = (el: Element | null): el is HTMLElement => {
 
 export function hasScrollableAncestorInDirection(
   start: EventTarget | null,
-  deltaY: number
+  deltaY: number,
 ): boolean {
   if (typeof window === "undefined") return false;
 

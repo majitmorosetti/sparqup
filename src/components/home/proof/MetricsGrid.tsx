@@ -21,26 +21,44 @@ export default function MetricsGrid({ metrics }: { metrics: Metric[] }) {
   return (
     <ul className="grid min-w-0 flex-1 gap-x-4 gap-y-1.5 md:gap-x-6 md:gap-y-2.5 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))] md:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
       {metrics.map((m, i) => (
-        <li
-          key={m.label + i}
-          className="flex items-baseline gap-2 text-foreground"
-        >
+        <li key={`${m.label}:${m.value ?? ""}:${i}`} className="flex items-baseline gap-2">
+          {/* Icône avec halo "label-like" (drop-shadow pour SVG) */}
           {m.icon ? (
-            <span className="opacity-75">
+            <span
+              aria-hidden
+              className="
+                inline-flex items-center
+                [filter:drop-shadow(0_0_6px_var(--halo))_drop-shadow(0_0_12px_var(--halo))]
+                md:[filter:drop-shadow(0_0_8px_var(--halo))_drop-shadow(0_0_14px_var(--halo))]
+              "
+            >
               <Icon name={m.icon} />
             </span>
           ) : null}
-          <span className="text-[12px] leading-5 opacity-70">{m.label}</span>
+
+          {/* Label (inchangé) */}
           <span
-            className={[
-              "ml-auto font-semibold tabular-nums",
-              "text-[15px] leading-5 md:text-[16px] md:leading-6",
-              m.pending ? "opacity-70 italic" : "",
-            ].join(" ")}
+            className="
+              text-[12px] leading-5 opacity-85
+              [text-shadow:0_0_6px_var(--halo),0_0_12px_var(--halo)]
+              md:[text-shadow:0_0_8px_var(--halo),0_0_14px_var(--halo)]
+            "
+          >
+            {m.label}
+          </span>
+
+          {/* Valeur — même halo que label */}
+          <span
+            className="
+              ml-auto font-semibold tabular-nums
+              text-[15px] leading-5 md:text-[16px] md:leading-6
+              [text-shadow:0_0_6px_var(--halo),0_0_12px_var(--halo)]
+              md:[text-shadow:0_0_8px_var(--halo),0_0_14px_var(--halo)]
+            "
           >
             {m.value}
             {m.pending ? (
-              <span className="ml-1 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current align-middle" />
+              <span className="ml-1 inline-block h-1.5 w-1.5 align-middle rounded-full animate-pulse bg-current" />
             ) : null}
           </span>
         </li>

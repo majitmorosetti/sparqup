@@ -29,6 +29,9 @@ export default function HomePage() {
           {
             site: { name: "Chez Joon — Restaurant" },
             screenshot: {
+              src: "/media/mockups/chez-joon.webp", // ← image locale dans /public
+              width: 640, // largeur de rendu (hint)
+              height: 400, // hauteur de rendu (hint)
               placeholder: {
                 colors: ["#dc2626", "#f97316"], // rouge/orange “gochujang/kimchi”
                 label: "Chez Joon",

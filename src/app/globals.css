@@ -6,6 +6,7 @@
   --foreground: #171717;
   --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
   --font-mono: var(--font-geist-mono, ui-monospace, monospace);
+  --halo: rgba(255 255 255 / 0.7);
 }
 
 /* Déclare tes alias Tailwind depuis ces tokens */
@@ -22,6 +23,7 @@
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --halo: rgba(0 0 0 / 0.55);
 }
 
 /* PAS de couleurs ni de font ici: on les met en classes Tailwind dans layout.tsx */
@@ -34,6 +36,7 @@ body {
 .dark :root {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --halo: rgba(0 0 0 / 0.55);
 }
 
 /* Surfaces & border adaptatives (light/dark) */
@@ -43,12 +46,37 @@ body {
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 7%);
   --border: color-mix(in oklab, var(--foreground), transparent 88%);
   --muted: color-mix(in oklab, var(--foreground), var(--background) 70%);
+  --halo: rgba(255 255 255 / 0.7);
+  /* teinte translucide pour le frosted */
+  --header-tint: rgba(255 255 255 / 0.4);
+  /* traits/ombres adaptés au fond clair */
+  --header-divider: color-mix(in oklab, #000, transparent 86%);
+  --header-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  /* halo léger autour du header pour diffuser les bords */
+  --header-halo: radial-gradient(
+    120% 60% at 50% -10%,
+    rgba(0, 0, 0, 0.1),
+    transparent 60%
+  );
 }
 .dark {
   --surface-1: color-mix(in oklab, var(--background), var(--foreground) 8%);
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 12%);
   --border: color-mix(in oklab, var(--foreground), transparent 82%);
   --muted: color-mix(in oklab, var(--foreground), var(--background) 60%);
+  --halo: rgba(0 0 0 / 0.55);
+  /* teinte noire pour frosted dark */
+  --header-tint: rgba(0 0 0 / 0.45);
+  /* traits/ombres adaptés au fond sombre */
+  --header-divider: color-mix(in oklab, #fff, transparent 88%);
+  --header-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.22);
+  --header-halo: radial-gradient(
+    120% 60% at 50% -10%,
+    rgba(255, 255, 255, 0.06),
+    transparent 60%
+  );
 }
 
 /* Expose-les à Tailwind (comme tu l’as déjà fait pour background/foreground) */

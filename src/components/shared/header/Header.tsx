@@ -41,11 +41,10 @@ const NAV = [
   { href: "/portfolio", label: "Portfolio" },
 ];
 
-const OPT_SCROLL: AddEventListenerOptions = { passive: true }
-const OPT_TOUCH: AddEventListenerOptions  = { passive: true }
-const OPT_WHEEL  = { passive: true, capture: true } as const
-const OPT_KEY    = { capture: true } as const
-
+const OPT_SCROLL: AddEventListenerOptions = { passive: true };
+const OPT_TOUCH: AddEventListenerOptions = { passive: true };
+const OPT_WHEEL = { passive: true, capture: true } as const;
+const OPT_KEY = { capture: true } as const;
 
 export default function Header() {
   const pathname = usePathname();
@@ -139,7 +138,7 @@ export default function Header() {
       raf(() => setRevealed(true));
     };
 
-    window.addEventListener("scroll", onScroll, OPT_SCROLL);
+    window.addEventListener("scroll", onScroll, OPT_SCROLL); 
     window.addEventListener("wheel", onWheel, OPT_WHEEL);
     window.addEventListener("touchstart", onTouchStart, OPT_TOUCH);
     window.addEventListener("touchmove", onTouchMove, OPT_TOUCH);
@@ -164,10 +163,10 @@ export default function Header() {
       <div
         className={[
           "relative transform-gpu will-change-transform",
-          // Blur costaud + TEINTE BLANCHE 40% (fallback si backdrop non supporté)
-          "bg-white/40 supports-[backdrop-filter]:bg-white/40",
-          "backdrop-blur-[28px] md:backdrop-blur-[56px] lg:backdrop-blur-[72px]",
-          "backdrop-saturate-150 md:backdrop-saturate-175",
+          "relative isolate transform-gpu will-change-transform",
+          "bg-[color:var(--header-tint)]",
+          "supports-[backdrop-filter]:backdrop-blur-[28px] md:supports-[backdrop-filter]:backdrop-blur-[56px] lg:supports-[backdrop-filter]:backdrop-blur-[72px]",
+          "supports-[backdrop-filter]:backdrop-saturate-150 md:supports-[backdrop-filter]:backdrop-saturate-175",
           // Animation d’apparition (pas d’anim d’opacité sur le blur pour éviter tout lag visuel)
           "transition-[transform,box-shadow] duration-[320ms] [transition-timing-function:cubic-bezier(.2,.8,.16,1)]",
           revealed ? "translate-y-0" : "-translate-y-full",

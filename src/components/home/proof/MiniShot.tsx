@@ -23,10 +23,13 @@ export default function MiniShot({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [err, setErr] = useState(false);
-  const src = useMemo(
-    () => (siteUrl ? screenshotURL(siteUrl, screenshot) : null),
-    [siteUrl, screenshot],
-  );
+  const src = useMemo(() => {
+    if (screenshot?.src) return screenshot.src;
+    if (screenshot && siteUrl) {
+      return screenshotURL(siteUrl as string, screenshot);
+    }
+    return null;
+  }, [siteUrl, screenshot]);
 
   // conteneur fluide : largeur = clamp(min, vw, max), hauteur via aspect-ratio
   const style: React.CSSProperties = {

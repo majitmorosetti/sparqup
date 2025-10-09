@@ -16,9 +16,11 @@ export type PlaceholderCfgData = {
 };
 
 export type ScreenshotData = {
+  src?: string;
   url?: string;
   provider?: "mshots" | "thumio";
   width?: number;
+  height?: number;
   placeholder?: PlaceholderCfgData;
 };
 
