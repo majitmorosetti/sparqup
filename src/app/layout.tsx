@@ -44,13 +44,17 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="color-scheme" content="light dark" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
                   (function () {
                     try {
+                      var root = document.documentElement;
                       var stored = localStorage.getItem('theme');
-                      if (stored === 'dark') document.documentElement.classList.add('dark');
+                      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                      var isDark = stored ? (stored === 'dark') : systemDark;
+                      if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
                     } catch (e) {}
                   })();
                   `,

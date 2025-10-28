@@ -3,8 +3,10 @@ import ProofSlider from "@/components/home/proof/ProofSlider";
 import Pillars from "@/components/home/Pillars";
 import PricingTeaser from "@/components/home/PricingTeaser";
 import Features from "@/components/home/Features";
+import Process from "@/components/home/ProcessFiberSequence";
 
 export default function HomePage() {
+
   return (
     <>
       <Hero />
@@ -47,6 +49,7 @@ export default function HomePage() {
           },
         ]}
       />
+      <Process />
       <Pillars />
       <PricingTeaser />
     </>

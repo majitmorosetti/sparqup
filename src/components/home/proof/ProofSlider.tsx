@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, useState, useId } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, useId, useEffect } from "react";
 import Slider, { SliderHandle } from "./Slider";
 import MiniShot from "./MiniShot";
 import MetricsGrid from "./MetricsGrid";
@@ -40,6 +40,17 @@ export default function ProofSlider({
   const [index, setIndex] = useState(0);
   const ref = useRef<SliderHandle>(null);
   const active = slides[index];
+  const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+
+  // media query reduced-motion (évite d’ajouter motion/react ici)
+  useEffect(() => {
+    const m = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(!!m?.matches);
+    update();
+    m?.addEventListener?.('change', update);
+    return () => m?.removeEventListener?.('change', update);
+  }, []);
 
   // --- Fond (blur screenshot + dégradé marque)
   const bgImage = useMemo(() => {
@@ -57,6 +68,9 @@ export default function ProofSlider({
     );
     return brandGradient(colors, "soft");
   }, [active, look]);
+
+  // autoplay effectif : coupé si paused ou reduced
+  const effectiveAutoPlay = !paused && !reduced ? autoPlayMs : undefined;
 
   // --- Mesure des hauteurs (miroir caché)
   const measureRef = useRef<HTMLDivElement>(null);
@@ -95,6 +109,10 @@ export default function ProofSlider({
   }, [slides, lockHeight, contentMaxWidth]);
 
   // --- viewport height style
+  // CONTRAT ANTI-CLS :
+  // - Toujours mesurer la plus grande slide via le miroir caché (measureRef)
+  // - Verrouiller la hauteur du viewport sur ce max
+  // - Transition courte pour éviter les à-coups quand un asset charge
   const viewportStyle: React.CSSProperties = lockHeight
     ? {
         height: maxH ? `${maxH}px` : undefined, // le temps de mesurer : auto
@@ -154,7 +172,7 @@ export default function ProofSlider({
 
         {/* VIEWPORT avec hauteur verrouillée */}
         <div className="relative w-full overflow-hidden" style={viewportStyle}>
-          <Slider ref={ref} autoPlayMs={autoPlayMs} onIndexChange={setIndex}>
+          <Slider ref={ref} autoPlayMs={effectiveAutoPlay} onIndexChange={setIndex}>
             {slides.map((s, i) => (
               <div
                 key={s.site.name}
@@ -204,7 +222,7 @@ export default function ProofSlider({
         </div>
 
         {showNav && slides.length > 1 ? (
-          <div className="mt-3">
+          <div className="mt-3 flex items-center justify-between gap-3">
             <NavChips
               labels={slides.map((s) => s.site.name)}
               active={index}
@@ -214,6 +232,26 @@ export default function ProofSlider({
               className="gap-2"
               pillClass="px-3 py-1.5 text-sm"
             />
+           {/* Play/Pause accessible (cache le contrôle si reduce-motion) */}
+            <div className="shrink-0">
+              <button
+                type="button"
+                aria-label={paused ? "Lire le carrousel" : "Mettre en pause le carrousel"}
+                aria-pressed={!paused}
+                disabled={reduced}
+                onClick={() => setPaused((p) => !p)}
+                className={[
+                  "inline-flex items-center rounded-md border px-3 py-1.5 text-sm",
+                  reduced
+                    ? "opacity-50 cursor-not-allowed"
+                    : paused
+                    ? "bg-foreground text-background"
+                    : "bg-foreground/10 text-foreground hover:bg-foreground/15",
+                ].join(" ")}
+              >
+                {paused ? "Lire" : "Pause"}
+              </button>
+            </div>
           </div>
         ) : null}
       </div>

@@ -36,6 +36,7 @@ export default forwardRef<SliderHandle, Props>(function Slider(
   const [index, setIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [reduced, setReduced] = useState(false);
 
   const items = Array.isArray(children) ? children : [children];
 
@@ -50,6 +51,16 @@ export default forwardRef<SliderHandle, Props>(function Slider(
       });
     },
   }));
+
+  // media query reduced-motion
+  useEffect(() => {
+    const m = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(!!m?.matches);
+    update();
+    m?.addEventListener?.('change', update);
+    return () => m?.removeEventListener?.('change', update);
+  }, []);
+
 
   // détection de l’item centré
   useEffect(() => {
@@ -111,6 +122,7 @@ export default forwardRef<SliderHandle, Props>(function Slider(
   // autoplay
   useEffect(() => {
     if (!autoPlayMs) return;
+    if (reduced) return; // respecter prefers-reduced-motion
     if ((pauseOnHover && hovered) || (pauseWhenHidden && !visible)) return;
     const el = scrollerRef.current;
     if (!el) return;
@@ -132,6 +144,7 @@ export default forwardRef<SliderHandle, Props>(function Slider(
     visible,
     pauseOnHover,
     pauseWhenHidden,
+    reduced,
   ]);
 
   return (

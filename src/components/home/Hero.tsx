@@ -37,7 +37,7 @@ export default function Hero() {
 
         {/* H1 */}
         <motion.h1
-          className="mt-2 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl"
+          className="mt-2 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.05 }}
@@ -73,7 +73,7 @@ export default function Hero() {
 
         {/* Texte + CTAs */}
         <motion.p
-          className="mt-6 max-w-2xl text-foreground/80"
+          className="mt-6 max-w-2xl text-foreground/80 px-auto text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -83,7 +83,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-7 flex flex-wrap gap-3"
+          className="mt-7 flex flex-wrap gap-3 justify-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.18 }}

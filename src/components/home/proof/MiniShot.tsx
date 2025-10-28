@@ -32,6 +32,8 @@ export default function MiniShot({
   }, [siteUrl, screenshot]);
 
   // conteneur fluide : largeur = clamp(min, vw, max), hauteur via aspect-ratio
+  // NOTE: Ne pas augmenter `idealVW`/`maxW` sans ajuster la ligne adjacente
+  // (risque de wrap & saut vertical). Garder 16/10 par défaut pour stabilité.
   const style: React.CSSProperties = {
     inlineSize: `clamp(${minW}px, ${idealVW}vw, ${maxW}px)`,
     aspectRatio: ratio,

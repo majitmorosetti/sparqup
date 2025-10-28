@@ -17,26 +17,16 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Mode sombre auto par préférence système (tu peux passer en “class” si tu veux) */
-
-/* --- dark forcé (toggle) --- */
+/* --- dark via classe .dark sur <html> --- */
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   --halo: rgba(0 0 0 / 0.55);
 }
 
-/* PAS de couleurs ni de font ici: on les met en classes Tailwind dans layout.tsx */
 html,
 body {
   height: 100%;
-}
-
-/* Mode sombre contrôlé par classe .dark sur <html> */
-.dark :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --halo: rgba(0 0 0 / 0.55);
 }
 
 /* Surfaces & border adaptatives (light/dark) */
@@ -46,7 +36,6 @@ body {
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 7%);
   --border: color-mix(in oklab, var(--foreground), transparent 88%);
   --muted: color-mix(in oklab, var(--foreground), var(--background) 70%);
-  --halo: rgba(255 255 255 / 0.7);
   /* teinte translucide pour le frosted */
   --header-tint: rgba(255 255 255 / 0.4);
   /* traits/ombres adaptés au fond clair */
@@ -59,13 +48,17 @@ body {
     rgba(0, 0, 0, 0.1),
     transparent 60%
   );
+  /* fibre — light */
+  --fiber-core: oklch(0.65 0.08 230); /* bleu/gris froid net */
+  --fiber-clad: oklch(0.7 0.03 230); /* gaine neutre froide */
+  --fiber-sheen: oklch(0.85 0.02 230 / 0.8); /* reflet très doux */
 }
 .dark {
   --surface-1: color-mix(in oklab, var(--background), var(--foreground) 8%);
   --surface-2: color-mix(in oklab, var(--background), var(--foreground) 12%);
   --border: color-mix(in oklab, var(--foreground), transparent 82%);
   --muted: color-mix(in oklab, var(--foreground), var(--background) 60%);
-  --halo: rgba(0 0 0 / 0.55);
+
   /* teinte noire pour frosted dark */
   --header-tint: rgba(0 0 0 / 0.45);
   /* traits/ombres adaptés au fond sombre */
@@ -77,6 +70,10 @@ body {
     rgba(255, 255, 255, 0.06),
     transparent 60%
   );
+  /* fibre — dark (un peu plus claire pour rester lisible sur fond sombre) */
+  --fiber-core: oklch(0.82 0.06 230);
+  --fiber-clad: oklch(0.78 0.03 230);
+  --fiber-sheen: oklch(0.92 0.02 230 / 0.7);
 }
 
 /* Expose-les à Tailwind (comme tu l’as déjà fait pour background/foreground) */
