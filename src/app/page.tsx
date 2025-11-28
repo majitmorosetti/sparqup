@@ -1,57 +1,25 @@
-import Hero from "@/components/home/Hero";
-import ProofSlider from "@/components/home/proof/ProofSlider";
-import Pillars from "@/components/home/Pillars";
-import PricingTeaser from "@/components/home/PricingTeaser";
-import Features from "@/components/home/Features";
-import Process from "@/components/home/ProcessFiberSequence";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default function HomePage() {
-
+export default function Home() {
   return (
-    <>
-      <Hero />
-      <Features />
-      <ProofSlider
-        title="Showcases & performances"
-        look="screenshot"
-        contentMaxWidth={560}
-        autoPlayMs={7000}
-        slides={[
-          {
-            site: { name: "faceplastie.com", url: "https://faceplastie.com" },
-            screenshot: { provider: "mshots", width: 640 },
-            metrics: [
-              { label: "Lighthouse (mobile)", value: "92", icon: "gauge" },
-              { label: "Desktop", value: "99", icon: "gauge" },
-              { label: "LCP", value: "1.8s", icon: "timer" },
-              { label: "CLS", value: "0.01", icon: "activity" },
-            ],
-            extras: [{ label: "Étude de cas", href: "/portfolio" }],
-          },
-          {
-            site: { name: "Chez Joon — Restaurant" },
-            screenshot: {
-              src: "/media/mockups/chez-joon.webp", // ← image locale dans /public
-              width: 640, // largeur de rendu (hint)
-              height: 400, // hauteur de rendu (hint)
-              placeholder: {
-                colors: ["#dc2626", "#f97316"], // rouge/orange “gochujang/kimchi”
-                label: "Chez Joon",
-                emoji: "🥢",
-              },
-            },
-            metrics: [
-              { label: "Lighthouse (mobile)", value: "à venir", pending: true },
-              { label: "Desktop", value: "à venir", pending: true },
-              { label: "LCP cible", value: "≤ 2.2s", pending: true },
-              { label: "CLS cible", value: "≤ 0.02", pending: true },
-            ],
-          },
-        ]}
-      />
-      <Process />
-      <Pillars />
-      <PricingTeaser />
-    </>
+    <main className="container flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center text-center px-4">
+      <h1 className="text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+        Le site dont votre entreprise a<br />
+        vraiment besoin.
+      </h1>
+      
+      <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        Nous créons des sites et des systèmes qui s&apos;adaptent à vos besoins.
+        <br />
+        Des outils connectés. Des solutions sur mesure.
+      </p>
+
+      <Button size="lg" className="mt-8" asChild>
+        <Link href="/questionnaire">
+          Simuler mon projet en 5 questions
+        </Link>
+      </Button>
+    </main>
   );
 }
