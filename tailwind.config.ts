@@ -1,8 +1,10 @@
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 export default {
-  content: ["./src/**/*.{ts,tsx}"],
-  theme: { extend: {} },
-  plugins: [],
+  content: [
+    './src/app/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+  ],
+  // Les couleurs sont définies dans globals.css via @theme
+  // Pas besoin de config supplémentaire
 } satisfies Config;

@@ -1,101 +1,69 @@
-"use client";
+// src/app/questionnaire/page.tsx
+'use client';
 
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Step1ActivityType } from "@/components/questionnaire/Step1ActivityType";
-import { Step2Features } from "@/components/questionnaire/Step2Features";
-import { Step3Tools } from "@/components/questionnaire/Step3Tools";
-import { Step4Automations } from "@/components/questionnaire/Step4Automations";
-import { Step5Contact } from "@/components/questionnaire/Step5Contact";
-import { ResultPage } from "@/components/questionnaire/ResultPage";
-import type { QuestionnaireData } from "@/lib/questionnaire-types";
+import { useState } from 'react';
+import QuestionnaireModal from '@/components/questionnaire/QuestionnaireModal';
+import Container from '@/components/ui/Container';
+import Button from '@/components/ui/Button';
 
 export default function QuestionnairePage() {
-  const [step, setStep] = useState(1);
-  const [data, setData] = useState<QuestionnaireData>({
-    activityType: null,
-    features: [],
-    tools: [],
-    automations: [],
-    budget: null,
-    timeline: null,
-    email: "",
-  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalKey, setModalKey] = useState(0); // ← Force re-mount
 
-  const totalSteps = 5;
-  const progress = (step / totalSteps) * 100;
-
-  const updateData = (updates: Partial<QuestionnaireData>) => {
-    setData((prev) => ({ ...prev, ...updates }));
+  const handleOpenModal = () => {
+    setModalKey(prev => prev + 1); // ← Incrémente = nouveau state
+    setIsModalOpen(true);
   };
 
-  const nextStep = () => setStep((s) => Math.min(s + 1, totalSteps + 1));
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
-
   return (
-    <div className="container max-w-3xl py-12">
-      {step <= totalSteps && (
-        <>
-          <div className="mb-8">
-            <Progress value={progress} className="h-2" />
-            <p className="mt-2 text-sm text-muted-foreground text-center">
-              Étape {step} sur {totalSteps}
+    <>
+      <div className="min-h-screen bg-neutral-50 py-25 pt-40">
+        <Container size="md">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl sm:text-6xl font-bold text-neutral-950 mb-6">
+              Simulez votre projet en 5 minutes
+            </h1>
+            <p className="text-xl text-neutral-600 mb-8 max-w-2xl mx-auto">
+              Répondez à quelques questions sur votre projet. 
+              Vous recevrez une estimation budgétaire claire et réaliste sous 24h.
             </p>
+
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={handleOpenModal}
+            >
+              Démarrer le questionnaire
+            </Button>
           </div>
 
-          <Card className="p-8">
-            {step === 1 && (
-              <Step1ActivityType
-                value={data.activityType}
-                onChange={(activityType) => updateData({ activityType })}
-                onNext={nextStep}
-              />
-            )}
+          {/* Reassurance cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="text-center p-6 bg-white rounded-xl border border-neutral-200">
+              <div className="text-3xl mb-3">✓</div>
+              <div className="font-semibold text-neutral-950 mb-1">Gratuit</div>
+              <div className="text-sm text-neutral-600">Sans engagement</div>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl border border-neutral-200">
+              <div className="text-3xl mb-3">⚡</div>
+              <div className="font-semibold text-neutral-950 mb-1">5 minutes</div>
+              <div className="text-sm text-neutral-600">Estimation rapide</div>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl border border-neutral-200">
+              <div className="text-3xl mb-3">📧</div>
+              <div className="font-semibold text-neutral-950 mb-1">24h</div>
+              <div className="text-sm text-neutral-600">Réponse garantie</div>
+            </div>
+          </div>
+        </Container>
+      </div>
 
-            {step === 2 && (
-              <Step2Features
-                activityType={data.activityType}
-                value={data.features}
-                onChange={(features) => updateData({ features })}
-                onNext={nextStep}
-                onBack={prevStep}
-              />
-            )}
-
-            {step === 3 && (
-              <Step3Tools
-                value={data.tools}
-                onChange={(tools) => updateData({ tools })}
-                onNext={nextStep}
-                onBack={prevStep}
-              />
-            )}
-
-            {step === 4 && (
-              <Step4Automations
-                value={data.automations}
-                onChange={(automations) => updateData({ automations })}
-                onNext={nextStep}
-                onBack={prevStep}
-              />
-            )}
-
-            {step === 5 && (
-              <Step5Contact
-                budget={data.budget}
-                timeline={data.timeline}
-                email={data.email}
-                onChange={(updates) => updateData(updates)}
-                onNext={nextStep}
-                onBack={prevStep}
-              />
-            )}
-          </Card>
-        </>
-      )}
-
-      {step > totalSteps && <ResultPage data={data} onReset={() => setStep(1)} />}
-    </div>
+      {/* Modal avec key pour forcer re-mount */}
+      <QuestionnaireModal 
+        key={modalKey}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

@@ -1,0 +1,248 @@
+// src/components/questionnaire/QuestionnaireFlow.tsx
+
+'use client';
+
+import { useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import QuestionnaireFooter from './QuestionnaireFooter';
+import Q1TypeProject from './questions/Q1TypeProject';
+import Q2Features from './questions/Q2Features';
+import Q3Assets from './questions/Q3Assets';
+import Q4Tools from './questions/Q4Tools';
+import Q5TimelineBudget from './questions/Q5TimelineBudget';
+import Q6Estimation from './questions/Q6Estimation';
+import { QuestionnaireState, ProjectType, Branch, Timeline, BudgetTPE, ContactData } from '@/lib/questionnaire/types';
+import { calculateEstimation } from '@/lib/questionnaire/estimation';
+import { submitQuestionnaire } from '@/actions/questionnaire';
+
+export default function QuestionnaireFlow() {
+  const router = useRouter();
+  
+  const [state, setState] = useState<QuestionnaireState>({
+    projectType: null,
+    branch: null,
+    features: [],
+    assets: [],
+    tools: [],
+    timeline: null,
+    budget: null,
+    complexityScore: 0,
+    contact: null,
+    currentStep: 1,
+    totalSteps: 6,
+    startedAt: new Date()
+  });
+
+  // ============================================
+  // Handlers (identiques)
+  // ============================================
+
+  const handleQ1Next = useCallback((projectType: ProjectType, branch: Branch) => {
+    setState(prev => ({
+      ...prev,
+      projectType,
+      branch,
+      currentStep: 2,
+      totalSteps: branch === 'tech' ? 4 : branch === 'conseil' ? 4 : 6
+    }));
+  }, []);
+
+  const handleQ2FeaturesChange = useCallback((features: string[]) => {
+    setState(prev => ({ ...prev, features }));
+  }, []);
+
+  const handleQ3AssetsChange = useCallback((assets: string[]) => {
+    setState(prev => ({ ...prev, assets }));
+  }, []);
+
+  const handleQ4ToolsChange = useCallback((tools: string[]) => {
+    setState(prev => ({ ...prev, tools }));
+  }, []);
+
+  const handleQ5TimelineChange = useCallback((timeline: Timeline) => {
+    setState(prev => ({ ...prev, timeline }));
+  }, []);
+
+  const handleQ5BudgetChange = useCallback((budget: BudgetTPE) => {
+    setState(prev => ({ ...prev, budget }));
+  }, []);
+
+  const handleQ6Submit = useCallback(async (contact: ContactData) => {
+    setState(prev => ({ ...prev, contact, completedAt: new Date() }));
+
+    try {
+      await submitQuestionnaire({
+        ...state,
+        contact,
+        branch: state.branch!
+      } as any);
+
+      router.push('/questionnaire/confirmation');
+    } catch (error) {
+      console.error('Erreur submission:', error);
+      alert('Une erreur est survenue. Veuillez réessayer.');
+    }
+  }, [state, router]);
+
+  const handleNext = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      currentStep: prev.currentStep + 1
+    }));
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      currentStep: Math.max(1, prev.currentStep - 1)
+    }));
+  }, []);
+
+  // ============================================
+  // Helpers
+  // ============================================
+
+  const getStepLabel = () => {
+    const labels: Record<number, string> = {
+      1: 'Votre projet',
+      2: 'Fonctionnalités',
+      3: 'Vos assets',
+      4: 'Vos outils',
+      5: 'Planning',
+      6: 'Estimation'
+    };
+    return `Étape ${state.currentStep}/${state.totalSteps} : ${labels[state.currentStep] || '...'}`;
+  };
+
+  const isStepValid = () => {
+    switch (state.currentStep) {
+      case 1:
+        return state.projectType !== null;
+      case 2:
+        return state.features.length > 0;
+      case 3:
+        return true;
+      case 4:
+        return true;
+      case 5:
+        return state.timeline !== null && state.budget !== null;
+      case 6:
+        return false;
+      default:
+        return true;
+    }
+  };
+
+  const estimation = state.currentStep === 6 && state.projectType
+    ? calculateEstimation(state)
+    : null;
+
+  // ============================================
+  // Render — Style Tally
+  // ============================================
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
+      {/* Progress bar en haut */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <div className="h-1 bg-neutral-200">
+          <div 
+            className="h-full bg-neutral-900 transition-all duration-500 ease-out"
+            style={{ width: `${(state.currentStep / state.totalSteps) * 100}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Content centré verticalement */}
+      <div className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-25 lg:py-32">
+        <div className="w-full max-w-3xl">
+          {/* Q1 */}
+          {state.currentStep === 1 && (
+            <Q1TypeProject
+              value={state.projectType}
+              onNext={handleQ1Next}
+            />
+          )}
+
+          {/* Q2 */}
+          {state.currentStep === 2 && state.branch === 'tpe' && state.projectType && (
+            <Q2Features
+              value={state.features}
+              onChange={handleQ2FeaturesChange}
+              projectType={state.projectType}
+            />
+          )}
+
+          {/* Q3 */}
+          {state.currentStep === 3 && state.branch === 'tpe' && (
+            <Q3Assets
+              value={state.assets}
+              onChange={handleQ3AssetsChange}
+            />
+          )}
+
+          {/* Q4 */}
+          {state.currentStep === 4 && state.branch === 'tpe' && (
+            <Q4Tools
+              value={state.tools}
+              onChange={handleQ4ToolsChange}
+            />
+          )}
+
+          {/* Q5 */}
+          {state.currentStep === 5 && state.branch === 'tpe' && (
+            <Q5TimelineBudget
+              timeline={state.timeline}
+              budget={state.budget as BudgetTPE}
+              onTimelineChange={handleQ5TimelineChange}
+              onBudgetChange={handleQ5BudgetChange}
+            />
+          )}
+
+          {/* Q6 */}
+          {state.currentStep === 6 && state.branch === 'tpe' && estimation && (
+            <Q6Estimation
+              estimation={estimation}
+              onSubmit={handleQ6Submit}
+            />
+          )}
+
+          {/* Placeholders Tech/Conseil */}
+          {state.branch === 'tech' && state.currentStep > 1 && (
+            <div className="text-center p-12">
+              <h3 className="text-2xl font-bold text-neutral-950 mb-4">
+                Branch Tech — En cours de développement
+              </h3>
+              <p className="text-neutral-600">
+                Questions techniques à venir...
+              </p>
+            </div>
+          )}
+
+          {state.branch === 'conseil' && state.currentStep > 1 && (
+            <div className="text-center p-12">
+              <h3 className="text-2xl font-bold text-neutral-950 mb-4">
+                Branch Conseil — En cours de développement
+              </h3>
+              <p className="text-neutral-600">
+                Questions de conseil à venir...
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Footer navigation minimaliste */}
+      <QuestionnaireFooter
+        currentStep={state.currentStep}
+        totalSteps={state.totalSteps}
+        stepLabel={getStepLabel()}
+        onNext={state.currentStep > 1 && state.currentStep < 6 ? handleNext : undefined}
+        onPrev={state.currentStep > 1 ? handlePrev : undefined}
+        showNext={state.currentStep > 1 && state.currentStep < 6}
+        showPrev={state.currentStep > 1}
+        isValid={isStepValid()}
+      />
+    </div>
+  );
+}

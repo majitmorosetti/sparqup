@@ -1,18 +1,44 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import { Inter, Fraunces } from 'next/font/google';
 
-export const metadata = {
-  title: "SparqUp - Digitalisation TPE/PME",
-  description: "Sites web, automatisation, connexion d'outils digitaux"
+const fraunces = Fraunces({ 
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: ['300','400','500', '600', '700', '800'],
+  display: 'swap'
+});
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap'
+});
+
+/* const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'], 
+  variable: '--font-raleway',
+  display: 'swap',
+}); */
+
+export const metadata: Metadata = {
+  title: 'SparqUp',
+  description: 'Développement web & automatisation pour TPE/PME',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="fr">
-      <body className="font-sans antialiased flex flex-col min-h-screen">
+    <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="font-body antialiased">
         <Header />
-        <div className="flex-1">{children}</div>
+          {children}
         <Footer />
       </body>
     </html>

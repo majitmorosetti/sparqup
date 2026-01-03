@@ -1,0 +1,270 @@
+// src/lib/services-data.ts
+import { Code2, Zap, PenLine, Link2, Rocket, CloudCheck, LucideIcon } from 'lucide-react';
+
+export interface Service {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  text_focus_color: string;
+  description: string;
+  fullDescription?: string;
+  color: string;
+  bg_color: string;
+  CTA: string | null;
+  // Détails pour page services
+  includes: string[];
+  technologies: string[];
+  pricing: string;
+  duration: string;
+  idealFor: string;
+  examples: string[];
+  imageConfig?: {
+    border?: boolean;
+    shadow?: boolean;
+    rounded?: boolean;
+    objectFit?: 'cover' | 'contain';
+    aspectRatio?: '4/3' | '3/4' | '16/9' | '1/1' | 'auto';
+  };
+}
+
+export const SERVICES: Service[] = [
+  {
+    id: 'creation-web',
+    icon: Code2,
+    title: 'Création de sites web',
+    subtitle: 'Vitrine, e-commerce, application',
+    text_focus_color: "text-white",
+    description:
+      "Votre site = votre commercial 24/7. Design qui rassure, tunnel qui convertit. Pas de template : pensé pour VOTRE métier et VOS clients.",
+    fullDescription:
+      "Je crée des sites qui vendent, pas des vitrines qui prennent la poussière. Design pensé pour votre cible, tunnel de conversion optimisé, performance maximale. Que ce soit un site vitrine, une boutique e-commerce ou une plateforme métier, chaque élément est pensé pour convertir vos visiteurs en clients.",
+    color: 'from-sky-600 via-sky-800 to-slate-700',
+    bg_color: 'bg-gradient-to-r from-sky-800 via-sky-900 to-slate-800 backdrop-blur-lg',
+    CTA: null,
+    includes: [
+      'Design sur-mesure pensé pour votre activité',
+      'Site responsive (mobile, tablette, desktop)',
+      'Performance optimale (Google PageSpeed >90)',
+      'SEO intégré dès la conception',
+      'Formulaires de contact avec notifications',
+      'Hébergement haute performance inclus 1 an',
+      'Formation complète à la gestion du contenu',
+      'Support technique 3 mois'
+    ],
+    technologies: ['Wordpress','Wix','Squarespace','Django','Next.js', 'React', 'Tailwind CSS', 'Vercel', 'Shopify (e-commerce)'],
+    pricing: '2 500€ - 12 000€',
+    duration: '3-8 semaines',
+    idealFor: 'TPE, artisans, commerçants, consultants cherchant une présence web qui convertit',
+    examples: [
+      'Site vitrine pro avec tunnel de conversion',
+      'Boutique e-commerce clé en main',
+      'Plateforme de réservation en ligne',
+      'Site multilingue pour l\'international'
+    ],
+    imageConfig: {
+      border: false,
+      shadow: false,
+      rounded: false,
+      objectFit: 'contain',
+      aspectRatio: '1/1',
+    }
+  },
+  {
+    id: 'automatisation',
+    icon: Zap,
+    title: 'Automatisation',
+    subtitle: 'Process, workflows, gains de temps',
+    text_focus_color: "text-white",
+    description:
+      "Facturation, relances clients, gestion des commandes... J'automatise ce qui vous fait perdre du temps. Résultat : 5 à 10h récupérées par semaine pour vous concentrer sur l'essentiel. Vos clients reçoivent leurs réponses instantanément.",
+    fullDescription:
+      "Stop aux tâches répétitives qui vous bouffent votre temps. J'identifie ce qui peut être automatisé dans votre quotidien et je mets en place les workflows adaptés. Facturation auto, relances clients, gestion commandes, synchronisation données... Résultat concret : vous récupérez 5 à 10h par semaine.",
+    color: 'from-orange-600 via-orange-500 to-red-500',
+    bg_color: 'bg-gradient-to-r from-orange-700 via-orange-600 to-red-600 backdrop-blur-lg',
+    CTA: null,
+    includes: [
+      'Audit complet de vos process actuels',
+      'Identification des tâches automatisables',
+      'Mise en place de 3 à 10 automatisations',
+      'Formation à la gestion des workflows',
+      'Documentation technique complète',
+      'Support 1 mois post-lancement',
+      'Ajustements inclus pendant 30 jours'
+    ],
+    technologies: ['Zapier', 'Make', 'n8n', 'Webhooks', 'API REST', 'Airtable', 'Notion'],
+    pricing: '1 500€ - 5 000€',
+    duration: '2-4 semaines',
+    idealFor: 'Entrepreneurs débordés, agences, e-commerçants avec process manuels chronophages',
+    examples: [
+      'Nouveau client → création auto fiche CRM + email bienvenue',
+      'Commande e-commerce → facture auto + notification compta',
+      'Formulaire site → création task Notion + alerte Slack',
+      'Relances clients automatiques selon statut paiement'
+    ],
+    imageConfig: {
+      border: true,
+      shadow: true,
+      rounded: true,
+      objectFit: 'contain',
+      aspectRatio: '16/9',
+    }
+  },
+  {
+    id: 'contenu',
+    icon: PenLine,
+    title: 'Production de contenu',
+    subtitle: 'Texte, visuels, vidéos',
+    text_focus_color: "text-white",
+    description:
+      "Calendrier de contenu vide ? Je produis vos textes de vente, visuels produits, vidéos promo. Résultat : 1 mois de contenu en 3 jours, sans recruter graphiste ni copywriter. Vous validez, j'ajuste, vous publiez.",
+    fullDescription:
+      "Plus besoin de recruter un graphiste, un copywriter et un vidéaste. J'utilise l'IA et mes compétences pour produire un mois de contenu en quelques jours. Fiches produits, posts réseaux sociaux, vidéos promo, emails marketing... Vous validez, j'ajuste, vous publiez.",
+    color: 'from-orange-600 via-orange-500 to-red-500',
+    bg_color: 'bg-gradient-to-r from-orange-700 via-orange-600 to-red-600 backdrop-blur-lg',
+    CTA: null,
+    includes: [
+      'Audit de votre ligne éditoriale actuelle',
+      'Calendrier éditorial 1 mois',
+      '20 à 40 posts réseaux sociaux (texte + visuel)',
+      '5 à 10 fiches produits optimisées SEO',
+      '3 à 5 vidéos courtes (15-60 sec)',
+      'Templates réutilisables fournis',
+      '2 aller-retours de modifications inclus'
+    ],
+    technologies: ['Nanobanana', 'Claude AI', 'Davinci Resolve', 'CapCut', 'Canva Pro', 'Figma'],
+    pricing: '800€ - 2 500€',
+    duration: '1-2 semaines',
+    idealFor: 'E-commerçants, marques, agences sans équipe contenu interne',
+    examples: [
+      'Pack 30 posts Instagram + visuels pour e-shop mode',
+      '20 fiches produits SEO pour boutique bio',
+      '10 vidéos courtes produits pour TikTok/Reels',
+      'Emails marketing pour lancement produit (séquence complète)'
+    ],
+    imageConfig: {
+      border: false,
+      shadow: false,
+      rounded: false,
+      objectFit: 'contain',
+      aspectRatio: '4/3',
+    }
+  },
+  {
+    id: 'connexion-outils',
+    icon: Link2,
+    title: "Connexion d'outils",
+    subtitle: 'CRM, paiement, email, calendrier',
+    text_focus_color: "text-white",
+    description:
+      "Vos outils ne communiquent pas ? Vous ressaisissez les infos 3 fois ? Je connecte votre site, CRM, emails, compta. Un client achète → fiche créée auto → email envoyé → vous êtes notifié. Tout se synchronise.",
+    fullDescription:
+      "Vous perdez du temps à copier-coller entre vos outils ? Je les connecte pour qu'ils parlent entre eux. Site web, CRM, emails, compta, calendrier... Un seul événement déclenche toute une chaîne automatique. Fini la ressaisie, place à la productivité.",
+    color: 'from-teal-500 via-teal-700 to-teal-800',
+    bg_color: 'bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 backdrop-blur-lg',
+    CTA: null,
+    includes: [
+      'Audit de votre écosystème digital actuel',
+      'Connexion de 3 à 8 outils entre eux',
+      'Synchronisation bidirectionnelle des données',
+      'Webhooks et API custom si nécessaire',
+      'Documentation des flux créés',
+      'Formation à la gestion des intégrations',
+      'Support technique 1 mois'
+    ],
+    technologies: ['Zapier', 'Make', 'API REST', 'Webhooks', 'OAuth', 'Stripe', 'Mailchimp'],
+    pricing: '1 200€ - 4 000€',
+    duration: '2-3 semaines',
+    idealFor: 'Entreprises avec multiples outils isolés, ressaisie manuelle fréquente',
+    examples: [
+      'Shopify → Pennylane (sync commandes + factures auto)',
+      'Typeform → Notion + Gmail (lead capture + notif)',
+      'Calendly → Google Calendar + Zoom (rdv auto créés)',
+      'Stripe → Slack + CRM (notif paiement + création client)'
+    ],
+      imageConfig: {
+      border: false,
+      shadow: false,
+      rounded: false, 
+      objectFit: 'contain',
+      aspectRatio: '1/1',
+    }
+  },
+  {
+    id: 'digitalisation',
+    icon: Rocket,
+    title: 'Digitalisation complète',
+    subtitle: 'De zéro à un système qui tourne',
+    text_focus_color: "text-white",
+    description:
+      "Pas de site ? Pas de CRM ? Tout en manuel ? Je vous accompagne de A à Z : audit, choix des outils, mise en place, formation. Vous repartez avec un système complet documenté que vous maîtrisez. En 2 à 4 semaines.",
+    fullDescription:
+      "Vous êtes encore en mode 100% manuel ? Je vous accompagne dans votre transformation digitale complète. Audit de l'existant, recommandations stack, mise en place site + CRM + outils + automatisations, formation équipe. Vous repartez autonome avec un système complet et documenté.",
+    color: 'from-purple-500 to-violet-800',
+    bg_color: 'bg-gradient-to-r from-purple-900 via-violet-900 to-purple-700 backdrop-blur-lg',
+    CTA: null,
+    includes: [
+      'Audit complet de votre situation actuelle',
+      'Recommandations stack adaptée à votre budget',
+      'Site web professionnel (vitrine ou e-commerce)',
+      'Mise en place CRM et outils essentiels',
+      '5 à 10 automatisations clés',
+      'Formation complète de votre équipe (2-4h)',
+      'Documentation exhaustive de votre système',
+      'Support privilégié 3 mois'
+    ],
+    technologies: ['Next.js', 'Shopify', 'HubSpot/Pipedrive', 'Zapier', 'Mailchimp', 'Notion'],
+    pricing: '8 000€ - 20 000€',
+    duration: '6-12 semaines',
+    idealFor: 'TPE en croissance, artisans se digitalisant, commerces passant au digital',
+    examples: [
+      'Artisan sans site → Site + CRM + facturation auto',
+      'Commerce physique → E-commerce + gestion stock',
+      'Consultant solo → Site + tunnel + automatisations admin',
+      'Agence en croissance → Système complet client + projet'
+    ],
+      imageConfig: {
+      border: false,
+      shadow: false,
+      rounded: false, 
+      objectFit: 'contain',
+      aspectRatio: '4/3',
+    }
+  },
+  {
+    id: 'projet-technique',
+    icon: CloudCheck,
+    title: 'Projets techniques sur-mesure',
+    subtitle: 'API, SaaS, solutions custom',
+    text_focus_color: "text-white",
+    description:
+      "Architecture backend, développement SaaS, API métier. Pour projets nécessitant une stack avancée et une expertise technique.",
+    fullDescription:
+      "Votre projet nécessite une architecture complexe ? Backend robuste, API métier, plateforme SaaS multi-tenant, marketplace... Je développe votre solution technique de A à Z avec une stack moderne et scalable. Code maintenable, documentation complète, déploiement production.",
+    color: 'from-slate-500 to-slate-800',
+    bg_color: 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 backdrop-blur-lg',
+    CTA: 'Discuter de mon projet technique',
+    includes: [
+      'Cadrage technique détaillé',
+      'Architecture backend scalable',
+      'API REST documentée (Swagger/OpenAPI)',
+      'Base de données optimisée',
+      'Authentification et autorisation',
+      'Tests unitaires et d\'intégration',
+      'CI/CD et déploiement automatisé',
+      'Monitoring et alertes',
+      'Documentation technique complète',
+      'Maintenance 6 mois offerte'
+    ],
+    technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'Supabase', 'Docker', 'Vercel', 'AWS'],
+    pricing: 'Sur devis (>15 000€)',
+    duration: '8-20 semaines',
+    idealFor: 'Startups tech, projets SaaS, plateformes métier complexes, scale-ups',
+    examples: [
+      'Plateforme SaaS multi-tenant avec abonnements',
+      'Marketplace avec système de paiement fractionné',
+      'API métier pour application mobile',
+      'Espace membre avec gestion de droits avancée'
+    ]
+  }
+];

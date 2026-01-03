@@ -1,50 +1,68 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import Link from "next/link";
+// src/app/services/page.tsx
+import { SERVICES } from '@/lib/services-data';
+import Container from '@/components/ui/Container';
+import { ArrowRight } from 'lucide-react';
+import PageHeader from '@/components/layout/PageHeader';
+import ServiceSection from '@/components/services/ServiceSection';
 
-export default function Services() {
-  const services = [
-    {
-      title: "Création de sites web",
-      description: "Sites vitrines, e-commerce, applications web sur-mesure.",
-    },
-    {
-      title: "Automatisation",
-      description: "Gagnez du temps avec des process automatisés et connectés.",
-    },
-    {
-      title: "Connexion d'outils",
-      description: "Intégration CRM, paiement, calendrier, email marketing...",
-    },
-    {
-      title: "Digitalisation",
-      description: "Transformation digitale complète de votre activité.",
-    },
-  ];
-
+export default function ServicesPage() {
   return (
-    <main className="container py-16">
-      <div className="mx-auto max-w-4xl text-center">
-        <h1 className="text-4xl font-bold">Nos services</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Des solutions digitales adaptées à votre entreprise.
-        </p>
-      </div>
+    <>
+      <PageHeader
+        title="Solutions"
+        subtitle="Développement / automatisation / Digitalisation"
+      />
 
-      <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
-        {services.map((service) => (
-          <Card key={service.title} className="p-6">
-            <h3 className="text-xl font-semibold">{service.title}</h3>
-            <p className="mt-2 text-muted-foreground">{service.description}</p>
-          </Card>
-        ))}
-      </div>
+      {/* Services détaillés */}
+      {SERVICES.map((service, index) => {
+        const IconComponent = service.icon; // ← Récupère le composant Lucide
+        const isReversed = index % 2 !== 0; // Alterne gauche/droite
 
-      <div className="mt-12 text-center">
-        <Button size="lg" asChild>
-          <Link href="/questionnaire">Simuler mon projet</Link>
-        </Button>
-      </div>
-    </main>
+        return (
+          <ServiceSection
+            key={service.id}
+            id={service.id}
+            title={service.title}
+            subtitle={service.subtitle}
+            description={service.fullDescription || service.description}
+            icon={<IconComponent className="w-12 h-12 text-forest-700" />}
+            features={service.includes || []}
+            technologies={service.technologies || []}
+            pricing={service.pricing}
+            duration={service.duration}
+            imageUrl={`/media/services/${service.id}.png`}
+            imageAlt={`${service.title} - SparqUp`}
+            reversed={isReversed}
+            // Customize par service si besoin
+            imageBorder={service.imageConfig?.border ?? true}
+            imageShadow={service.imageConfig?.shadow ?? true}
+            imageRounded={service.imageConfig?.rounded ?? true}
+            imageObjectFit={service.imageConfig?.objectFit || 'cover'}
+            aspectRatio={service.imageConfig?.aspectRatio }
+          />
+        );
+      })}
+
+      {/* CTA Final */}
+      <section className="bg-forest-950 text-white py-20">
+        <Container size="md">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              Pas sûr de quelle solution choisir ?
+            </h2>
+            <p className="text-forest-100 mb-8 text-lg">
+              Répondez à quelques questions, je vous recommande la meilleure approche
+            </p>
+            <a
+              href="/questionnaire"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-forest-950 rounded-lg font-bold hover:bg-neutral-100 transition-colors"
+            >
+              Démarrer le questionnaire
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
