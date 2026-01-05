@@ -30,7 +30,7 @@ export const questionnaireSchematech = z.object({
   projectType: z.literal('tech'),
   branch: z.literal('tech'),
   techNature: z.string().min(1, "Sélectionnez le type de projet technique"),
-  techStack: z.string().min(1, "Indiquez votre situation technique"),
+  techStack: z.string().optional(),
   techScale: z.string().optional(),
   techTeam: z.string().optional(),
   budget: z.enum(['5000-15000', '15000-30000', '30000-50000', '>50000', 'tbd']),

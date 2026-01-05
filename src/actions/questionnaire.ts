@@ -9,55 +9,40 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 type QuestionnaireData = z.infer<typeof questionnaireSchema>
 
-export async function submitQuestionnaire(data: QuestionnaireData ) {
-  console.log('📨 Questionnaire reçu:', data);
 
+export async function submitQuestionnaire(data: QuestionnaireData) {
   try {
-    // ============================================
-    // 1. Validation
-    // ============================================
     const validated = questionnaireSchema.parse(data);
 
-    // ============================================
-    // 2. Email de confirmation au client
-    // ============================================
+    // ✅ Utilise ton domaine vérifié
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'contact@sparqup.fr';
+
+    // 1️⃣ Email au visiteur
     const confirmationEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev', // ← Change avec ton domaine vérifié
-      to: validated.contact.email,
+      from: fromEmail, // ✅ contact@sparqup.fr
+      to: validated.contact.email, // ✅ N'importe quel email
       subject: '✓ Demande reçue — Estimation sous 24h',
       html: generateConfirmationEmail(validated)
     });
 
-    // Fix: Vérifie si erreur
     if (confirmationEmail.error) {
-      console.error('❌ Erreur email confirmation:', confirmationEmail.error);
+      console.error('❌ Erreur confirmation:', confirmationEmail.error);
       throw new Error('Erreur envoi email confirmation');
     }
 
-    console.log('✅ Email confirmation envoyé:', confirmationEmail.data?.id);
-
-    // ============================================
-    // 3. Email de notification pour toi
-    // ============================================
+    // 2️⃣ Email à toi
     const notificationEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'morosetti.majit@yahoo.com', // ← Ton email
-      subject: `🔔 Nouveau lead: ${validated.contact.company} (${validated.projectType})`,
+      from: fromEmail,
+      to: process.env.RESEND_TO_EMAIL!,
+      replyTo: validated.contact.email, // ✅ Pour répondre facilement
+      subject: `🔔 Nouveau lead: ${validated.contact.company}`,
       html: generateNotificationEmail(validated)
     });
 
     if (notificationEmail.error) {
-      console.error('❌ Erreur email notification:', notificationEmail.error);
-      // On continue quand même (client a reçu sa confirmation)
-    } else {
-      console.log('✅ Email notification envoyé:', notificationEmail.data?.id);
+      console.error('⚠️ Erreur notification:', notificationEmail.error);
+      // Continue quand même
     }
-
-    // ============================================
-    // 4. Save to database (optionnel)
-    // ============================================
-    // await saveToNotion(validated);
-    // await saveToAirtable(validated);
 
     return { success: true };
 

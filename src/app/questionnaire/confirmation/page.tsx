@@ -9,7 +9,7 @@ export default function ConfirmationPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4 py-25">
+    <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4 py-40">
       <Container size="md">
         <div className="text-center">
           {/* Checkmark */}

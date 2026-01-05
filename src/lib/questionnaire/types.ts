@@ -53,37 +53,37 @@ export interface ContactData {
 
 export interface QuestionnaireState {
   // Q1 - Type de projet (détermine la branch)
-  projectType: ProjectType | null
-  branch: Branch | null
+  projectType: ProjectType | null;
+  branch: Branch | null;
   
   // Q2-Q5 - Détails projet (adaptatif selon branch)
-  features: string[]
-  assets: string[]
-  tools: string[]
-  timeline: Timeline | null
-  budget: Budget | null
+  features: string[];
+  assets: string[];
+  tools: string[];
+  timeline: Timeline | null;
+  budget: Budget | null;
   
   // Questions spécifiques branch Tech
-  techNature?: string
-  techStack?: string
-  techScale?: string
-  techTeam?: string
+  techNature?: string;
+  techStack?: string;
+  techScale?: string;
+  techTeam?: string;
   
   // Questions spécifiques branch Conseil
-  conseilObjectives?: string[]
-  conseilUrgency?: string
+  conseilObjectives?: string[];
+  conseilUrgency?: string;
   
   // Calculé
-  complexityScore: number
+  complexityScore: number;
   
   // Contact (dernière étape)
-  contact: ContactData | null
+  contact: ContactData | null;
   
   // Meta
-  currentStep: number
-  totalSteps: number
-  startedAt: Date
-  completedAt?: Date
+  currentStep: number;
+  totalSteps: number;
+  startedAt: Date;
+  completedAt?: Date;
 }
 
 export interface Estimation {

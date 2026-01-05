@@ -20,6 +20,8 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
+    const form = e.currentTarget;
+
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get('name'),
@@ -36,7 +38,7 @@ export default function ContactPage() {
 
       if (response.ok) {
         alert('Message envoyé ! Je vous réponds sous 24h.');
-        e.currentTarget.reset();
+        form.reset();
         setConsent(false);
       } else {
         alert('Erreur lors de l\'envoi. Réessayez.');
