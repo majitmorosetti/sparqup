@@ -62,30 +62,29 @@ export default function ProcessTimeline() {
     offset: ["start center", "end center"]
   });
 
-  // Ligne verticale qui se dessine progressivement
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="py-24 bg-neutral-50">
+    <section className="py-24 bg-neutral-50 px-12">
       <Container size="lg">
         <SectionHeader 
           title="Comment on travaille ensemble"
           subtitle="Un process transparent, pas de tunnel noir, pas de surprise"
         />
 
-        {/* Timeline alternée */}
+        {/* Timeline */}
         <div ref={containerRef} className="relative max-w-6xl mx-auto">
-          {/* Ligne verticale statique (gris clair) */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neutral-200 translate-x-1/2 hidden lg:block" />
+          {/* Ligne verticale statique (desktop only) */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neutral-200 -translate-x-1/2 hidden lg:block" />
           
-          {/* Ligne verticale progressive (noir) */}
+          {/* Ligne verticale progressive (desktop only) */}
           <motion.div 
             className="absolute left-1/2 top-0 w-0.5 bg-neutral-900 -translate-x-1/2 hidden lg:block origin-top"
             style={{ height: lineHeight }}
           />
 
-          {/* Steps */}
-          <div className="space-y-12">
+          {/* Steps - Stack vertical mobile, alterné desktop */}
+          <div className="space-y-8 lg:space-y-12">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isLeft = index % 2 === 0;
@@ -93,17 +92,22 @@ export default function ProcessTimeline() {
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className={`relative grid lg:grid-cols-2 mb-[-50px] gap-8 items-center ${
-                    isLeft ? '' : 'lg:grid-flow-dense'
-                  }`}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className={`
+                    relative 
+                    lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center
+                    ${isLeft ? '' : 'lg:grid-flow-dense'}
+                  `}
                 >
                   {/* Card */}
-                  <div className={`${isLeft ? 'lg:justify-self-end' : 'lg:justify-self-start lg:col-start-2'}`}>
-                    <div className="group relative p-6 bg-white border-2 border-neutral-200 rounded-2xl shadow-sm hover:border-neutral-900 hover:shadow-xl transition-all duration-300 max-w-lg">
+                  <div className={`
+                    w-full
+                    ${isLeft ? 'lg:justify-self-end' : 'lg:justify-self-start lg:col-start-2'}
+                  `}>
+                    <div className="group relative p-6 bg-white border-2 border-neutral-200 rounded-2xl shadow-sm hover:border-neutral-900 hover:shadow-xl transition-all duration-300 lg:max-w-lg">
                       {/* Header */}
                       <div className="flex items-start gap-4 mb-4">
                         <div className="flex-shrink-0">
@@ -141,7 +145,7 @@ export default function ProcessTimeline() {
                     </div>
                   </div>
 
-                  {/* Dot central avec pulse au scroll */}
+                  {/* Dot central (desktop only) */}
                   <motion.div 
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
@@ -166,15 +170,17 @@ export default function ProcessTimeline() {
                     />
                   </motion.div>
 
-                  {/* Ligne horizontale vers le dot */}
+                  {/* Ligne horizontale (desktop only) */}
                   <motion.div
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
                     viewport={{ once: true }}
-                    className={`hidden lg:block absolute top-1/2 w-3 h-0.5 bg-neutral-900 ${
-                      isLeft ? 'right-1/2 mr-3 origin-right' : 'left-1/2 ml-3 origin-left'
-                    }`}
+                    className={`
+                      hidden lg:block 
+                      absolute top-1/2 w-8 h-0.5 bg-neutral-900
+                      ${isLeft ? 'right-1/2 mr-3 origin-right' : 'left-1/2 ml-3 origin-left'}
+                    `}
                   />
                 </motion.div>
               );
@@ -183,17 +189,17 @@ export default function ProcessTimeline() {
         </div>
 
         {/* Bottom reassurance */}
-        <div className="mt-40 p-8 bg-white border-2 border-neutral-900 rounded-2xl max-w-4xl mx-auto">
+        <div className="mt-16 lg:mt-24 p-6 lg:p-8 bg-white border-2 border-neutral-900 rounded-2xl max-w-4xl mx-auto">
           <div className="text-center">
-            <h3 className="text-3xl font-bold text-neutral-950 mb-4">
+            <h3 className="text-2xl lg:text-3xl font-bold text-neutral-950 mb-4">
               Pas de devis surprise, pas de tunnel noir
             </h3>
-            <p className="text-lg text-neutral-700 mb-6 leading-relaxed">
+            <p className="text-base lg:text-lg text-neutral-700 mb-6 leading-relaxed">
               Vous savez exactement où vous en êtes à chaque étape.
               Budget ET timeline validés dès l&apos;audit.
               Pas de frais cachés, pas de deadline fantaisiste
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-neutral-700">
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 text-sm text-neutral-700">
               <span className="inline-flex items-center gap-2">
                 ✓ Estimation précise après audit
               </span>

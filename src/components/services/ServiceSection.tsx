@@ -103,7 +103,7 @@ export default function ServiceSection({
             </h2>
 
             {/* Image - Hug top */}
-            <div className="relative mb-6 -mx-4 sm:mx-0"> {/* Bleed sur mobile si besoin */}
+            <div className="relative mb-6 mx-4 sm:mx-0"> {/* Bleed sur mobile si besoin */}
               <div className={imageWrapperClasses}>
                 <Image
                   src={imageUrl}

@@ -3,19 +3,16 @@
 
 import { SERVICES } from '@/lib/services-data';
 import { ArrowRight } from 'lucide-react';
+import SectionHeader from '../ui/SectionHeader';
 
 export default function ServicesGrid() {
   return (
     <section className="py-20 bg-neutral-50 mt-10">
       <div className="container mx-auto px-4">
-        <div className="text-left mb-12 max-w-7xl px-12 mx-auto">
-          <h2 className="text-5xl font-bold text-neutral-950 mb-4">
-            Solutions
-          </h2>
-          <p className="text-xl text-neutral-600 max-w-2xl">
-            Des offres concrètes pour digitaliser votre business de A à Z avec les outils dont vous avez besoin.
-          </p>
-        </div>
+        <SectionHeader 
+                  title="Solutions"
+                  subtitle="Des offres concrètes pour digitaliser votre business de A à Z avec les outils dont vous avez besoin."
+                />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {SERVICES.map((service) => {

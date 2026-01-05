@@ -75,7 +75,7 @@ function getScreenshotUrl(url: string) {
 
 export default function FeaturedProjects() {
   return (
-    <section id="realisations" className="py-24 bg-white">
+    <section id="realisations" className="py-24 bg-white px-12">
       <Container>
         <SectionHeader 
           title="Projets récents"

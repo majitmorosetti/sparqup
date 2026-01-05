@@ -97,28 +97,13 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Entreprise</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link 
-                  href="/a-propos" 
-                  className="text-forest-200 hover:text-white transition-colors"
-                >
-                  À propos
-                </Link>
-              </li>
+
               <li>
                 <Link 
                   href="/realisations" 
                   className="text-forest-200 hover:text-white transition-colors"
                 >
                   Réalisations
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/process" 
-                  className="text-forest-200 hover:text-white transition-colors"
-                >
-                  Process
                 </Link>
               </li>
               <li>
