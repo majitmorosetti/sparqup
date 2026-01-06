@@ -36,7 +36,7 @@ export const SERVICES: Service[] = [
     subtitle: 'Vitrine, e-commerce, application',
     text_focus_color: "text-white",
     description:
-      "Votre site = votre commercial 24/7. Design qui rassure, tunnel qui convertit. Pas de template : pensé pour VOTRE métier et VOS clients.",
+      "Transformez vos visiteurs en clients. Un site qui génère des leads et des ventes pendant que vous dormez. Pas de template, 100% adapté à votre métier.",
     fullDescription:
       "Je crée des sites qui vendent, pas des vitrines qui prennent la poussière. Design pensé pour votre cible, tunnel de conversion optimisé, performance maximale. Que ce soit un site vitrine, une boutique e-commerce ou une plateforme métier, chaque élément est pensé pour convertir vos visiteurs en clients.",
     color: 'from-sky-600 via-sky-800 to-slate-700',
@@ -77,7 +77,7 @@ export const SERVICES: Service[] = [
     subtitle: 'Process, workflows, gains de temps',
     text_focus_color: "text-white",
     description:
-      "Facturation, relances clients, gestion des commandes... J'automatise ce qui vous fait perdre du temps. Résultat : 5 à 10h récupérées par semaine pour vous concentrer sur l'essentiel. Vos clients reçoivent leurs réponses instantanément.",
+      "Récupérez 5 à 10h par semaine. Vos tâches répétitives tournent en arrière-plan : facturation, relances, gestion commandes. Vous vous concentrez sur ce qui compte.",
     fullDescription:
       "Stop aux tâches répétitives qui vous bouffent votre temps. J'identifie ce qui peut être automatisé dans votre quotidien et je mets en place les workflows adaptés. Facturation auto, relances clients, gestion commandes, synchronisation données... Résultat concret : vous récupérez 5 à 10h par semaine.",
     color: 'from-orange-600 via-orange-500 to-red-500',
@@ -117,7 +117,7 @@ export const SERVICES: Service[] = [
     subtitle: 'Texte, visuels, vidéos',
     text_focus_color: "text-white",
     description:
-      "Calendrier de contenu vide ? Je produis vos textes de vente, visuels produits, vidéos promo. Résultat : 1 mois de contenu en 3 jours, sans recruter graphiste ni copywriter. Vous validez, j'ajuste, vous publiez.",
+      "Votre calendrier social media rempli pour 1 mois en 3 jours. Posts Instagram/LinkedIn, stories, vidéos Reels. Production rapide, templates réutilisables fournis.",
     fullDescription:
       "Plus besoin de recruter un graphiste, un copywriter et un vidéaste. J'utilise l'IA et mes compétences pour produire un mois de contenu en quelques jours. Fiches produits, posts réseaux sociaux, vidéos promo, emails marketing... Vous validez, j'ajuste, vous publiez.",
     color: 'from-orange-600 via-orange-500 to-red-500',
@@ -157,7 +157,7 @@ export const SERVICES: Service[] = [
     subtitle: 'CRM, paiement, email, calendrier',
     text_focus_color: "text-white",
     description:
-      "Vos outils ne communiquent pas ? Vous ressaisissez les infos 3 fois ? Je connecte votre site, CRM, emails, compta. Un client achète → fiche créée auto → email envoyé → vous êtes notifié. Tout se synchronise.",
+      "Arrêtez de ressaisir vos données 3 fois. Vos outils communiquent entre eux : un événement déclenche toute la chaîne. Zéro copier-coller.",
     fullDescription:
       "Vous perdez du temps à copier-coller entre vos outils ? Je les connecte pour qu'ils parlent entre eux. Site web, CRM, emails, compta, calendrier... Un seul événement déclenche toute une chaîne automatique. Fini la ressaisie, place à la productivité.",
     color: 'from-teal-500 via-teal-700 to-teal-800',
@@ -197,7 +197,7 @@ export const SERVICES: Service[] = [
     subtitle: 'De zéro à un système qui tourne',
     text_focus_color: "text-white",
     description:
-      "Pas de site ? Pas de CRM ? Tout en manuel ? Je vous accompagne de A à Z : audit, choix des outils, mise en place, formation. Vous repartez avec un système complet documenté que vous maîtrisez. En 2 à 4 semaines.",
+      "Passez du tout manuel au tout automatisé en 6 à 12 semaines. Site, CRM, process : un système complet qui tourne sans vous, documenté de A à Z.",
     fullDescription:
       "Vous êtes encore en mode 100% manuel ? Je vous accompagne dans votre transformation digitale complète. Audit de l'existant, recommandations stack, mise en place site + CRM + outils + automatisations, formation équipe. Vous repartez autonome avec un système complet et documenté.",
     color: 'from-purple-500 to-violet-800',
@@ -238,7 +238,7 @@ export const SERVICES: Service[] = [
     subtitle: 'API, SaaS, solutions custom',
     text_focus_color: "text-white",
     description:
-      "Architecture backend, développement SaaS, API métier. Pour projets nécessitant une stack avancée et une expertise technique.",
+      "Votre SaaS, API ou plateforme custom développée avec une stack moderne. Architecture scalable, code maintenable, déploiement automatisé.",
     fullDescription:
       "Votre projet nécessite une architecture complexe ? Backend robuste, API métier, plateforme SaaS multi-tenant, marketplace... Je développe votre solution technique de A à Z avec une stack moderne et scalable. Code maintenable, documentation complète, déploiement production.",
     color: 'from-slate-500 to-slate-800',

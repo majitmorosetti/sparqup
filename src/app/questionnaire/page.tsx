@@ -1,7 +1,8 @@
 // src/app/questionnaire/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import QuestionnaireModal from '@/components/questionnaire/QuestionnaireModal';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
@@ -9,6 +10,26 @@ import Button from '@/components/ui/Button';
 export default function QuestionnairePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalKey, setModalKey] = useState(0); // ← Force re-mount
+  const searchParams = useSearchParams();
+
+  // ✅ Détecte preset et auto-open
+  useEffect(() => {
+    const preset = searchParams.get('preset');
+    
+    if (preset === 'tech') {
+      // Injection preset
+      sessionStorage.setItem('questionnaire-preset', JSON.stringify({
+        projectType: 'tech',
+        branch: 'tech',
+        currentStep: 2,
+        totalSteps: 4
+      }));
+      
+      // Auto-open modal
+      setModalKey(prev => prev + 1);
+      setIsModalOpen(true);
+    }
+  }, [searchParams]);
 
   const handleOpenModal = () => {
     setModalKey(prev => prev + 1); // ← Incrémente = nouveau state

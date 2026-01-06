@@ -3,7 +3,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { X } from 'lucide-react';
+import { X, AlertTriangle } from 'lucide-react';
 import Q1TypeProject from './questions/Q1TypeProject';
 import Q2Features from './questions/Q2Features';
 import Q3Assets from './questions/Q3Assets';
@@ -19,6 +19,7 @@ import { submitQuestionnaire } from '@/actions/questionnaire';
 import { cn } from '@/lib/utils';
 import { z } from 'zod';
 import { questionnaireSchema } from '@/lib/questionnaire/schema';
+import toast from 'react-hot-toast';
 
 
 type QuestionnaireSubmitData = z.infer<typeof questionnaireSchema>;
@@ -31,6 +32,7 @@ interface QuestionnaireModalProps {
 export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireModalProps) {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
+  const [showConfirmExit, setShowConfirmExit] = useState(false);
   const [state, setState] = useState<QuestionnaireState>({
     projectType: null,
     branch: null,
@@ -46,6 +48,28 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
     startedAt: new Date()
   });
 
+  // ✅ Charge preset au mount du modal
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const presetStr = sessionStorage.getItem('questionnaire-preset');
+    if (presetStr) {
+      try {
+        const preset = JSON.parse(presetStr);
+        setState(prev => ({
+          ...prev,
+          ...preset,
+          startedAt: new Date()
+        }));
+        // Nettoie après chargement
+        sessionStorage.removeItem('questionnaire-preset');
+      } catch (error) {
+        console.error('Erreur chargement preset:', error);
+      }
+    }
+  }, [isOpen]);
+
+
   useEffect(() => {
     if (contentRef.current) {
       contentRef.current.scrollTo({
@@ -57,11 +81,20 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
 
   const handleClose = useCallback(() => {
   if (state.currentStep > 1) {
-    const confirm = window.confirm('Êtes-vous sûr de vouloir quitter ? Votre progression sera perdue.');
-    if (!confirm) return;
+    setShowConfirmExit(true);
+  } else {
+    onClose();
   }
-  onClose();
-}, [state.currentStep, onClose]);
+  }, [state.currentStep, onClose]);
+
+  const confirmExit = () => {
+    setShowConfirmExit(false);
+    onClose();
+  };
+
+  const cancelExit = () => {
+    setShowConfirmExit(false);
+  };
 
   // Fermer avec Escape
   useEffect(() => {
@@ -140,7 +173,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
       router.push('/questionnaire/confirmation');
     } catch (error) {
       console.error('Erreur submission:', error);
-      alert('Une erreur est survenue. Veuillez réessayer.');
+      toast.error('Une erreur est survenue. Veuillez réessayer.');
     }
   }, [state, router, onClose]);
 
@@ -391,6 +424,55 @@ const isStepValid = () => {
             )}
           </div>
         )}
+        {/* ✅ Modal de confirmation (overlay par-dessus) */}
+      {showConfirmExit && (
+        <>
+          {/* Overlay confirmation (z-index supérieur) */}
+          <div 
+            className="fixed inset-0 bg-black/60 z-[60] animate-in fade-in duration-200"
+            onClick={cancelExit}
+          />
+
+          {/* Modal confirmation */}
+          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 pointer-events-none">
+            <div 
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 pointer-events-auto animate-in zoom-in-95 fade-in duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Icon + Title */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                  <AlertTriangle className="w-6 h-6 text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-neutral-950 mb-1">
+                    Quitter le questionnaire ?
+                  </h3>
+                  <p className="text-sm text-neutral-600">
+                    Votre progression sera perdue. Vous devrez recommencer depuis le début.
+                  </p>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={cancelExit}
+                  className="flex-1 px-4 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-900 font-semibold rounded-lg transition-colors"
+                >
+                  Continuer
+                </button>
+                <button
+                  onClick={confirmExit}
+                  className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors"
+                >
+                  Quitter
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       </div>
     </div>
   </>

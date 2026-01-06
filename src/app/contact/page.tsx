@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/layout/PageHeader';
+import toast from 'react-hot-toast';
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,6 +14,8 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    const toastId = toast.loading('Envoi en cours...');
+
     if (!consent) {
       alert('Veuillez accepter la politique de confidentialité');
       return;
@@ -37,15 +40,21 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        alert('Message envoyé ! Je vous réponds sous 24h.');
+        toast.success('Message envoyé ! Je vous réponds sous 24h.', {
+          id: toastId, // Remplace le loading
+        });
         form.reset();
         setConsent(false);
       } else {
-        alert('Erreur lors de l\'envoi. Réessayez.');
+        toast.error('Erreur lors de l\'envoi. Réessayez.', {
+          id: toastId,
+        });
       }
     } catch (error) {
       console.error('Erreur envoi contact:', error);
-      alert('Erreur. Contactez-moi directement par email.');
+      toast.error('Erreur réseau. Contactez-moi par email.', {
+        id: toastId,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -59,7 +68,7 @@ export default function ContactPage() {
                     />
       <Container size="md">
         
-        <div className="max-w-2xl mx-auto pt-20">
+        <div className="max-w-2xl mx-auto pt-20 px-4">
 
           <div className="bg-white rounded-2xl border-2 border-neutral-200 p-8 mb-6">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -139,8 +148,8 @@ export default function ContactPage() {
           </div>
 
           {/* Alternative questionnaire */}
-          <div className="bg-neutral-100 rounded-xl p-6 text-center border border-neutral-200">
-            <p className="text-sm text-neutral-700 mb-3">
+          <div className="bg-forest-900 rounded-xl p-6 text-center border border-neutral-800 my-12">
+            <p className="text-sm text-forest-400 mb-3">
               💡 <strong>Pour un devis précis :</strong> Simulez votre projet en 5 minutes
             </p>
             <Button

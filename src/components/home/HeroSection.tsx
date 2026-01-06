@@ -8,6 +8,9 @@ import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
 
 export default function HeroSection() {
+
+
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-forest-900">
       {/* Image de fond */}
@@ -58,13 +61,14 @@ export default function HeroSection() {
               className="group bg-forest-100 hover:text-black text-neutral-900 hover:bg-white transition duration-300 ease-in-out"
             >
               <span>Estimer mon projet</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition delay-50 duration-500 ease-in-out" />
+
             </Button>
           </Link>
 
           {/* Secondary CTA: lien texte*/}
-          <Link href="/pro">
-            <p className="text-slate-300 hover:text-white transition delay-50 duration-500 ease-in-out underline">Projet technique (API, SaaS) →</p>
+          <Link href="/questionnaire?preset=tech" className='text-forest-500 flex flex-row gap-1'>
+            <span>Projet technique (API, SaaS)</span>
+            <ArrowRight className="w-5 h-5" />
           </Link>
 
         </div>
