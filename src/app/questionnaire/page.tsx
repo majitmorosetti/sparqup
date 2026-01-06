@@ -32,6 +32,7 @@ export default function QuestionnairePage() {
   }, [searchParams]);
 
   const handleOpenModal = () => {
+    sessionStorage.removeItem('questionnaire-preset');
     setModalKey(prev => prev + 1); // ← Incrémente = nouveau state
     setIsModalOpen(true);
   };
