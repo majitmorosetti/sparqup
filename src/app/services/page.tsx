@@ -24,11 +24,10 @@ export default function ServicesPage() {
             id={service.id}
             title={service.title}
             subtitle={service.subtitle}
-            description={service.fullDescription || service.description}
+            description={service.description}
             icon={<IconComponent className="w-12 h-12 text-forest-700" />}
             features={service.includes || []}
             technologies={service.technologies || []}
-            pricing={service.pricing}
             duration={service.duration}
             imageUrl={`/media/services/${service.id}.png`}
             imageAlt={`${service.title} - SparqUp`}

@@ -7,18 +7,18 @@ import Link from 'next/link';
 import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-type AspectRatio = '4/3' | '3/4' | '16/9' | '1/1' | 'auto';
+
 
 interface ServiceSectionProps {
   id: string;
   title: string;
   subtitle: string;
   description: string;
-  fullDescription?: string;
   icon: React.ReactNode;
   features: string[];
   technologies: string[];
-  duration?: string;
+  pricing?: string; // ← Ajoute ça
+  duration: string;  // ← Et ça
   imageUrl: string;
   imageAlt: string;
   reversed?: boolean;
@@ -26,7 +26,7 @@ interface ServiceSectionProps {
   imageShadow?: boolean;
   imageRounded?: boolean;
   imageObjectFit?: 'cover' | 'contain';
-  aspectRatio?: AspectRatio;
+  aspectRatio?: '4/3' | '3/4' | '16/9' | '1/1' | 'auto';
 }
 
 export default function ServiceSection({
