@@ -34,7 +34,7 @@ export default function Header() {
   console.log('Header render - scrollstate:', scrollstate);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-60 pointer-events-none transition-all duration-300">
       <div className="pt-6 px-2 pointer-events-auto">
         <div className="max-w-7xl mx-auto bg-neutral-200 rounded-full shadow-lg pl-1.5 pr-0.3 py-1.5">
           <div className="flex items-center justify-between px-2">

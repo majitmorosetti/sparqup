@@ -4,6 +4,7 @@
 import { SERVICES } from '@/lib/services-data';
 import { ArrowRight } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
+import ServiceSection from '../services/ServiceSection';
 
 export default function ServicesGrid() {
   return (
@@ -14,44 +15,36 @@ export default function ServicesGrid() {
                   subtitle="Des offres concrètes pour digitaliser votre business de A à Z avec les outils dont vous avez besoin."
                 />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {SERVICES.map((service) => {
-            const IconComponent = service.icon;
-            
-            return (
-              <a
-                key={service.id}
-                href={`/services#${service.id}`}
-                className={`group relative block p-8 rounded-2xl border-2 border-neutral-200 overflow-hidden transition-all hover:border-neutral-900 hover:scale-[1.02]`}
-              >
-                {/* Gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                
-                {/* Content */}
-                <div className="relative z-10">
-                  <IconComponent className={`w-12 h-12 mb-4 text-neutral-900 group-hover:${service.text_focus_color} transition-colors`} />
-                  
-                  <h3 className={`text-2xl font-bold mb-2 text-neutral-950 group-hover:${service.text_focus_color} transition-colors`}>
-                    {service.title}
-                  </h3>
-                  
-                  <p className={`text-sm font-medium mb-4 text-neutral-600 group-hover:${service.text_focus_color} group-hover:opacity-90 transition-colors`}>
-                    {service.subtitle}
-                  </p>
-                  
-                  <p className={`text-neutral-700 mb-6 leading-relaxed group-hover:${service.text_focus_color} group-hover:opacity-90 transition-colors`}>
-                    {service.description}
-                  </p>
-
-                  <div className={`flex items-center gap-2 text-sm font-semibold text-neutral-900 group-hover:${service.text_focus_color} group-hover:gap-3 transition-all`}>
-                    {service.CTA || 'En savoir plus'}
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </a>
-            );
-          })}
-        </div>
+        {/* Services détaillés */}
+              {SERVICES.map((service, index) => {
+                const IconComponent = service.icon; // ← Récupère le composant Lucide
+                const isReversed = index % 2 !== 0; // Alterne gauche/droite
+        
+                return (
+                  <ServiceSection
+                    key={service.id}
+                    id={service.id}
+                    title={service.title}
+                    subtitle={service.subtitle}
+                    description={service.description}
+                    fullDescription={service.fullDescription}
+                    icon={<IconComponent className="w-12 h-12 text-forest-700" />}
+                    features={service.includes || []}
+                    technologies={service.technologies || []}
+                    pricing={service.pricing}
+                    duration={service.duration}
+                    imageUrl={`/media/services/${service.id}.png`}
+                    imageAlt={`${service.title} - SparqUp`}
+                    reversed={isReversed}
+                    // Customize par service si besoin
+                    imageBorder={service.imageConfig?.border ?? true}
+                    imageShadow={service.imageConfig?.shadow ?? true}
+                    imageRounded={service.imageConfig?.rounded ?? true}
+                    imageObjectFit={service.imageConfig?.objectFit || 'cover'}
+                    aspectRatio={service.imageConfig?.aspectRatio }
+                  />
+                );
+              })}
 
         <div className="text-center mt-12">
           <a

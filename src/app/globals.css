@@ -9,10 +9,6 @@
      TYPOGRAPHIE
      ============================================ */
 
-  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
-
   /* ============================================
      PALETTE FOREST (Hero & Accents)
      ============================================ */
@@ -146,4 +142,17 @@
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+@keyframes grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px 300px;
+  }
+}
+
+.animate-grid-scroll {
+  animation: grid-scroll 60s linear infinite;
 }

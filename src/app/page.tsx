@@ -3,12 +3,12 @@
 
 import HeroSection from '@/components/home/HeroSection';
 import TechMarquee from '@/components/home/TechMarquee';
-import ServicesGrid from '@/components/home/ServicesGrid';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import ProcessTimeline from '@/components/home/ProcessTimeline';
 import FinalCTA from '@/components/home/FinalCTA';
 import QuestionnaireModal from '@/components/questionnaire/QuestionnaireModal';
 import { useEffect, useState } from 'react';
+import SolutionsGrid from '@/components/home/SolutionsGrid';
 
 export default function HomePage() {
   const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
@@ -29,8 +29,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TechMarquee />  {/* ← Ajoute ici */}
-      <ServicesGrid />
+      <TechMarquee />
+      <SolutionsGrid />
       <FeaturedProjects />
       <ProcessTimeline />
       <FinalCTA />
