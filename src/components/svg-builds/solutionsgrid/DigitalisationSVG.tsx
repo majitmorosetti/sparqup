@@ -158,8 +158,8 @@ const items: Item[] = [
 // Rayon de courbure: 12px aux virages
 const connections: Connection[] = [
   // Animation 1
-  { from: 'social', to: 'manychat', path: 'M130,366 L130,322 Q130,310 118,310 L74,310', gradient: { start: '#E1306C', end: '#00D068' }, wave: 1 },
-  { from: 'social', to: 'website', path: 'M130,366 L130,322 Q130,310 142,310 L186,310', gradient: { start: '#E1306C', end: '#95E1D3' }, wave: 1 },
+  { from: 'social', to: 'manychat', path: 'M126,366 L126,322 Q126,310 114,310 L74,310', gradient: { start: '#E1306C', end: '#00D068' }, wave: 1 },
+  { from: 'social', to: 'website', path: 'M134,366 L134,322 Q134,310 146,310 L186,310', gradient: { start: '#E1306C', end: '#95E1D3' }, wave: 1 },
   // Animation 2
   { from: 'manychat', to: 'social', path: 'M74,310 L118,310 Q130,310 130,322 L130,366', gradient: { start: '#00D068', end: '#E1306C' }, wave: 2 },
   { from: 'manychat', to: 'zapier', path: 'M40,276 L40,232 Q40,220 52,220 L96,220', gradient: { start: '#00D068', end: '#FF4A00' }, wave: 2 },
@@ -168,19 +168,19 @@ const connections: Connection[] = [
   { from: 'zapier', to: 'crm', path: 'M130,186 L130,142 Q130,130 118,130 L52,130 Q40,130 40,118 L40,74', gradient: { start: '#FF4A00', end: '#F38181' }, wave: 3 },
   { from: 'website', to: 'mailing', path: 'M220,276 L220,142 Q220,130 232,130 L276,130', gradient: { start: '#95E1D3', end: '#FFE01B' }, wave: 3 },
   // Animation 4
-  { from: 'mailing', to: 'crm', path: 'M276,130 L52,130 Q40,130 40,118 L40,74', gradient: { start: '#FFE01B', end: '#F38181' }, wave: 4 },
-  { from: 'mailing', to: 'zapier', path: 'M276,130 L142,130 Q130,130 130,142 L130,186', gradient: { start: '#FFE01B', end: '#FF4A00' }, wave: 4 },
+  { from: 'mailing', to: 'crm', path: 'M276,126 L52,126 Q40,126 40,114 L40,74', gradient: { start: '#FFE01B', end: '#F38181' }, wave: 4 },
+  { from: 'mailing', to: 'zapier', path: 'M276,134 L142,134 Q130,134 130,146 L130,186', gradient: { start: '#FFE01B', end: '#FF4A00' }, wave: 4 },
   // Animation 5
   { from: 'website', to: 'paiement', path: 'M220,276 L220,74', gradient: { start: '#95E1D3', end: '#635BFF' }, wave: 5 },
-  { from: 'website', to: 'zapier', path: 'M220,276 L220,232 Q220,220 208,220 L164,220', gradient: { start: '#95E1D3', end: '#FF4A00' }, wave: 5 },
-  { from: 'website', to: 'mailing', path: 'M220,276 L220,142 Q220,130 232,130 L276,130', gradient: { start: '#95E1D3', end: '#FFE01B' }, wave: 5 },
+  { from: 'website', to: 'zapier', path: 'M212,276 L212,232 Q212,220 200,220 L164,220', gradient: { start: '#95E1D3', end: '#FF4A00' }, wave: 5 },
+  { from: 'website', to: 'mailing', path: 'M228,276 L228,142 Q228,130 240,130 L276,130', gradient: { start: '#95E1D3', end: '#FFE01B' }, wave: 5 },
   // Animation 6
-  { from: 'zapier', to: 'crm', path: 'M130,186 L130,142 Q130,130 118,130 L52,130 Q40,130 40,118 L40,74', gradient: { start: '#FF4A00', end: '#F38181' }, wave: 6 },
+  { from: 'zapier', to: 'crm', path: 'M122,186 L122,142 Q122,130 110,130 L52,130 Q40,130 40,118 L40,74', gradient: { start: '#FF4A00', end: '#F38181' }, wave: 6 },
   { from: 'zapier', to: 'calendrier', path: 'M130,186 L130,74', gradient: { start: '#FF4A00', end: '#006BFF' }, wave: 6 },
-  { from: 'paiement', to: 'zapier', path: 'M220,74 L220,118 Q220,130 208,130 L142,130 Q130,130 130,142 L130,186', gradient: { start: '#635BFF', end: '#FF4A00' }, wave: 6 },
+  { from: 'paiement', to: 'zapier', path: 'M220,74 L220,118 Q220,130 208,130 L150,130 Q138,130 138,142 L138,186', gradient: { start: '#635BFF', end: '#FF4A00' }, wave: 6 },
 ];
 
-export default function DigitalizationGrid() {
+export default function DigitalisationSVG() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [activeItems, setActiveItems] = useState<Set<string>>(new Set());
   const [activeWave, setActiveWave] = useState<number | null>(null);
@@ -284,7 +284,7 @@ export default function DigitalizationGrid() {
           currentWave = (currentWave % 6) + 1;
           timeoutId = setTimeout(animateWave, 300);
         }, 400);
-      }, 3000);
+      }, 2000);
     };
 
     timeoutId = setTimeout(animateWave, 1000);
@@ -295,9 +295,7 @@ export default function DigitalizationGrid() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-[350px] mx-auto">
-      
-
+    <div className="relative w-full max-w-[350px] mx-auto"> 
       <div className="relative w-full">
       {/* SVG Connections Layer */}
       <svg
@@ -382,7 +380,7 @@ export default function DigitalizationGrid() {
                 </div>
                 <div
                   className={`font-body text-xs font-medium text-center leading-tight transition-colors duration-300 ${
-                    isActive ? 'text-neutral-800' : 'text-neutral-200'
+                    isActive ? 'text-neutral-800' : 'text-neutral-100'
                   }`}
                 >
                   {item.label}

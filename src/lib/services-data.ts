@@ -14,7 +14,7 @@ export interface Service {
   // Détails pour page services
   includes: string[];
   technologies: string[];
-  pricing?: string;
+  pricing: string;
   duration: string;
   idealFor: string;
   examples: string[];

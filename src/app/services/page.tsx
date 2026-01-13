@@ -28,6 +28,7 @@ export default function ServicesPage() {
             icon={<IconComponent className="w-12 h-12 text-forest-700" />}
             features={service.includes || []}
             technologies={service.technologies || []}
+            pricing={service.pricing}
             duration={service.duration}
             imageUrl={`/media/services/${service.id}.png`}
             imageAlt={`${service.title} - SparqUp`}

@@ -6,13 +6,12 @@ import { ArrowRight } from 'lucide-react';
 import { SERVICES } from '@/lib/services-data';
 import { cn } from '@/lib/utils';
 import SectionContainer from '@/components/ui/SectionContainer';
-import StackedCards from '../ui/StackedCards';
-import DigitalizationGrid from '../DigitalizationGrid/DigitalizationGrid';
+import DigitalisationSVG from '../svg-builds/solutionsgrid/DigitalisationSVG';
+import { SolutionsGridSVGs } from '../svg-builds/SolutionsGridSVGs';
 
 
 
 export default function SolutionsGrid() {
-
   const sectionGradients = {
     topLeft: 'bg-gradient-to-b from-white to-neutral-50',
     topCenter: 'bg-gradient-to-b from-white to-neutral-50',
@@ -24,6 +23,61 @@ export default function SolutionsGrid() {
     bottomRight: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
   };
 
+  const ServiceCard = ({ 
+    service, 
+    serviceIndex,
+    className
+  }: { 
+    service: typeof SERVICES[0], 
+    serviceIndex: number,
+    className?: string
+  }) => {
+    const SVGComponent = SolutionsGridSVGs[serviceIndex];
+
+    return (
+      <Link
+        href={`/services#${service.id}`}
+        className={cn(
+          "group relative bg-white overflow-hidden",
+          "hover:bg-neutral-50 transition-colors duration-200",
+          "hover:border hover:border-forest-600",
+          "h-80",
+          "flex flex-col",
+          className
+        )}
+      >
+        {/* Content - Top */}
+        <div className="p-4 lg:px-8 lg:pt-8 lg:pb-4 flex-1 flex flex-col justify-start z-10">
+          <div className="space-y-3">
+            <h3 className="text-2xl font-semibold  text-neutral-950 group-hover:text-forest-700 transition-colors">
+              {service.title}
+            </h3>
+            
+            <p className="text-neutral-600 text-sm leading-relaxed">
+              {service.description.split('|')[0]}
+            </p>
+          </div>
+
+          {/* Arrow */}
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity self-end">
+            <ArrowRight className="w-5 h-5 text-forest-600" />
+          </div>
+        </div>
+
+        {/* Visual - Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-42 -mb-8 z-0">
+          {SVGComponent ? (
+            <div className="w-full h-full bg-neutral-50  flex items-end justify-center">
+              <SVGComponent />
+            </div>
+          ) : (
+            <div className="w-full h-full bg-sky-100 border-t-2 border-sky-600" />
+          )}
+        </div>
+      </Link>
+    );
+  };
+
   return (
     <SectionContainer 
       className="bg-neutral-50"
@@ -33,7 +87,7 @@ export default function SolutionsGrid() {
       cellBgColor='bg-gradient-to-b from-neutral-50 to-neutral-100'
       gradientFromColor="from-neutral-50"
       gradientHeight="h-24"
-    >      {/* Header */}
+    >
       {/* Grid pattern background subtil */}
       <div 
         className="absolute inset-0 opacity-30 z-0"
@@ -49,7 +103,7 @@ export default function SolutionsGrid() {
       />
 
       {/* Header */}
-      <div className="max-w-3xl px-4 py-4 md:px-8 md:py-8 mb-8  relative z-10">
+      <div className="max-w-3xl px-4 py-4 md:px-8 md:py-8 mb-8 relative z-10">
         <p className="text-forest-600 font-medium mb-4 text-sm">
           Solutions
         </p>
@@ -66,67 +120,64 @@ export default function SolutionsGrid() {
 
       {/* Mosaic Grid */}
       <div className="relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px relative overflow-hidden ">
-            {/* ✅ Background pattern animé */}
-                <div 
-                className="absolute inset-0 -z-10 animate-grid-scroll"
-                style={{
-                    backgroundColor: '#d2f6dd', 
-                    backgroundImage: `
-                    linear-gradient(#c3e7ce 1px, transparent 1px),
-                    linear-gradient(90deg, #c3e7ce 1px, transparent 1px)
-                    `,
-                    backgroundSize: '20px 20px'
-                }}
-                />
-          {SERVICES.map((service, index) => {
-            
-            
-            const layouts = [
-              'md:col-span-1 md:row-span-1',
-              'md:col-span-1 md:row-span-1',
-              'md:col-span-1 md:row-span-1',
-              'md:col-span-2 md:row-span-1',
-              'md:col-span-1 md:row-span-1',
-              'md:col-span-2 md:row-span-1',
-              'md:col-span-1 md:row-span-1',
-            ];
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px relative overflow-hidden">
+          {/* Background pattern animé */}
+          <div 
+            className="absolute inset-0 -z-10 animate-grid-scroll"
+            style={{
+              backgroundColor: '#d2f6dd', 
+              backgroundImage: `
+                linear-gradient(#c3e7ce 1px, transparent 1px),
+                linear-gradient(90deg, #c3e7ce 1px, transparent 1px)
+              `,
+              backgroundSize: '20px 20px'
+            }}
+          />
 
-            return (
-              <Link
-                key={service.id}
-                href={`/services#${service.id}`}
-                className={cn(
-                  "group relative bg-white p-4 lg:p-8",
-                  "hover:bg-neutral-50 transition-colors duration-200",
-                  "hover:border hover:border-forest-600",
-                  layouts[index % layouts.length]
-                )}
-              >
-                
-                {/* Content */}
-                <div className="space-y-3 mb-8 md:mb-0">
-                  <h3 className="text-2xl font-semibold text-neutral-950 group-hover:text-forest-700 transition-colors">
-                    {service.title}
+          {/* Row 1: 3 carrés */}
+          <ServiceCard service={SERVICES[0]} serviceIndex={0}/>
+          <ServiceCard service={SERVICES[2]} serviceIndex={2} />
+          <ServiceCard service={SERVICES[1]} serviceIndex={1} />
+
+          {/* Row 2: 3 carrés */}
+          <ServiceCard service={SERVICES[3]} serviceIndex={3} className='md:col-span-2' />
+          <ServiceCard service={SERVICES[5]} serviceIndex={5}/>
+
+          {/* Row 3: Digitalisation Complète - Full Width */}
+          <Link
+            href="/services#digitalisation"
+            className="md:col-span-3 bg-white p-8 lg:p-12 hover:bg-neutral-50 transition-colors duration-200 hover:border hover:border-forest-600 group"
+          >
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left: Header + Text */}
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <h3 className="text-3xl font-semibold text-neutral-950 group-hover:text-forest-700 transition-colors">
+                    Digitalisation Complète
                   </h3>
-                  
-                  <p className="text-neutral-600 text-sm leading-relaxed">
-                    {service.description.split('|')[0]}
+                  <p className="text-neutral-600 text-base leading-relaxed">
+                    Une transformation digitale de bout en bout : CRM, automatisation, site web, paiements, analytics. 
+                    Tout connecté, tout optimisé.
                   </p>
                 </div>
 
                 {/* Arrow */}
-                <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-forest-600" />
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowRight className="w-6 h-6 text-forest-600" />
                 </div>
-              </Link>
-            );
-          })}
+              </div>
+
+              {/* Right: Animation */}
+              <div className="flex items-center justify-center">
+                <DigitalisationSVG />
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 
       {/* Bottom CTA */}
-      <div className=" px-4 py-8 md:px-8 md:py-16 mt-16 lg:mt-20 flex flex-col sm:flex-row items-center justify-between gap-8 pt-16 relative z-10">
+      <div className="px-4 py-8 md:px-8 md:py-16 mt-16 lg:mt-20 flex flex-col sm:flex-row items-center justify-between gap-8 pt-16 relative z-10">
         <div className="max-w-2xl">
           <h3 className="text-3xl font-semibold text-neutral-950 mb-3">
             Prêt à digitaliser votre business ?
@@ -143,9 +194,9 @@ export default function SolutionsGrid() {
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
+
       <div className="my-20">
-        <StackedCards />
-        <DigitalizationGrid />
+
       </div>
     </SectionContainer>
   );
