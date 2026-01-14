@@ -4,7 +4,7 @@ export const ContenuSVG = () => {
     return (
         <svg viewBox="0 0 300 120" className="w-full h-full">
             {/* Background */}
-            <rect x="0" y="0" width="300" height="120" fill="#f9fafb" />
+            <rect x="0" y="0" width="300" height="120" fill="none" />
 
             {/* Content Plan - Mode paysage (large et horizontal) */}
             <g transform='translate(20,0) '>

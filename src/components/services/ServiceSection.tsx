@@ -1,11 +1,12 @@
 // src/components/services/ServiceSection.tsx
 'use client';
 
-import { useState } from 'react';
+import { ComponentType, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import SectionContainer from '../ui/SectionContainer';
 
 
 
@@ -20,6 +21,7 @@ interface ServiceSectionProps {
   pricing?: string; // ← Ajoute ça
   duration: string;  // ← Et ça
   imageUrl: string;
+  SVG?: ComponentType;
   imageAlt: string;
   reversed?: boolean;
   imageBorder?: boolean;
@@ -30,7 +32,6 @@ interface ServiceSectionProps {
 }
 
 export default function ServiceSection({
-  id,
   title,
   subtitle,
   description,
@@ -38,6 +39,7 @@ export default function ServiceSection({
   technologies,
   duration,
   imageUrl,
+  SVG,
   imageAlt,
   reversed = false,
   imageBorder = true,
@@ -74,47 +76,67 @@ export default function ServiceSection({
     imageObjectFit === 'cover' ? "object-cover" : "object-contain"
   );
 
+  const sectionGradients = {
+    topLeft: 'bg-gradient-to-b from-white to-neutral-50',
+    topCenter: 'bg-gradient-to-b from-white to-neutral-50',
+    topRight: 'bg-gradient-to-b from-white to-neutral-50',
+    middleLeft: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    middleRight: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    bottomLeft: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomCenter: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomRight: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+  };
   return (
-    <section
-      id={id}
-      className={cn(
-        "py-16 lg:py-24 scroll-mt-20",
-        reversed ? "bg-neutral-50" : "bg-white"
-      )}
-    >
-      <div className="container mx-auto px-4">
+    <SectionContainer 
+                  className="scroll-mt-20 "
+                  gradients={sectionGradients}
+                  gridBgColor='bg-neutral-200'
+                  cellBgColor='bg-gradient-to-b from-neutral-50 to-neutral-100'
+                  showTopBar={false}
+                  showBottomBar={false}
+                  id="Solutions-Header"
+                >
+      <div className="py-16 lg:py-40  container mx-auto px-4 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* ============================================
               MOBILE LAYOUT
               ============================================ */}
           <div className="lg:hidden">
-            <div className="relative overflow-hidden rounded-2xl border-2 border-neutral-200">
-              {/* Frosted overlay */}
-              <div className="absolute inset-0 z-[1] backdrop-blur-xl bg-white/90" />
+            
+              
 
               {/* Content */}
-              <div className="relative z-10 p-6">
+              <div className="relative z-10">
                 {/* Subtitle */}
                 <p className="text-sm font-semibold uppercase tracking-wide text-forest-600 mb-2">
                   {subtitle}
                 </p>
 
                 {/* Title */}
-                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-950 mb-4">
+                <h2 className="font-heading text-3xl sm:text-3xl font-bold text-neutral-950 mb-4">
                   {title}
                 </h2>
-
+ 
                 {/* Image */}
-                <div className="relative h-56 mb-4 overflow-hidden rounded-xl shadow-lg">
-                  <Image
-                    src={imageUrl}
-                    alt={imageAlt}
-                    fill
-                    className={imageClasses}
-                    sizes="100vw"
-                  />
+                <div className='py-4'>
+                { SVG? (
+                    <div className="w-full h-full justify-center my-6 items-center"> {/* ← Ajoute bg pour voir le container */}
+                      <SVG />
+                    </div>
+                  ) : (
+                    <div className={cn("relative w-full h-full mb-4 overflow-hidden",
+                      imageWrapperClasses
+                    )}>
+                      <Image
+                        src={imageUrl}
+                        alt={imageAlt}
+                        fill
+                        className={imageClasses}
+                        sizes="100vw"
+                      />
+                    </div>
+                  )}
                 </div>
-
                 {/* Description */}
                 <div className="text-base text-neutral-700 leading-relaxed mb-6">
                   <p className="text-neutral-800 mb-2">
@@ -233,7 +255,7 @@ export default function ServiceSection({
                 </div>
               </div>
             </div>
-          </div>
+
 
           {/* ============================================
               DESKTOP LAYOUT
@@ -245,18 +267,24 @@ export default function ServiceSection({
             
             {/* Image */}
             <div className={cn(
-              "relative self-start",
+              "relative self-center",
               reversed && "lg:col-start-2"
             )}>
-              <div className={imageWrapperClasses}>
-                <Image
-                  src={imageUrl}
-                  alt={imageAlt}
-                  fill
-                  className={imageClasses}
-                  sizes="50vw"
-                />
-              </div>
+                { SVG? (
+                    <div className="w-full flex justify-center items-center py-8"> 
+                      <SVG />
+                    </div>
+                  ) : (
+                    <div className={cn("relative h-100 mb-4 overflow-hidden", imageWrapperClasses)}>
+                      <Image
+                        src={imageUrl}
+                        alt={imageAlt}
+                        fill
+                        className={imageClasses}
+                        sizes="100vw"
+                      />
+                    </div>
+                  )}
               
               {/* Accent décoratif */}
               {imageShadow && (
@@ -304,12 +332,9 @@ export default function ServiceSection({
               {/* Expandable details */}
               <div className="border-t border-neutral-200 pt-4">
                 <div
-                  className={cn(
-                    "grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
-                    !isExpanded && "grid-rows-[0fr] opacity-0",
-                    isExpanded && "grid-rows-[1fr] opacity-100"
-                  )}
-                >
+                  className=
+                    "grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grid-rows-[1fr] opacity-100"
+                     >
                   <div className="overflow-hidden">
                     <div className="space-y-6 mb-6">
                       {/* Features */}
@@ -367,39 +392,11 @@ export default function ServiceSection({
                   </div>
                 </div>
 
-                {/* CTAs */}
-                <div className="flex items-center justify-between gap-4 mt-4">
-                  {!isExpanded && (
-                    <Link
-                      href="/questionnaire"
-                      className="px-6 py-3 bg-forest-600 hover:bg-forest-500 text-white font-semibold rounded-lg transition-colors whitespace-nowrap"
-                    >
-                      Simuler ce service →
-                    </Link>
-                  )}
-                  
-                  {isExpanded && <div />}
-                  
-                  <button
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="flex items-center gap-2 group hover:text-forest-700 transition-colors"
-                  >
-                    <span className="font-semibold text-neutral-950 group-hover:text-forest-700">
-                      {isExpanded ? 'Masquer les détails' : 'Voir les détails'}
-                    </span>
-                    <ChevronDown
-                      className={cn(
-                        "w-5 h-5 text-neutral-600 transition-all duration-300 group-hover:text-forest-600",
-                        isExpanded && "rotate-180"
-                      )}
-                    />
-                  </button>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 }

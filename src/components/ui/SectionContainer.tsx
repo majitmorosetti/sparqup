@@ -7,10 +7,13 @@ interface SectionContainerProps {
   className?: string;
   gridBgColor?: string; // Couleur des lignes du grid
   cellBgColor?: string; // Couleur du contenu central
+  showTopBar?: boolean;
+  showBottomBar?: boolean;
   showTopGradient?: boolean;
   showBottomGradient?: boolean;
   gradientFromColor?: string; // ex: "from-white"
   gradientHeight?: string; // ex: "h-32"
+  id: string;
   gradients: {
     topLeft: string;
     topCenter: string;
@@ -30,13 +33,16 @@ export default function SectionContainer({
   cellBgColor,
   showTopGradient = false,
   showBottomGradient = false,
+  showBottomBar = true,
+  showTopBar = true,
   gradientFromColor = 'from-white',
   gradientHeight = 'h-32',
-  gradients
+  gradients,
+  id,
 }: SectionContainerProps) {
 
   return (
-    <section className={cn("relative", className)}>
+    <section id={id} className={cn("relative", className)}>
       {/* Barre gradient top */}
       {showTopGradient && (
         <div className={cn(
@@ -61,22 +67,30 @@ export default function SectionContainer({
         "gap-px",
         gridBgColor
       )}>
-        {/* ROW 1 */}
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topLeft)} />
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topCenter)} />
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topRight)} />
+        {/* ROW 1 - Top bar */}
+        {showTopBar && (
+          <>
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topLeft)} />
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topCenter)} />
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.topRight)} />
+          </>
+        )}
 
-        {/* ROW 2 */}
-        <div className={gradients.middleLeft} />
-        <div className={cellBgColor}>
+        {/* ROW 2 - Contenu principal */}
+        <div className={cn("min-w-[1rem] lg:min-h-[3rem]", gradients.middleLeft)} />
+        <div className={cn(cellBgColor)}>
           {children}
         </div>
-        <div className={gradients.middleRight} />
+        <div className={cn("min-w-[1rem] lg:min-h-[3rem]", gradients.middleRight)} />
 
-        {/* ROW 3 */}
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomLeft)} />
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomCenter)} />
-        <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomRight)} />
+        {/* ROW 3 - Bottom bar */}
+        {showBottomBar && (
+          <>
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomLeft)} />
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomCenter)} />
+            <div className={cn("min-h-[5rem] lg:min-h-[8rem]", gradients.bottomRight)} />
+          </>
+        )}
       </div>
     </section>
   );

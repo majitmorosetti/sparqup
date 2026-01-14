@@ -2,8 +2,8 @@ import React from 'react';
 
 export const AutomatisationSVG = () => {
     return (
-      <svg viewBox="0 0 200 120" className=" w-[90%] h-full border-1 bg-neutral-100 border-neutral-400 rounded-lg">
-        <g transform='translate(40,-10)'>  
+      <svg viewBox="0 0 200 150" className=" w-[90%] h-full ">
+        <g transform='translate(40,10)'>  
           {/* Roue dentée qui tourne - centrée */}
             <g transform="translate(100, 100)">
               <g>

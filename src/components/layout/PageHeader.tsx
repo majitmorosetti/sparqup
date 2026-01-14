@@ -16,8 +16,8 @@ export default function PageHeader({
   children
 }: PageHeaderProps) {
   return (
-    <section className="relative bg-forest-900 border-b border-neutral-200">
-      <div className="container pb-5 pt-30 max-w-full px-4 md:px-24 md:pt-45">
+    <section className="relative bg-forest-900  border-neutral-200">
+      <div className="container pb-5 pt-30 px-4 md:px-32 md:pt-40">
         <div className="text-left">
           {/* Badge optionnel */}
           {badge && (

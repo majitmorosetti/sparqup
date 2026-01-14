@@ -5,11 +5,10 @@ import { ExternalLink, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import Container from '@/components/ui/Container';
-import SectionHeader from '@/components/ui/SectionHeader';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
+import SectionContainer from '@/components/ui/SectionContainer';
 
 const projects = [
   {
@@ -18,10 +17,6 @@ const projects = [
     description:
       'Plateforme e-learning complète avec automatisation marketing et tunnel de vente pour programmes de rajeunissement facial naturel.',
     stack: ['LearnWorlds', 'Mailerlite', 'Zapier', 'Stripe', 'Notion', 'Manychat','Google Analytics','Meta Pixels','Meta Ads','Google Ads'],
-    metrics: [
-      { label: 'Automatisations', value: '15+' },
-      { label: 'Intégrations', value: '9 outils' },
-    ],
     link: 'https://faceplastie.com',
     screenshot: undefined,  // ← undefined = utilise l'API screenshot
     status: 'En refonte',
@@ -33,10 +28,6 @@ const projects = [
     description:
       'Site e-commerce premium pour produits de rajeunissement naturel : oreillers ergonomiques, outils LED, accessoires en soie.',
     stack: ['Shopify', 'TikTok Shop', 'Meta Pixels', 'Google Analytics'],
-    metrics: [
-      { label: 'Lancement', value: '2025' },
-      { label: 'Produits', value: '10+' },
-    ],
     link: 'https://boutique-umai.com',
     screenshot: undefined,  // ← undefined = utilise l'API screenshot
     status: 'En ligne',
@@ -48,10 +39,6 @@ const projects = [
     description:
       'Site vitrine et menu intégré pour restaurant à Bordeaux.',
     stack: ['Wix', 'Wix Restaurants'],
-    metrics: [
-      { label: 'Pages', value: '5' },
-      { label: 'En ligne', value: 'Menu intégré' },
-    ],
     link: 'https://chezjoon.com',
     screenshot: '/media/mockups/chez-joon.webp',  // ← Image locale de backup
     status: 'En développement',
@@ -74,15 +61,43 @@ function getScreenshotUrl(url: string) {
 }
 
 export default function FeaturedProjects() {
-  return (
-    <section id="realisations" className="py-24 bg-white px-12">
-      <Container>
-        <SectionHeader 
-          title="Projets récents"
-          subtitle="Du e-learning à l&apos;e-commerce en passant par les sites vitrines"
-        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  const sectionGradients = {
+    topLeft: 'bg-gradient-to-b from-white to-neutral-50',
+    topCenter: 'bg-gradient-to-b from-white to-neutral-50',
+    topRight: 'bg-gradient-to-b from-white to-neutral-50',
+    middleLeft: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    middleRight: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    bottomLeft: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomCenter: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomRight: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+  };
+
+  return (
+    <SectionContainer 
+          className="bg-neutral-50"
+          gradients={sectionGradients}
+          gridBgColor='bg-neutral-200'
+          cellBgColor='bg-gradient-to-b from-neutral-50 to-neutral-100'
+          showTopGradient={false}
+          showTopBar={false}
+          showBottomBar={false}
+          id="featured-projects"
+        >
+        {/* Header */}
+        <div className="max-w-3xl px-4 pb-4  md:px-8 md:pb-8 pt-32 mb-8 relative z-10">
+          <p className="text-forest-600 font-medium text-sm mb-2">
+            Projets récents
+          </p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-950 mb-6 leading-[01]">
+            Des réalisations concrètes.
+          </h2>
+          <p className="text-xl text-neutral-600 leading-relaxed">
+            Du e-learning à l&apos;e-commerce en passant par les sites vitrines
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-4 md:-mx-8 overflow-visible">
           {projects.map((project, index) => (
             <motion.div
               key={project.name}
@@ -91,7 +106,7 @@ export default function FeaturedProjects() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card padding="none" className="overflow-hidden group">
+              <Card padding="none" className="overflow-hidden group relative z-10">
                 <div className="relative h-64 bg-neutral-100 overflow-hidden">
                   <Image
                     src={project.screenshot || getScreenshotUrl(project.link)}  // ← Logique fallback
@@ -117,29 +132,20 @@ export default function FeaturedProjects() {
                   <p className="text-sm text-slate-400 font-medium mb-2">
                     {project.tagline}
                   </p>
-                  <p className="text-neutral-700 mb-5">
+                  <p className="text-neutral-700 mb-8">
                     {project.description}
                   </p>
 
-                  <div className="flex gap-4 mb-2">
-                    {project.metrics.map((metric) => (
-                      <div key={metric.label}>
-                        <div className="text-2xl font-bold text-neutral-900">
-                          {metric.value}
-                        </div>
-                        <div className="text-xs text-neutral-500">{metric.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                  
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.stack.slice(0, 3).map((tech) => (
-                      <Badge key={tech} variant="outline">
+                      <Badge key={tech} variant="default">
                         {tech}
                       </Badge>
                     ))}
                     {project.stack.length > 3 && (
-                      <Badge variant="outline">
+                      <Badge variant="default">
                         +{project.stack.length - 3}
                       </Badge>
                     )}
@@ -160,7 +166,7 @@ export default function FeaturedProjects() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center mb-32">
           <Link href="/questionnaire">
             <Button variant="primary" size="lg">
               Un projet similaire ?
@@ -168,7 +174,6 @@ export default function FeaturedProjects() {
             </Button>
           </Link>
         </div>
-      </Container>
-    </section>
+      </SectionContainer>
   );
 }

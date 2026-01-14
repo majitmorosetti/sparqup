@@ -1,5 +1,7 @@
 // src/lib/services-data.ts
 import { Code2, Zap, PenLine, Link2, Rocket, CloudCheck, LucideIcon } from 'lucide-react';
+import  DigitalisationSVG from '@/components/svg-builds/solutionsgrid/DigitalisationSVG';
+import { ComponentType } from 'react';
 
 export interface Service {
   id: string;
@@ -11,6 +13,7 @@ export interface Service {
   color: string;
   bg_color: string;
   CTA: string | null;
+  SVG?: ComponentType;
   // Détails pour page services
   includes: string[];
   technologies: string[];
@@ -218,6 +221,8 @@ export const SERVICES: Service[] = [
       objectFit: 'contain',
       aspectRatio: '4/3',
     }
+    ,
+    SVG: DigitalisationSVG
   },
   {
     id: 'projet-technique',

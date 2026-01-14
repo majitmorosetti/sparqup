@@ -184,7 +184,9 @@ export default function DigitalisationSVG() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [activeItems, setActiveItems] = useState<Set<string>>(new Set());
   const [activeWave, setActiveWave] = useState<number | null>(null);
-
+  // On est obligé d'avoir un id unique par instance du composant pour les gradients, 
+  // autrement le pre fetching de Next va donner plusieurs instances qui entrent en conflit
+  const [componentId] = useState(() => `dig-${Math.random().toString(36).substr(2, 9)}`);
 
   useEffect(() => {
    
@@ -309,7 +311,7 @@ export default function DigitalisationSVG() {
           {connections.map((connection, index) => (
             <linearGradient
               key={`gradient-${connection.wave}-${index}`}
-              id={`gradient-${connection.wave}-${index}`}
+              id={`gradient-${componentId}-${connection.wave}-${index}`}
               gradientUnits="userSpaceOnUse"
             >
               <stop offset="0%" stopColor={connection.gradient.start} />
@@ -328,7 +330,7 @@ export default function DigitalisationSVG() {
               data-wave={connection.wave}
               data-index={waveIndex}
               d={connection.path}
-              stroke={`url(#gradient-${connection.wave}-${connIndex})`}
+              stroke={`url(#gradient-${componentId}-${connection.wave}-${connIndex})`}
               strokeWidth="3"
               fill="none"
               opacity={activeWave === connection.wave ? 1 : 0}

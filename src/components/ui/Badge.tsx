@@ -9,7 +9,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = 'default', children, ...props }, ref) => {
     const variants = {
-      default: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
+      default: 'bg-forest-700 text-neutral-100 border border-neutral-200',
       outline: 'bg-neutral-900 text-neutral-300 border border-neutral-300',
       primary: 'bg-slate-800 text-neutral-100 border border-neutral-900',
       success: 'bg-green-100 text-green-800 border border-green-200',

@@ -5,19 +5,25 @@ import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/layout/PageHeader';
 import ServiceSection from '@/components/services/ServiceSection';
 
+
 export default function ServicesPage() {
+
+
+
   return (
     <>
-      <PageHeader
-        title="Solutions"
-        subtitle="Développement / automatisation / Digitalisation"
-      />
 
+        <PageHeader
+          title="Solutions"
+          subtitle="Développement / automatisation / Digitalisation"
+        />
+
+      
       {/* Services détaillés */}
       {SERVICES.map((service, index) => {
         const IconComponent = service.icon; // ← Récupère le composant Lucide
         const isReversed = index % 2 !== 0; // Alterne gauche/droite
-
+        
         return (
           <ServiceSection
             key={service.id}
@@ -33,6 +39,7 @@ export default function ServicesPage() {
             imageUrl={`/media/services/${service.id}.png`}
             imageAlt={`${service.title} - SparqUp`}
             reversed={isReversed}
+            SVG={service.SVG}
             // Customize par service si besoin
             imageBorder={service.imageConfig?.border ?? true}
             imageShadow={service.imageConfig?.shadow ?? true}
@@ -63,6 +70,7 @@ export default function ServicesPage() {
           </div>
         </Container>
       </section>
+
     </>
   );
 }

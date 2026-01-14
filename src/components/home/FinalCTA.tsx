@@ -10,7 +10,7 @@ import Button from '@/components/ui/Button';
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 px-4 bg-white">
       <Container size="md" className="text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -4,10 +4,6 @@ export const ProjetTechSVG = () => {
     return (
           <svg viewBox="0 0 300 120" className="w-full h-full">
             <defs>
-                <radialGradient id="RadialGradient">
-                    <stop offset="0%" stopColor="#000000" />
-                    <stop offset="100%" stopColor="#ffffff" />
-                </radialGradient>
                 <linearGradient id="LinearGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#687387" />
                     <stop offset="50%" stopColor="#becbd6" />
@@ -15,7 +11,6 @@ export const ProjetTechSVG = () => {
                 </linearGradient>
             </defs>
             <g transform='translate(0,20)'>
-                <rect x="-50" y="0" width="400" height="200" fill='url(#RadialGradient)'/>
                 <rect x="70" y="0" width="160" height="120" fill="#858585" stroke='#d6d6d6' strokeWidth="1" rx="4" />
                 <rect x="60" y="5" width="180" height="120" fill="#bbbdbb" stroke='#d6d6d6' strokeWidth="1" rx="6" />
                 <rect x="40" y="15" width="220" height="120" fill="#dcdedc" stroke='#d6d6d6' strokeWidth="1" rx="8" />

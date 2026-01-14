@@ -4,8 +4,8 @@
 import { Search, Layers, Rocket, Zap, GraduationCap } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import Container from '@/components/ui/Container';
-import SectionHeader from '@/components/ui/SectionHeader';
+import SectionContainer from '../ui/SectionContainer';
+import { cn } from '@/lib/utils';
 
 const steps = [
   {
@@ -62,24 +62,49 @@ export default function ProcessTimeline() {
     offset: ["start center", "end center"]
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1.1], ["0%", "100%"]);
+  const sectionGradients = {
+    topLeft: 'bg-gradient-to-b from-white to-neutral-50',
+    topCenter: 'bg-gradient-to-b from-white to-neutral-50',
+    topRight: 'bg-gradient-to-b from-white to-neutral-50',
+    middleLeft: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    middleRight: 'bg-gradient-to-b from-neutral-50 to-neutral-100',
+    bottomLeft: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomCenter: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+    bottomRight: 'bg-gradient-to-b from-neutral-100 to-neutral-200',
+  };
 
   return (
-    <section className="py-24 bg-neutral-50 px-12">
-      <Container size="lg">
-        <SectionHeader 
-          title="Comment on travaille ensemble"
-          subtitle="Un process transparent, pas de tunnel noir, pas de surprise"
-        />
-
+    <SectionContainer 
+              className="bg-neutral-50"
+              gradients={sectionGradients}
+              gridBgColor='bg-neutral-200'
+              cellBgColor='bg-gradient-to-b from-neutral-50 to-neutral-100'
+              showTopGradient={false}
+              showTopBar={false}
+              showBottomBar={false}
+              id="process-timeline"
+            >
+            {/* Header */}
+            <div className="max-w-3xl px-4 pb-4  md:px-8 md:pb-8 pt-32 mb-8 relative z-10">
+              <p className="text-forest-600 font-medium text-sm mb-2">
+                Comment on travaille ensemble
+              </p>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-950 mb-6 leading-[01]">
+                Un process transparent
+              </h2>
+              <p className="text-xl text-neutral-600 leading-relaxed">
+                Pas de tunnel noir, pas de surprise
+              </p>
+            </div>
         {/* Timeline */}
-        <div ref={containerRef} className="relative max-w-6xl mx-auto">
-          {/* Ligne verticale statique (desktop only) */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neutral-200 -translate-x-1/2 hidden lg:block" />
+        <div ref={containerRef} className="relative max-w-6xl  z-10 -mx-2 lg:-mx-8">
+          {/* Ligne verticale statique  */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neutral-200 -translate-x-1/2 block mb-32" />
           
-          {/* Ligne verticale progressive (desktop only) */}
+          {/* Ligne verticale progressive */}
           <motion.div 
-            className="absolute left-1/2 top-0 w-0.5 bg-neutral-900 -translate-x-1/2 hidden lg:block origin-top"
+            className="absolute left-1/2 top-0 w-0.5 bg-forest-400 bg-gradient-to-r -translate-x-1/2 block origin-top mb-32"
             style={{ height: lineHeight }}
           />
 
@@ -107,7 +132,7 @@ export default function ProcessTimeline() {
                     w-full
                     ${isLeft ? 'lg:justify-self-end' : 'lg:justify-self-start lg:col-start-2'}
                   `}>
-                    <div className="group relative p-6 bg-white border-2 border-neutral-200 rounded-2xl shadow-sm hover:border-neutral-900 hover:shadow-xl transition-all duration-300 lg:max-w-lg">
+                    <div className={cn(`${isLeft ? '' : 'lg:justify-self-end'}`,`group relative p-6 bg-white border-2 border-neutral-200 rounded-2xl shadow-sm hover:border-neutral-900 hover:shadow-xl transition-all duration-300 lg:max-w-lg`)}>
                       {/* Header */}
                       <div className="flex items-start gap-4 mb-4">
                         <div className="flex-shrink-0">
@@ -189,8 +214,7 @@ export default function ProcessTimeline() {
         </div>
 
         {/* Bottom reassurance */}
-        <div className="mt-16 lg:mt-24 p-6 lg:p-8 bg-white border-2 border-neutral-900 rounded-2xl max-w-4xl mx-auto">
-          <div className="text-center">
+          <div className="text-center px-4 py-16 md:px-8 md:pt-24 md:pb-20 max-w-3xl mx-auto relative z-10">
             <h3 className="text-2xl lg:text-3xl font-bold text-neutral-950 mb-4">
               Pas de devis surprise, pas de tunnel noir
             </h3>
@@ -199,7 +223,7 @@ export default function ProcessTimeline() {
               Budget ET timeline validés dès l&apos;audit.
               Pas de frais cachés, pas de deadline fantaisiste
             </p>
-            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 text-sm text-neutral-700">
+            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 text-sm text-forest-700">
               <span className="inline-flex items-center gap-2">
                 ✓ Estimation précise après audit
               </span>
@@ -211,8 +235,7 @@ export default function ProcessTimeline() {
               </span>
             </div>
           </div>
-        </div>
-      </Container>
-    </section>
+
+    </SectionContainer>
   );
 }
