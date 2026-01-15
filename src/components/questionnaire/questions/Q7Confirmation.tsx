@@ -33,7 +33,7 @@ export default function Q7Confirmation({
       {/* Message */}
       <div className="text-center mb-8">
         <p className="text-neutral-700 mb-4">
-          Vous recevrez une estimation personnalisée à l&aposadresse :
+          Vous recevrez une estimation personnalisée à l&apos;adresse :
         </p>
         <p className="text-lg font-semibold text-neutral-950 mb-6">
           {email}
@@ -50,7 +50,7 @@ export default function Q7Confirmation({
           size="lg"
           onClick={onClose}
         >
-          Retour à l&aposaccueil
+          Retour à l&apos;accueil
         </Button>
       </div>
     </QuestionCard>

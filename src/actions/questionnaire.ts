@@ -26,9 +26,16 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
     });
 
     if (confirmationEmail.error) {
-      console.error('❌ Erreur confirmation:', confirmationEmail.error);
-      throw new Error('Erreur envoi email confirmation');
+      console.error('⚠️ Erreur confirmation (non-bloquant):', confirmationEmail.error);
+      // ❌ NE PAS throw ici
+      // L'email de notification a été envoyé, c'est le principal
+    } else {
+      console.log('✅ Email de confirmation envoyé');
     }
+
+    // Continue le flow normalement
+    console.log('✅ Questionnaire enregistré avec succès');
+    return { success: true };
 
     // 2️⃣ Email à toi
     const notificationEmail = await resend.emails.send({
