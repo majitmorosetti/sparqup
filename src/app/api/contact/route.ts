@@ -1,8 +1,7 @@
 // src/app/api/contact/route.ts
-import { Resend } from 'resend';
+import { getResend } from '@/lib/email';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +15,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // 1️⃣ Email de NOTIFICATION (toi)
+    const resend = getResend();
+
+    // 1️⃣ Email de NOTIFICATION
     const notificationResult = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL!,
       to: process.env.RESEND_TO_EMAIL!,
