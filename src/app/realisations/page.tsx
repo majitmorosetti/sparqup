@@ -82,7 +82,7 @@ export default function RealisationsPage() {
                 subtitle="Du e-learning à l&apos;e-commerce en passant par les sites vitrines"
               />
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-24">
             {projects.map((project, index) => (
               <motion.div
                 key={project.name}
@@ -121,25 +121,15 @@ export default function RealisationsPage() {
                       {project.description}
                     </p>
 
-                    <div className="flex gap-4 mb-2">
-                      {project.metrics.map((metric) => (
-                        <div key={metric.label}>
-                          <div className="text-2xl font-bold text-neutral-900">
-                            {metric.value}
-                          </div>
-                          <div className="text-xs text-neutral-500">{metric.label}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    
+                    <div className="flex flex-wrap gap-2 mb-4 pt-8">
                       {project.stack.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="outline">
+                        <Badge key={tech} variant="default">
                           {tech}
                         </Badge>
                       ))}
                       {project.stack.length > 3 && (
-                        <Badge variant="outline">
+                        <Badge variant="default">
                           +{project.stack.length - 3}
                         </Badge>
                       )}
@@ -160,7 +150,7 @@ export default function RealisationsPage() {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="my-24 text-center">
             <Link href="/questionnaire">
               <Button variant="primary" size="lg">
                 Un projet similaire ?

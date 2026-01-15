@@ -1,6 +1,6 @@
 // src/lib/services-data.ts
 import { Code2, Zap, PenLine, Link2, Rocket, CloudCheck, LucideIcon } from 'lucide-react';
-import  DigitalisationSVG from '@/components/svg-builds/solutionsgrid/DigitalisationSVG';
+import DigitalisationSVGSolution from '@/components/services/DigitalisationSVG_solutions';
 import { ComponentType } from 'react';
 
 export interface Service {
@@ -13,7 +13,8 @@ export interface Service {
   color: string;
   bg_color: string;
   CTA: string | null;
-  SVG?: ComponentType;
+  showTopGradient?: boolean;
+  SVG?: ComponentType<{ instanceId?: string }>;
   // Détails pour page services
   includes: string[];
   technologies: string[];
@@ -67,7 +68,8 @@ export const SERVICES: Service[] = [
       rounded: false,
       objectFit: 'contain',
       aspectRatio: '1/1',
-    }
+    },
+    showTopGradient: true
   },
   {
     id: 'automatisation',
@@ -105,7 +107,8 @@ export const SERVICES: Service[] = [
       rounded: true,
       objectFit: 'contain',
       aspectRatio: '16/9',
-    }
+    },
+    showTopGradient: false
   },
   {
     id: 'contenu',
@@ -143,7 +146,8 @@ export const SERVICES: Service[] = [
       rounded: false,
       objectFit: 'contain',
       aspectRatio: '4/3',
-    }
+    },
+    showTopGradient: false
   },
   {
     id: 'connexion-outils',
@@ -181,7 +185,8 @@ export const SERVICES: Service[] = [
       rounded: false, 
       objectFit: 'contain',
       aspectRatio: '1/1',
-    }
+    },
+    showTopGradient: false
   },
   {
     id: 'digitalisation',
@@ -220,9 +225,9 @@ export const SERVICES: Service[] = [
       rounded: false, 
       objectFit: 'contain',
       aspectRatio: '4/3',
-    }
-    ,
-    SVG: DigitalisationSVG
+    },
+    showTopGradient: false,
+    SVG: DigitalisationSVGSolution
   },
   {
     id: 'projet-technique',
@@ -256,6 +261,7 @@ export const SERVICES: Service[] = [
       'Marketplace avec système de paiement fractionné',
       'API métier pour application mobile',
       'Espace membre avec gestion de droits avancée'
-    ]
+    ],
+    showTopGradient: false,
   }
 ];

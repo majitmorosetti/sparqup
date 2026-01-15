@@ -180,7 +180,7 @@ const connections: Connection[] = [
   { from: 'paiement', to: 'zapier', path: 'M220,74 L220,118 Q220,130 208,130 L150,130 Q138,130 138,142 L138,186', gradient: { start: '#635BFF', end: '#FF4A00' }, wave: 6 },
 ];
 
-export default function DigitalisationSVG() {
+export default function DigitalisationSVGSolution() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [activeItems, setActiveItems] = useState<Set<string>>(new Set());
   const [activeWave, setActiveWave] = useState<number | null>(null);

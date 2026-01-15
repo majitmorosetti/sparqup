@@ -17,8 +17,6 @@ export default function ServicesPage() {
           title="Solutions"
           subtitle="Développement / automatisation / Digitalisation"
         />
-
-      
       {/* Services détaillés */}
       {SERVICES.map((service, index) => {
         const IconComponent = service.icon; // ← Récupère le composant Lucide
@@ -26,8 +24,8 @@ export default function ServicesPage() {
         
         return (
           <ServiceSection
-            key={service.id}
             id={service.id}
+            key={service.id}
             title={service.title}
             subtitle={service.subtitle}
             description={service.description}
@@ -40,6 +38,7 @@ export default function ServicesPage() {
             imageAlt={`${service.title} - SparqUp`}
             reversed={isReversed}
             SVG={service.SVG}
+            showTopGradient={service.showTopGradient ?? true}
             // Customize par service si besoin
             imageBorder={service.imageConfig?.border ?? true}
             imageShadow={service.imageConfig?.shadow ?? true}

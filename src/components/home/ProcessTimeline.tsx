@@ -11,7 +11,7 @@ const steps = [
   {
     icon: Search,
     number: '01',
-    title: 'Audit sans bullshit',
+    title: 'Un audit qui a du sens',
     description:
       "On étudie votre projet ensemble. L'objectif : identifier ce dont vous avez VRAIMENT besoin. Pas de sur-vente, pas de fonctionnalités inutiles qui gonflent la facture. Si un site vitrine simple suffit (comme Chez Joon), je vous le dis.",
     deliverable: 'Recommandations claires + estimation budgétaire réaliste',
@@ -87,7 +87,7 @@ export default function ProcessTimeline() {
             >
             {/* Header */}
             <div className="max-w-3xl px-4 pb-4  md:px-8 md:pb-8 pt-32 mb-8 relative z-10">
-              <p className="text-forest-600 font-medium text-sm mb-2">
+              <p className="text-forest-600 font-medium text-sm ">
                 Comment on travaille ensemble
               </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-950 mb-6 leading-[01]">
