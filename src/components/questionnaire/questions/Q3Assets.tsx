@@ -57,6 +57,8 @@ export default function Q3Assets({ value, onChange }: Q3AssetsProps) {
       subtitle="Cela nous aide à estimer le temps et le budget"
       tip={tip?.message}
       tipType={tip?.type}
+      width="narrow"
+      spacing="compact"
     >
       <CheckboxGroup
         options={options}

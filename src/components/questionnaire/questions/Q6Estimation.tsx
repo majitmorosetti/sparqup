@@ -27,18 +27,15 @@ export default function Q6Estimation({ estimation, onSubmit }: Q6EstimationProps
   return (
     <QuestionCard
       title="Votre estimation"
+      subtitle="📌 Estimation indicative basée sur vos réponses. Budget final et timeline précis définis après audit gratuit de 30 min."
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-10">
         {/* Estimation */}
-        <div>
-          <h3 className="text-2xl font-bold text-neutral-950 mb-6">
-            Voici une première estimation pour votre projet
-          </h3>
+
           <EstimationCard estimation={estimation} />
-          <p className="text-sm text-neutral-600 mt-4">
-            📌 Estimation indicative basée sur vos réponses. Budget final et timeline précis définis après audit gratuit de 30 min.
-          </p>
-        </div>
+
 
         {/* Contact Form */}
         <div>

@@ -62,6 +62,8 @@ export default function Q4Tools({ value, onChange }: Q4ToolsProps) {
       subtitle="On pourra les connecter à votre nouveau site"
       tip={tip?.message}
       tipType={tip?.type}
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-8">
         {sections.map((section) => {

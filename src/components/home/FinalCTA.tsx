@@ -3,12 +3,15 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
+import { useQuestionnaireModal } from '../questionnaire/QuestionnaireProvider';
 
 export default function FinalCTA() {
+
+  const { open } = useQuestionnaireModal();
+
   return (
     <section className="py-24 px-4 bg-white">
       <Container size="md" className="text-center">
@@ -25,8 +28,8 @@ export default function FinalCTA() {
             5 questions → estimation immédiate
           </p>
 
-          <Link href="/questionnaire">
             <Button 
+              onClick={() => open()} 
               variant="primary" 
               size="lg"
               className="bg-black text-neutral-100 hover:bg-accent-50 shadow-2xl hover:shadow-accent-500/20"
@@ -34,7 +37,7 @@ export default function FinalCTA() {
               Simuler mon projet maintenant
               <ArrowRight className="w-5 h-5" />
             </Button>
-          </Link>
+
 
           <p className="mt-6 text-sm text-neutral-400">
             ⚡ Moins de 3 minutes • Estimation immédiate • 🔒 Sans engagement • 📧 Réponse garantie sous 24h

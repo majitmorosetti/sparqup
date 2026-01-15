@@ -25,6 +25,8 @@ export default function Q4TechContact({ onSubmit }: Q4TechContactProps) {
   return (
     <QuestionCard
       title="Parlons de votre projet technique"
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-8">
         {/* Message explicatif */}

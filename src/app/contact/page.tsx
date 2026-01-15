@@ -6,10 +6,13 @@ import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/layout/PageHeader';
 import toast from 'react-hot-toast';
+import { useQuestionnaireModal } from '@/components/questionnaire/QuestionnaireProvider';
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consent, setConsent] = useState(false);
+
+  const { open } = useQuestionnaireModal();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -154,7 +157,7 @@ export default function ContactPage() {
             </p>
             <Button
               variant="secondary"
-              onClick={() => window.location.href = '/questionnaire'}
+              onClick={() => open()}
             >
               Accéder au questionnaire →
             </Button>

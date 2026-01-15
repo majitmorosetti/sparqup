@@ -123,6 +123,8 @@ export default function Q2Features({ value, onChange, projectType }: Q2FeaturesP
       subtitle="Sélectionnez tout ce qui vous intéresse"
       tip={tip?.message}
       tipType={tip?.type}
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-8">
         {visibleSections.map((section) => (

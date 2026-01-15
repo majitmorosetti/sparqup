@@ -3,10 +3,11 @@
 
 import { ComponentType, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import SectionContainer from '../ui/SectionContainer';
+import { useQuestionnaireModal } from '../questionnaire/QuestionnaireProvider';
 
 interface ServiceSectionProps {
   id: string;
@@ -53,6 +54,8 @@ export default function ServiceSection({
   const [hookText, fullText] = description.includes('|') 
     ? description.split('|')
     : [description, ''];
+
+  const { open } = useQuestionnaireModal();
 
   const aspectClasses = {
     '4/3': 'aspect-[4/3]',
@@ -272,12 +275,12 @@ export default function ServiceSection({
                           </div>
                           
                           {/* CTA Desktop only */}
-                          <Link
-                            href="/questionnaire"
+                          <button
+                            onClick={() => open()}
                             className="hidden lg:inline-flex px-6 py-3 bg-forest-600 hover:bg-forest-500 text-white font-semibold rounded-lg transition-colors whitespace-nowrap"
                           >
                             Simuler ce service →
-                          </Link>
+                          </button>
                         </div>
                       )}
                     </div>
@@ -288,12 +291,12 @@ export default function ServiceSection({
                 {/* 🎯 ESPACEMENT: gap-2.5 entre boutons */}
                 <div className="flex flex-col gap-2.5 lg:hidden">
                   {!isExpanded && (
-                    <Link
-                      href="/questionnaire"
+                    <button
+                      onClick={() => open()}
                       className="w-full px-5 py-2.5 bg-forest-600 hover:bg-forest-500 text-white text-center text-sm font-semibold rounded-lg transition-colors"
                     >
                       Simuler ce service →
-                    </Link>
+                    </button>
                   )}
                   
                   <button
@@ -312,12 +315,12 @@ export default function ServiceSection({
                   </button>
 
                   {isExpanded && (
-                    <Link
-                      href="/questionnaire"
+                    <button
+                      onClick={() => open()}
                       className="w-full px-5 py-2.5 bg-forest-600 hover:bg-forest-500 text-white text-center text-sm font-semibold rounded-lg transition-colors"
                     >
                       Simuler ce service →
-                    </Link>
+                    </button>
                   )}
                 </div>
               </div>

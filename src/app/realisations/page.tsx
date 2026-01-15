@@ -2,7 +2,6 @@
 'use client'
 
 import { ExternalLink, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Container from '@/components/ui/Container';
@@ -10,6 +9,7 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import PageHeader from '@/components/layout/PageHeader';
+import { useQuestionnaireModal } from '@/components/questionnaire/QuestionnaireProvider';
 
 const projects = [
   {
@@ -75,90 +75,90 @@ function getScreenshotUrl(url: string) {
 
 
 export default function RealisationsPage() {
-    return (
-      <>
-        <PageHeader
-                title="Réalisations"
-                subtitle="Du e-learning à l&apos;e-commerce en passant par les sites vitrines"
+
+  const { open } = useQuestionnaireModal();
+
+  return (
+    <>
+      <PageHeader
+              title="Réalisations"
+              subtitle="Du e-learning à l&apos;e-commerce en passant par les sites vitrines"
+            />
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-24">
+          {projects.map((project, index) => (
+          <motion.div
+            key={project.name}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
+          <Card padding="none" className="overflow-hidden group">
+            <div className="relative h-64 bg-neutral-100 overflow-hidden">
+              <Image
+                src={project.screenshot || getScreenshotUrl(project.link)}  // ← Logique fallback
+                alt={`Screenshot ${project.name}`}
+                fill
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                unoptimized={!project.screenshot}  // ← Unoptimized seulement si API externe
               />
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-24">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
+              
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
+
+              <div className="absolute top-4 right-4 z-10">
+                <Badge variant={project.statusVariant} className="backdrop-blur-md bg-white/90">
+                  {project.status}
+                </Badge>
+              </div>
+            </div>
+
+            <div className="p-6 bg-neutral-100">
+              <h3 className="text-2xl font-bold text-neutral-900 ">
+                {project.name}
+              </h3>
+              <p className="text-sm text-slate-400 font-medium mb-2">
+                {project.tagline}
+              </p>
+              <p className="text-neutral-700 mb-5">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-4 pt-8">
+                {project.stack.slice(0, 3).map((tech) => (
+                  <Badge key={tech} variant="default">
+                    {tech}
+                  </Badge>
+                ))}
+                {project.stack.length > 3 && (
+                  <Badge variant="default">
+                    +{project.stack.length - 3}
+                  </Badge>
+                )}
+              </div>
+
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-slate-800 font-medium hover:gap-3 transition-all"
               >
-                <Card padding="none" className="overflow-hidden group">
-                  <div className="relative h-64 bg-neutral-100 overflow-hidden">
-                    <Image
-                      src={project.screenshot || getScreenshotUrl(project.link)}  // ← Logique fallback
-                      alt={`Screenshot ${project.name}`}
-                      fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      unoptimized={!project.screenshot}  // ← Unoptimized seulement si API externe
-                    />
-                    
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
+                Voir le site
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </Card>
+          </motion.div>
+          ))}
+        </div>
 
-                    <div className="absolute top-4 right-4 z-10">
-                      <Badge variant={project.statusVariant} className="backdrop-blur-md bg-white/90">
-                        {project.status}
-                      </Badge>
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-neutral-100">
-                    <h3 className="text-2xl font-bold text-neutral-900 ">
-                      {project.name}
-                    </h3>
-                    <p className="text-sm text-slate-400 font-medium mb-2">
-                      {project.tagline}
-                    </p>
-                    <p className="text-neutral-700 mb-5">
-                      {project.description}
-                    </p>
-
-                    
-                    <div className="flex flex-wrap gap-2 mb-4 pt-8">
-                      {project.stack.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="default">
-                          {tech}
-                        </Badge>
-                      ))}
-                      {project.stack.length > 3 && (
-                        <Badge variant="default">
-                          +{project.stack.length - 3}
-                        </Badge>
-                      )}
-                    </div>
-
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-slate-800 font-medium hover:gap-3 transition-all"
-                    >
-                      Voir le site
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="my-24 text-center">
-            <Link href="/questionnaire">
-              <Button variant="primary" size="lg">
-                Un projet similaire ?
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
-    </Container>
-  </>
-  );
+        <div className="my-24 text-center">
+            <Button variant="primary" size="lg" onClick={() => open()}>
+              Un projet similaire ?
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+        </div>
+      </Container>
+    </>
+);
 }

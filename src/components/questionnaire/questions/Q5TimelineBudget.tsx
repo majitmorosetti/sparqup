@@ -74,6 +74,8 @@ export default function Q5TimelineBudget({
       title="Planning et budget"
       tip={tip?.message}
       tipType={tip?.type}
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-10">
         <div>

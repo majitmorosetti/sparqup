@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useQuestionnaireModal } from '../questionnaire/QuestionnaireProvider';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,10 +32,12 @@ export default function Header() {
 
   const scrollstate = isScrolled ? 'scrolled' : 'top';
 
+  const { open } = useQuestionnaireModal();
+
   console.log('Header render - scrollstate:', scrollstate);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-60 pointer-events-none transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none transition-all duration-300">
       <div className="pt-6 px-2 pointer-events-auto">
         <div className="max-w-7xl mx-auto bg-neutral-200 rounded-full shadow-lg pl-1.5 pr-0.3 py-1.5">
           <div className="flex items-center justify-between px-2">
@@ -71,16 +74,14 @@ export default function Header() {
 
             {/* Right side */}
             <div className="hidden lg:flex items-center gap-4">
-              <Link href="/questionnaire">
-                <button className="group flex items-center gap-3 pl-6 pr-2 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-full transition-colors">
-                  <span className="text-sm font-medium text-neutral-100">
-                    Simuler mon projet
-                  </span>
-                  <div className="w-8 h-8 bg-neutral-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <ArrowRight className="w-4 h-4 text-black" />
-                  </div>
-                </button>
-              </Link>
+              <button onClick={() => open()} className="group flex items-center gap-3 pl-6 pr-2 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-full transition-colors">
+                <span className="text-sm font-medium text-neutral-100">
+                  Simuler mon projet
+                </span>
+                <div className="w-8 h-8 bg-neutral-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <ArrowRight className="w-4 h-4 text-black" />
+                </div>
+              </button>
             </div>
 
             {/* Mobile Toggle */}
@@ -112,17 +113,15 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              
-              <Link href="/questionnaire" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full flex items-center justify-between pl-6 pr-2 py-3 bg-blue-100 hover:bg-blue-200 rounded-full transition-colors mt-4">
-                  <span className="text-sm font-medium text-neutral-900">
-                    Simuler mon projet
-                  </span>
-                  <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center">
-                    <ArrowRight className="w-4 h-4 text-white" />
-                  </div>
-                </button>
-              </Link>
+                        
+              <button onClick={() => open()} className="w-full flex items-center justify-between pl-6 pr-2 py-3 bg-blue-100 hover:bg-blue-200 rounded-full transition-colors mt-4">
+                <span className="text-sm font-medium text-neutral-900">
+                  Simuler mon projet
+                </span>
+                <div className="w-8 h-8 bg-neutral-900 rounded-full flex items-center justify-center">
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </div>
+              </button>
             </nav>
           </div>
         )}

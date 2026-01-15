@@ -29,6 +29,8 @@ export default function Q2TechNature({ value, onChange }: Q2TechNatureProps) {
   return (
     <QuestionCard
       title="Quel type de projet technique ?"
+      width="narrow"
+      spacing="compact"
     >
       <RadioGroup
         options={options}

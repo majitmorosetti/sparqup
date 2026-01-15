@@ -3,14 +3,14 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
+import { useQuestionnaireModal } from '@/components/questionnaire/QuestionnaireProvider';
 
 
 export default function HeroSection() {
 
-
+  const { open } = useQuestionnaireModal();
 
   return (
       <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-forest-900">
@@ -55,22 +55,29 @@ export default function HeroSection() {
           {/* CTAs - Contraste maximal */}
           <div className="flex flex-col gap-4 justify-center items-center mt-12">
             {/* Primary CTA: Blanc sur noir */}
-            <Link href="/questionnaire">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="group bg-forest-100 hover:text-black text-neutral-900 hover:bg-white transition duration-300 ease-in-out"
-              >
-                <span>Estimer mon projet</span>
+            {/* CTA standard - sans preset */}
+            <Button 
+              variant="primary" 
+              size="lg" 
+              onClick={() => open()} // ← Pas de preset
+              className="group bg-forest-100 hover:text-black text-neutral-900 hover:bg-white transition duration-300 ease-in-out"
+            >
+              <span>Estimer mon projet</span>
+            </Button>
 
-              </Button>
-            </Link>
-
-            {/* Secondary CTA: lien texte*/}
-            <Link href="/questionnaire?preset=tech" className='text-forest-500 flex flex-row gap-1'>
-              <span>Projet technique (API, SaaS)</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            {/* CTA tech - avec preset */}
+          <button 
+            onClick={() => open({
+              projectType: 'tech',
+              branch: 'tech',
+              currentStep: 2, // ← Commence à step 2 (pas intro, type déjà séléctionné)
+              totalSteps: 5
+            })}
+            className='text-forest-500 flex flex-row gap-1 hover:text-forest-400 transition-colors'
+          >
+            <span>Projet technique (API, SaaS)</span>
+            <ArrowRight className="w-5 h-5" />
+          </button>
 
           </div>
         </Container>

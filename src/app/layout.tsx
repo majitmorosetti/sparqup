@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Inter, Fraunces } from 'next/font/google';
+import { QuestionnaireProvider } from '@/components/questionnaire/QuestionnaireProvider';
 
 const fraunces = Fraunces({ 
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="font-body antialiased">
+        <QuestionnaireProvider>
         <Header />
           {children}
         <Footer />
@@ -67,6 +69,7 @@ export default function RootLayout({
             },
           }}
         />
+        </QuestionnaireProvider>
       </body>
     </html>
   );

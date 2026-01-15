@@ -26,6 +26,8 @@ export default function Q1TypeProject({ value, onNext }: Q1TypeProjectProps) {
   return (
     <QuestionCard
       title="Quel type de projet avez-vous ?"
+      width="narrow"
+      spacing="compact"
     >
       <RadioGroup
         options={options}

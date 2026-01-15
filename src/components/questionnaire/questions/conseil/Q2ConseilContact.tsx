@@ -38,6 +38,8 @@ export default function Q2ConseilContact({ objectives, onObjectivesChange, onSub
     <QuestionCard
       title="Je vous aide à définir votre besoin"
       subtitle="Sélectionnez vos objectifs, puis laissez-moi vos coordonnées"
+      width="narrow"
+      spacing="compact"
     >
       <div className="space-y-10">
         {/* Objectifs */}

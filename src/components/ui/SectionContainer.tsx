@@ -46,7 +46,7 @@ export default function SectionContainer({
       {/* Barre gradient top */}
       {showTopGradient && (
         <div className={cn(
-          "absolute top-0 left-0 right-0 bg-gradient-to-b to-transparent z-50 pointer-events-none",
+          "absolute top-0 left-0 right-0 bg-gradient-to-b to-transparent z-30 pointer-events-none",
           gradientHeight,
           gradientFromColor
         )} />
@@ -55,7 +55,7 @@ export default function SectionContainer({
       {/* Barre gradient bottom */}
       {showBottomGradient && (
         <div className={cn(
-          "absolute bottom-0 left-0 right-0 bg-gradient-to-t to-transparent z-50 pointer-events-none",
+          "absolute bottom-0 left-0 right-0 bg-gradient-to-t to-transparent z-30 pointer-events-none",
           gradientHeight,
           gradientFromColor
         )} />
