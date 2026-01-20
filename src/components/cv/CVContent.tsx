@@ -1,15 +1,18 @@
-// app/cv/CVContent.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function CVContent() {
+  const t = useTranslations('cv');
+  const locale = useLocale();
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'experience', 'competences', 'formations','infos-comp'];
+      const sections = ['about', 'experience', 'competences', 'formations', 'infos-comp'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -35,36 +38,47 @@ export default function CVContent() {
     }
   };
 
+  // Helper pour remplacer les balises <highlight> par des spans
+  const renderHighlightedText = (text: string) => {
+    return text
+      .replace(/<highlight>/g, '<span class="text-neutral-200">')
+      .replace(/<\/highlight>/g, '</span>');
+  };
+
   return (
     <div className="lg:flex lg:justify-between lg:gap-4 max-w-screen-xl mx-auto px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
       
       {/* LEFT SIDE - Sticky Info */}
-      <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-40">
+      <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:pb-40 lg:pt-14">
+      {/* Language Switcher */}
+              <div className='pb-8'>
+                <LanguageSwitcher />
+              </div>
         <div>
           {/* Nom + Titre */}
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            <Link href="/" className="hover:text-forest-300 transition-colors">
-              Majit Mambetzhumayev
+            <Link href={`/${locale}`} className="hover:text-forest-300 transition-colors">
+              {t('header.name')}
             </Link>
           </h1>
           
           <h2 className="mt-3 text-lg font-medium tracking-tight text-forest-400 sm:text-2xl">
-            Développeur Web Full Stack
+            {t('header.title')}
           </h2>
           
           <p className="mt-4 max-w-xs leading-normal text-neutral-400">
-            Next.js · TypeScript · Node.js · Express · Tailwind
+            {t('header.tagline')}
           </p>
 
           {/* Navigation Desktop */}
-          <nav className="nav hidden lg:block mt-16" aria-label="In-page jump links">
+          <nav className="nav hidden lg:block mt-12" aria-label="In-page jump links">
             <ul className="w-max">
               {[
-                { id: 'about', label: 'À propos' },
-                { id: 'experience', label: 'Expérience' },
-                { id: 'competences', label: 'Compétences' },
-                { id: 'formations', label: 'Formations' },
-                { id: 'infos-comp', label: 'Informations Complémentaires' },
+                { id: 'about', label: t('nav.about') },
+                { id: 'experience', label: t('nav.experience') },
+                { id: 'competences', label: t('nav.skills') },
+                { id: 'formations', label: t('nav.education') },
+                { id: 'infos-comp', label: t('nav.additional') },
               ].map(({ id, label }) => (
                 <li key={id}>
                   <button
@@ -94,14 +108,14 @@ export default function CVContent() {
               ))}
             </ul>
           </nav>
+
         </div>
 
         {/* Social Links */}
         <ul className="ml-1 mt-8 flex items-center gap-5" aria-label="Social media">
           <li className="text-xs">
-            
             <a 
-                href="https://github.com/majitmorosetti"
+              href="https://github.com/majitmambetzhumayev"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-white text-neutral-400 transition"
@@ -119,8 +133,8 @@ export default function CVContent() {
           </li>
           
           <li className="text-xs">
-            
-              <a href="https://linkedin.com/in/majitmorosetti"
+            <a 
+              href="https://linkedin.com/in/majit-mambetzhumayev-95b4273a7"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-white text-neutral-400 transition"
@@ -138,8 +152,8 @@ export default function CVContent() {
           </li>
 
           <li className="text-xs">
-            
-              <a href="/cv-majit-morosetti.pdf"
+            <a 
+              href="/cv-majit-morosetti.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-white text-neutral-400 transition"
@@ -164,30 +178,23 @@ export default function CVContent() {
         
         {/* À propos */}
         <section id="about" className="mb-16 scroll-mt-16 lg:mb-16 lg:scroll-mt-24">
-          <div className="sticky top-0 z-20 -mx-6  w-screen bg-forest-900/75 px-6 py-5 backdrop-blur lg:hidden">
+          <div className="sticky top-0 z-20 -mx-6 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur lg:hidden">
             <h2 className="text-lg font-bold uppercase tracking-widest text-neutral-200">
-              À propos
+              {t('about.title')}
             </h2>
           </div>
           
           <div className="space-y-4 text-neutral-400 leading-relaxed">
-            <p>
-                Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation. 
-                J&apos;interviens sur des projets web concrets allant de la génération de leads à des plateformes e‑learning et e‑commerce,
-                 avec une attention particulière portée à la performance, à la clarté du code et à l&apos;expérience utilisateur.
-            </p>
-            <p>
-                Habitué à travailler sans cadre académique classique, je compense par une capacité d&apos;apprentissage rapide, 
-                une approche pragmatique et une mise en production régulière de projets réels.
-            </p>
-            </div>
+            <p>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
+          </div>
         </section>
 
         {/* Expérience */}
         <section id="experience" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
-          <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur ">
-            <h2 className="text-lg lg:text-3xl font-bold  tracking-widest text-neutral-200">
-              Expérience professionnelle
+          <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
+            <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
+              {t('experiences.title')}
             </h2>
           </div>
 
@@ -195,16 +202,16 @@ export default function CVContent() {
             {/* Expérience Unifiée */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
                 
                 <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  2023 — Présent
+                  {t('experiences.devexperience.period')}
                 </header>
 
                 <div className="z-10 sm:col-span-6">
                   <h3 className="font-medium leading-snug text-neutral-200">
                     <span className="inline-flex items-baseline font-medium leading-tight text-neutral-300 text-lg pb-4">
-                      Développeur Web Full Stack · Projets freelance & produits web
+                      {t('experiences.devexperience.role')}
                     </span>
                   </h3>
 
@@ -212,92 +219,131 @@ export default function CVContent() {
                   <div className="mt-4 space-y-6">
                     
                     {/* Projet 1 - Plateforme de génération de leads */}
+                    <div>
                       <h4 className="text-md font-semibold text-forest-400 mb-2">
-                        Plateforme de génération de leads
+                        {t('experiences.devexperience.projects.leads.title')}
                       </h4>
                       <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
-                        <p className="text-sm leading-relaxed text-neutral-400 mb-2">
-                          Conception et développement d&apos;un site vitrine avec <span className='text-neutral-200'>questionnaire interactif</span> pour 
-                          l&apos;estimation de projets. Mise en place d&apos;un <span className='text-neutral-200'>backend Next.js</span> pour la réception, le  
-                          <span className='text-neutral-200'> traitement et l&apos;automatisation des leads</span> vers Notion. Déploiement sur Vercel.
-                        </p>
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.devexperience.projects.leads.description'))
+                          }}
+                        />
                       </div>
-
-{/*                       <ul className="flex flex-wrap gap-2">
-                        {['Next.js', 'TypeScript', 'Tailwind CSS', 'Notion API', 'Vercel'].map(tech => (
-                          <li key={tech}>
-                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                              {tech}
-                            </div>
-                          </li>
-                        ))}
-                      </ul> */}
+                    </div>
 
                     {/* Projet 2 - Umaï */}
-                    
+                    <div>
                       <h4 className="text-md font-semibold text-forest-400 mb-2">
-                        Plateforme e-commerce – Umaï
+                        {t('experiences.devexperience.projects.umai.title')}
                       </h4>
                       <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
-                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
-                        Intégration et configuration avancée de Shopify. <span className='text-neutral-200'>Customization du frontend avec Liquid</span>. Connexion avec des outils externes 
-                        (emails, automatisations) et <span className='text-neutral-200'>optimisation du parcours utilisateur</span>.
-                      </p>
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.devexperience.projects.umai.description'))
+                          }}
+                        />
                       </div>
-{/*                       <ul className="flex flex-wrap gap-2">
-                        {['Shopify', 'Meta Ads', 'Email Marketing', 'Copywriting'].map(tech => (
-                          <li key={tech}>
-                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                              {tech}
-                            </div>
-                          </li>
-                        ))}
-                      </ul> */}
-                    
+                    </div>
 
                     {/* Projet 3 - Faceplastie */}
-                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                    <div>
                       <h4 className="text-md font-semibold text-forest-400 mb-2">
-                        Plateforme e-learning – Faceplastie
+                        {t('experiences.devexperience.projects.faceplastie.title')}
                       </h4>
-                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
-                        Mise en place et personnalisation de la plateforme LearnWorlds. Intégration d&apos;outils 
-                        externes et gestion d&apos;une base de plus de 2 000 inscrits. <span className='text-neutral-200'>Migration LMS complexe avec 
-                        préservation des données utilisateurs.</span>
-                      </p>
-{/*                       <ul className="flex flex-wrap gap-2">
-                        {['LearnWorlds', 'WordPress', 'Make', 'Zapier', 'Stripe', 'GA4'].map(tech => (
-                          <li key={tech}>
-                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                              {tech}
-                            </div>
-                          </li>
-                        ))}
-                      </ul> */}
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <p 
+                        className="text-sm leading-relaxed text-neutral-400 mb-2"
+                        dangerouslySetInnerHTML={{
+                          __html: renderHighlightedText(t.raw('experiences.devexperience.projects.faceplastie.description'))
+                        }}
+                      />
+                      </div>
                     </div>
 
                     {/* Projet 4 - API d'ingestion */}
-                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                    <div>
                       <h4 className="text-md font-semibold text-forest-400 mb-2 flex items-center gap-2">
-                        API d&apos;ingestion de leads
-                        <span className="text-xs font-normal text-neutral-500 italic">(en cours)</span>
+                        {t('experiences.devexperience.projects.api.title')}
+                        <span className="text-xs font-normal text-neutral-500 italic">
+                          ({t('experiences.devexperience.projects.api.status')})
+                        </span>
                       </h4>
-                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
-                        Développement d&apos;une <span className='text-neutral-200'>API REST</span> dédiée à la collecte et au traitement de leads provenant 
-                        de plateformes externes (Malt, Codeur.com). <span className='text-neutral-200'>Normalisation des données et communication 
-                        avec le backend principal.</span>
-                      </p>
-{/*                       <ul className="flex flex-wrap gap-2">
-                        {['Express', 'Node.js', 'REST API', 'PostgreSQL'].map(tech => (
-                          <li key={tech}>
-                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                              {tech}
-                            </div>
-                          </li>
-                        ))}
-                      </ul> */}
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <p 
+                        className="text-sm leading-relaxed text-neutral-400 mb-2"
+                        dangerouslySetInnerHTML={{
+                          __html: renderHighlightedText(t.raw('experiences.devexperience.projects.api.description'))
+                        }}
+                      />
+                      </div>
                     </div>
 
+                  </div>
+                </div>
+              </div>
+            </li>
+            {/*  - Experience 3D designer */}
+            <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
+                
+                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  {t('experiences.3Dexperience.period')}
+                </header>
+
+                <div className="z-10 sm:col-span-6">
+                  <h3 className="font-medium leading-snug text-neutral-200">
+                    <span className="inline-flex items-baseline font-medium leading-tight text-neutral-300 text-lg pb-2">
+                      {t('experiences.3Dexperience.role')}
+                    </span>
+                  </h3>
+                  <div className='text-forest-400 text-sm'>Capgemini · Bee Engineering · Abylsen</div>
+                  <div className="mt-4 space-y-6">
+                    <div>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors my-4">
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.3Dexperience.accomplishments.A'))
+                          }}
+                        />
+                      </div>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors my-4">
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.3Dexperience.accomplishments.B'))
+                          }}
+                        />
+                      </div>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors my-4">
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.3Dexperience.accomplishments.C'))
+                          }}
+                        />
+                      </div>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors my-4">
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.3Dexperience.accomplishments.D'))
+                          }}
+                        />
+                      </div>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors my-4">
+                        <p 
+                          className="text-sm leading-relaxed text-neutral-400 mb-2"
+                          dangerouslySetInnerHTML={{
+                            __html: renderHighlightedText(t.raw('experiences.3Dexperience.accomplishments.E'))
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -305,13 +351,14 @@ export default function CVContent() {
           </ol>
 
           <div className="mt-12">
-            <a href="/cv-majit-morosetti.pdf"
+            <a 
+              href="/cv-majit-morosetti.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center font-medium leading-tight text-neutral-200 group"
             >
               <span className="border-b border-transparent pb-px transition group-hover:border-forest-300">
-                Voir le CV complet
+                {t('cta.downloadCV')}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -334,32 +381,33 @@ export default function CVContent() {
         <section id="competences" className="mb-16 scroll-mt-16 lg:mb-32 lg:scroll-mt-24">
           <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
             <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
-              Compétences
+              {t('skills.title')}
             </h2>
           </div>
+
           {/* Liste de compétences par catégorie */}
           <ol className="group/list">
             {/* Frontend */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
-                </div>                
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
+                
                 <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Frontend
+                  {t('skills.frontend')}
                 </header>
+                
                 <div className="z-10 sm:col-span-6">
                   <div className="mt-4 space-y-6">
-                    {/* Liste compétences frontend */}
                     <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
                       <ul className="flex flex-wrap gap-2">
-                      {['Next.js (App router, API routes)', 'React', 'TypeScript', 'Tailwind CSS', 'HTML/CSS'].map(skill => (
-                        <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                            {skill}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                        {(t.raw('skills.categories.frontend') as string[]).map((skill) => (
+                          <li key={skill}>
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                              {skill}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -369,75 +417,77 @@ export default function CVContent() {
             {/* Backend */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
-                </div>                
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
+                
                 <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Backend
+                  {t('skills.backend')}
                 </header>
+                
                 <div className="z-10 sm:col-span-6">
                   <div className="mt-4 space-y-6">
-                    {/* Liste compétences Backend */}
                     <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
                       <ul className="flex flex-wrap gap-2">
-                      {['Node.js', 'Express','REST APIs', 'PostgreSQL', 'Authentification (JWT / sessions)', 'Webhooks & intégrations tierces' ].map(skill => (
+                        {(t.raw('skills.categories.backend') as string[]).map((skill) => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
-                          </div>
+                            </div>
                           </li>
-                      ))}
+                        ))}
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </li>
+
             {/* Outils & écosystème */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
-                </div>                
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
+                
                 <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Outils & écosystème
+                  {t('skills.tools')}
                 </header>
+                
                 <div className="z-10 sm:col-span-6">
                   <div className="mt-4 space-y-6">
-                    {/* Liste compétences Outils & écosystème */}
                     <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
                       <ul className="flex flex-wrap gap-2">
-                      {['Vercel', 'ESLint','Git / GitHub', 'Notion API', 'Resend (emails transactionnels)', 'Stripe (bases)' ].map(skill => (
+                        {(t.raw('skills.categories.tools') as string[]).map((skill) => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
-                          </div>
+                            </div>
                           </li>
-                      ))}
+                        ))}
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </li>
+
             {/* CMS / plateformes */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
-                </div>                
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
+                
                 <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  CMS / plateformes
+                  {t('skills.platforms')}
                 </header>
+                
                 <div className="z-10 sm:col-span-6">
                   <div className="mt-4 space-y-6">
-                    {/* Liste compétences CMS / plateformes */}
                     <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
                       <ul className="flex flex-wrap gap-2">
-                      {['Shopify (customisation, intégrations)', 'LearnWorlds','Mailerlite', 'Zapier', 'Make' ].map(skill => (
+                        {(t.raw('skills.categories.platforms') as string[]).map((skill) => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
-                          </div>
+                            </div>
                           </li>
-                      ))}
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -445,88 +495,88 @@ export default function CVContent() {
               </div>
             </li>
           </ol>
-
-          
         </section>
 
         {/* Formation */}
         <section id="formations" className="mb-16 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
           <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
-            <h2 className="text-lg lg:text-3xl font-bold  tracking-widest text-neutral-200">
-              Formations
+            <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
+              {t('education.title')}
             </h2>
           </div>
 
           <ol className="group/list">
-          <li className="mb-12">
+            {/* Autodidacte */}
+            <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
                 
                 <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  2023 — Présent
+                  {t('education.autodidact.period')}
                 </header>
 
-                <div className="z-10 sm:col-span-6"> 
-                    {/* Bac S */}
-                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
-                      <h4 className="text-md font-semibold text-neutral-300 mb-2">
-                        Parcours autodidacte en développement web
-                      </h4>
-                      <p className="text-sm leading-relaxed text-forest-400 mb-2">
-                        documentation officielle, projets réels, mise en production
-                      </p>
-                    </div>
+                <div className="z-10 sm:col-span-6">
+                  <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                    <h4 className="text-md font-semibold text-neutral-300 mb-2">
+                      {t('education.autodidact.title')}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-forest-400 mb-2">
+                      {t('education.autodidact.description')}
+                    </p>
+                  </div>
                 </div>
               </div>
             </li>
+
+            {/* Bac S */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20"></div>
                 
                 <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  2014
+                  {t('education.bac.period')}
                 </header>
 
-                <div className="z-10 sm:col-span-6"> 
-                    {/* Bac S */}
-                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
-                      <h4 className="text-md font-semibold text-neutral-300 mb-2">
-                        Baccalauréat S
-                      </h4>
-                      <p className="text-sm leading-relaxed text-forest-400 mb-2">
-                        Lycée René Cassin - Oslo
-                      </p>
-                    </div>
+                <div className="z-10 sm:col-span-6">
+                  <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                    <h4 className="text-md font-semibold text-neutral-300 mb-2">
+                      {t('education.bac.title')}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-forest-400 mb-2">
+                      {t('education.bac.school')}
+                    </p>
+                  </div>
                 </div>
               </div>
             </li>
           </ol>
         </section>
+
         {/* Infos complémentaires */}
         <section id="infos-comp" className="mb-16 scroll-mt-16 lg:mb-32 lg:scroll-mt-24 h-[40vh]">
           <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
             <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
-              Informations complémentaires
+              {t('additional.title')}
             </h2>
           </div>
-          <div className='text-neutral-300 text-lg'>
-            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
-              <p>Forte autonomie et capacité d&apos;apprentissage rapide</p>
-            </div>
-            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
-              <p>Sens du produit et de la valeur métier</p>
-            </div>
-            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
-              <p>À l&apos;aise dans des environnements sans cadre académique classique</p>
-            </div>
+          
+          <div className="text-neutral-300 text-lg">
+            {(t.raw('additional.items') as string[]).map((item, index) => (
+              <div 
+                key={index}
+                className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out"
+              >
+                <p>{item}</p>
+              </div>
+            ))}
           </div>
-        </section>  
+        </section>
 
         {/* Footer */}
         <footer className="max-w-md text-sm text-neutral-500 pt-20 lg:pt-40 pb-0">
           <p>
-            Développé avec <span className="text-neutral-400">Next.js</span> et{' '}
-            <span className="text-neutral-400">Tailwind CSS</span>. Déployé sur{' '}
+            {t('footer.builtWith')} <span className="text-neutral-400">Next.js</span> {t('footer.and')}{' '}
+            <span className="text-neutral-400">Tailwind CSS</span>. {t('footer.deployedOn')}{' '}
             <span className="text-neutral-400">Vercel</span>.
           </p>
         </footer>
