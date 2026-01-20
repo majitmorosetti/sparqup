@@ -9,7 +9,7 @@ export default function CVContent() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'experience', 'skills', 'projects'];
+      const sections = ['about', 'experience', 'competences', 'formations','infos-comp'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -381,7 +381,7 @@ export default function CVContent() {
                       <ul className="flex flex-wrap gap-2">
                       {['Node.js', 'Express','REST APIs', 'PostgreSQL', 'Authentification (JWT / sessions)', 'Webhooks & intégrations tierces' ].map(skill => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
                           </div>
                           </li>
@@ -407,7 +407,7 @@ export default function CVContent() {
                       <ul className="flex flex-wrap gap-2">
                       {['Vercel', 'ESLint','Git / GitHub', 'Notion API', 'Resend (emails transactionnels)', 'Stripe (bases)' ].map(skill => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
                           </div>
                           </li>
@@ -433,7 +433,7 @@ export default function CVContent() {
                       <ul className="flex flex-wrap gap-2">
                       {['Shopify (customisation, intégrations)', 'LearnWorlds','Mailerlite', 'Zapier', 'Make' ].map(skill => (
                           <li key={skill}>
-                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
                               {skill}
                           </div>
                           </li>
