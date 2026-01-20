@@ -44,7 +44,7 @@ export default function CVContent() {
           {/* Nom + Titre */}
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
             <Link href="/" className="hover:text-forest-300 transition-colors">
-              Majit Morosetti Mambetzhumayev
+              Majit Mambetzhumayev
             </Link>
           </h1>
           
@@ -53,7 +53,7 @@ export default function CVContent() {
           </h2>
           
           <p className="mt-4 max-w-xs leading-normal text-neutral-400">
-            Développeur autodidacte spécialisé en automatisation et solutions web orientées business.
+            Next.js · TypeScript · Node.js · Express · Tailwind
           </p>
 
           {/* Navigation Desktop */}
@@ -62,8 +62,9 @@ export default function CVContent() {
               {[
                 { id: 'about', label: 'À propos' },
                 { id: 'experience', label: 'Expérience' },
-                { id: 'skills', label: 'Compétences' },
-                { id: 'projects', label: 'Projets' },
+                { id: 'competences', label: 'Compétences' },
+                { id: 'formations', label: 'Formations' },
+                { id: 'infos-comp', label: 'Informations Complémentaires' },
               ].map(({ id, label }) => (
                 <li key={id}>
                   <button
@@ -159,10 +160,10 @@ export default function CVContent() {
       </header>
 
       {/* RIGHT SIDE - Scrollable Content */}
-      <main className="py-12 lg:w-1/2 lg:py-40">
+      <main className="py-12 lg:w-1/2 lg:pt-40">
         
         {/* À propos */}
-        <section id="about" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
+        <section id="about" className="mb-16 scroll-mt-16 lg:mb-16 lg:scroll-mt-24">
           <div className="sticky top-0 z-20 -mx-6  w-screen bg-forest-900/75 px-6 py-5 backdrop-blur lg:hidden">
             <h2 className="text-lg font-bold uppercase tracking-widest text-neutral-200">
               À propos
@@ -171,23 +172,13 @@ export default function CVContent() {
           
           <div className="space-y-4 text-neutral-400 leading-relaxed">
             <p>
-                Développeur web full stack <strong className="text-neutral-200">autodidacte</strong> avec 
-                5 ans de pratique et une expérience terrain continue depuis août 2023 sur des projets web 
-                à enjeux business réels.
+                Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation. 
+                J&apos;interviens sur des projets web concrets allant de la génération de leads à des plateformes e‑learning et e‑commerce,
+                 avec une attention particulière portée à la performance, à la clarté du code et à l&apos;expérience utilisateur.
             </p>
             <p>
-                Spécialisé dans la <strong className="text-neutral-200">création, migration et optimisation 
-                de plateformes web</strong>, la conception de systèmes automatisés (Make, Zapier, Notion) 
-                et l&apos;intégration d&apos;outils métiers, avec une approche orientée efficacité opérationnelle, 
-                réduction des coûts et résultats mesurables.
-            </p>
-            <p>
-                Compétences en <strong className="text-neutral-200">Django, Next.js, React</strong>, 
-                plateformes e-commerce (Shopify) et CMS (WordPress, Wix). Maîtrise des outils de développement 
-                modernes : <strong className="text-neutral-200">Git pour le versioning, Docker pour la 
-                conteneurisation, PostgreSQL</strong> comme base de données relationnelle, et{' '}
-                <strong className="text-neutral-200">Postman</strong> pour les tests d&apos;API. 
-                Expertise en analytics (GA4, Umami) et automatisation marketing.
+                Habitué à travailler sans cadre académique classique, je compense par une capacité d&apos;apprentissage rapide, 
+                une approche pragmatique et une mise en production régulière de projets réels.
             </p>
             </div>
         </section>
@@ -195,161 +186,126 @@ export default function CVContent() {
         {/* Expérience */}
         <section id="experience" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
           <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur ">
-            <h2 className="text-lg lg:text-2xl font-bold  tracking-widest text-neutral-200">
-              Expérience
+            <h2 className="text-lg lg:text-3xl font-bold  tracking-widest text-neutral-200">
+              Expérience professionnelle
             </h2>
           </div>
 
           <ol className="group/list">
-            {/* Face Plastie */}
+            {/* Expérience Unifiée */}
             <li className="mb-12">
               <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
                 
                 <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Août 2023 — Présent
+                  2023 — Présent
                 </header>
 
                 <div className="z-10 sm:col-span-6">
                   <h3 className="font-medium leading-snug text-neutral-200">
-                    <div>
-                        <span className="inline-flex items-baseline font-medium leading-tight text-neutral-200 hover:text-forest-300 focus-visible:text-forest-300 group/link text-base">
-                        <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded lg:-inset-x-6 lg:block"></span>
-                        <span className="inline-flex items-center gap-1.5">
-                            <span>Développeur Web / Automation ·</span>
-                            <span className="inline-flex items-center">
-                            Faceplastie
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 motion-reduce:transition-none ml-0.5"
-                                aria-hidden="true"
-                            >
-                                <path
-                                fillRule="evenodd"
-                                d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                                clipRule="evenodd"
-                                />
-                            </svg>
-                            </span>
-                        </span>
-                        </span>
-                    </div>
-                    </h3>
-
-                  <p className="mt-2 text-sm leading-normal text-neutral-400">
-                    Développement et maintenance du site faceplastie.com. Gestion infrastructure complète 
-                    (domaines, DNS, hébergement). Migration LMS complexe LearnDash → GetCourse → LearnWorlds 
-                    avec préservation des données utilisateurs. Conception de systèmes automatisés (Make, Zapier, Notion) 
-                    et intégration outils métiers (Stripe, MailerLite, ManyChat, Meta).
-                  </p>
-
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {['WordPress', 'LearnWorlds', 'Make', 'Zapier', 'Stripe', 'GA4', 'Umami'].map(tech => (
-                      <li key={tech}>
-                        <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                          {tech}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </li>
-
-            {/* Umaï */}
-            <li className="mb-12">
-              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                
-                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Oct. 2024 — Présent
-                </header>
-
-                <div className="z-10 sm:col-span-6">
-                  <h3 className="font-medium leading-snug text-neutral-200">
-                    <div>
-                      <span className="inline-flex items-baseline font-medium leading-tight text-neutral-200 hover:text-forest-300 focus-visible:text-forest-300 group/link text-base">
-                        <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded lg:-inset-x-6 lg:block"></span>
-                        <span className="inline-flex items-center gap-1.5">
-                            <span>Développeur Web / E-commerce ·</span>
-                            <span className="inline-flex items-center">
-                                Umaï
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                    fillRule="evenodd"
-                                    d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                                    clipRule="evenodd"
-                                    />
-                                </svg>
-                            </span>
-                        </span>
-                      </span>
-                    </div>
+                    <span className="inline-flex items-baseline font-medium leading-tight text-neutral-300 text-lg pb-4">
+                      Développeur Web Full Stack · Projets freelance & produits web
+                    </span>
                   </h3>
 
-                  <p className="mt-2 text-sm leading-normal text-neutral-400">
-                    Création et gestion complète du site e-commerce umai.fr sur Shopify. Intégration 
-                    outils marketing et paiement. Gestion et optimisation des campagnes Meta Ads avec 
-                    création de contenus et optimisation du tunnel de conversion.
-                  </p>
+                  {/* Liste des projets */}
+                  <div className="mt-4 space-y-6">
+                    
+                    {/* Projet 1 - Plateforme de génération de leads */}
+                      <h4 className="text-md font-semibold text-forest-400 mb-2">
+                        Plateforme de génération de leads
+                      </h4>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                        <p className="text-sm leading-relaxed text-neutral-400 mb-2">
+                          Conception et développement d&apos;un site vitrine avec <span className='text-neutral-200'>questionnaire interactif</span> pour 
+                          l&apos;estimation de projets. Mise en place d&apos;un <span className='text-neutral-200'>backend Next.js</span> pour la réception, le  
+                          <span className='text-neutral-200'> traitement et l&apos;automatisation des leads</span> vers Notion. Déploiement sur Vercel.
+                        </p>
+                      </div>
 
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {['Shopify', 'Meta Ads', 'Copywriting', 'Email Marketing'].map(tech => (
-                      <li key={tech}>
-                        <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                          {tech}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </li>
+{/*                       <ul className="flex flex-wrap gap-2">
+                        {['Next.js', 'TypeScript', 'Tailwind CSS', 'Notion API', 'Vercel'].map(tech => (
+                          <li key={tech}>
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
+                              {tech}
+                            </div>
+                          </li>
+                        ))}
+                      </ul> */}
 
-            {/* Chez Joon */}
-            <li className="mb-12">
-              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                
-                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  2026
-                </header>
+                    {/* Projet 2 - Umaï */}
+                    
+                      <h4 className="text-md font-semibold text-forest-400 mb-2">
+                        Plateforme e-commerce – Umaï
+                      </h4>
+                      <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
+                        Intégration et configuration avancée de Shopify. <span className='text-neutral-200'>Customization du frontend avec Liquid</span>. Connexion avec des outils externes 
+                        (emails, automatisations) et <span className='text-neutral-200'>optimisation du parcours utilisateur</span>.
+                      </p>
+                      </div>
+{/*                       <ul className="flex flex-wrap gap-2">
+                        {['Shopify', 'Meta Ads', 'Email Marketing', 'Copywriting'].map(tech => (
+                          <li key={tech}>
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
+                              {tech}
+                            </div>
+                          </li>
+                        ))}
+                      </ul> */}
+                    
 
-                <div className="z-10 sm:col-span-6">
-                  <h3 className="font-medium leading-snug text-neutral-200">
-                    <span>Développeur Web · Restaurant Chez Joon</span>
-                  </h3>
+                    {/* Projet 3 - Faceplastie */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <h4 className="text-md font-semibold text-forest-400 mb-2">
+                        Plateforme e-learning – Faceplastie
+                      </h4>
+                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
+                        Mise en place et personnalisation de la plateforme LearnWorlds. Intégration d&apos;outils 
+                        externes et gestion d&apos;une base de plus de 2 000 inscrits. <span className='text-neutral-200'>Migration LMS complexe avec 
+                        préservation des données utilisateurs.</span>
+                      </p>
+{/*                       <ul className="flex flex-wrap gap-2">
+                        {['LearnWorlds', 'WordPress', 'Make', 'Zapier', 'Stripe', 'GA4'].map(tech => (
+                          <li key={tech}>
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
+                              {tech}
+                            </div>
+                          </li>
+                        ))}
+                      </ul> */}
+                    </div>
 
-                  <p className="mt-2 text-sm leading-normal text-neutral-400">
-                    Développement d&apos;un site vitrine sur Wix. Structuration de l&apos;offre, menus, 
-                    identité visuelle et optimisation de l&apos;expérience utilisateur locale.
-                  </p>
+                    {/* Projet 4 - API d'ingestion */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <h4 className="text-md font-semibold text-forest-400 mb-2 flex items-center gap-2">
+                        API d&apos;ingestion de leads
+                        <span className="text-xs font-normal text-neutral-500 italic">(en cours)</span>
+                      </h4>
+                      <p className="text-sm leading-relaxed text-neutral-400 mb-2">
+                        Développement d&apos;une <span className='text-neutral-200'>API REST</span> dédiée à la collecte et au traitement de leads provenant 
+                        de plateformes externes (Malt, Codeur.com). <span className='text-neutral-200'>Normalisation des données et communication 
+                        avec le backend principal.</span>
+                      </p>
+{/*                       <ul className="flex flex-wrap gap-2">
+                        {['Express', 'Node.js', 'REST API', 'PostgreSQL'].map(tech => (
+                          <li key={tech}>
+                            <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
+                              {tech}
+                            </div>
+                          </li>
+                        ))}
+                      </ul> */}
+                    </div>
 
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {['Wix', 'UX Design'].map(tech => (
-                      <li key={tech}>
-                        <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                          {tech}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </li>
           </ol>
 
           <div className="mt-12">
-            
-              <a href="/cv-majit-morosetti.pdf"
+            <a href="/cv-majit-morosetti.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center font-medium leading-tight text-neutral-200 group"
@@ -375,141 +331,199 @@ export default function CVContent() {
         </section>
 
         {/* Compétences */}
-        <section id="skills" className="mb-16 scroll-mt-16 lg:mb-32 lg:scroll-mt-24">
+        <section id="competences" className="mb-16 scroll-mt-16 lg:mb-32 lg:scroll-mt-24">
           <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
-            <h2 className="text-lg lg:text-2xl font-bold tracking-widest text-neutral-200">
+            <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
               Compétences
             </h2>
           </div>
-
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-sm font-semibold text-neutral-300 mb-3">Développement</h3>
-              <ul className="flex flex-wrap gap-2">
-                {['Django', 'Next.js', 'React', 'JavaScript', 'HTML', 'CSS', 'Git'].map(skill => (
-                  <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                      {skill}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div>
-                <h3 className="text-sm font-semibold text-neutral-300 mb-3">Base de données & Backend</h3>
-                <ul className="flex flex-wrap gap-2">
-                {['PostgreSQL', 'Django ORM', 'Prisma', 'REST APIs'].map(skill => (
-                    <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                        {skill}
-                    </div>
-                    </li>
-                ))}
-                </ul>
-            </div>
-
-            <div>
-                <h3 className="text-sm font-semibold text-neutral-300 mb-3">DevOps & Outils</h3>
-                <ul className="flex flex-wrap gap-2">
-                {['Git', 'GitHub', 'Docker', 'Postman', 'Vercel'].map(skill => (
-                    <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                        {skill}
-                    </div>
-                    </li>
-                ))}
-                </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-neutral-300 mb-3">CMS & Plateformes</h3>
-              <ul className="flex flex-wrap gap-2">
-                {['Shopify', 'WordPress', 'Wix', 'LearnWorlds'].map(skill => (
-                  <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                      {skill}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-neutral-300 mb-3">Automatisation & Intégrations</h3>
-              <ul className="flex flex-wrap gap-2">
-                {['Make', 'Zapier', 'Notion', 'ManyChat', 'MailerLite', 'Tally', 'Stripe'].map(skill => (
-                  <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                      {skill}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-neutral-300 mb-3">Analytics & Marketing</h3>
-              <ul className="flex flex-wrap gap-2">
-                {['Google Analytics 4', 'Umami', 'Meta Ads', 'Copywriting'].map(skill => (
-                  <li key={skill}>
-                    <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
-                      {skill}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Projets */}
-        <section id="projects" className="mb-16 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
-          <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
-            <h2 className="text-lg lg:text-2xl font-bold  tracking-widest text-neutral-200">
-              Projets
-            </h2>
-          </div>
-
-          <ul className="group/list">
+          {/* Liste de compétences par catégorie */}
+          <ol className="group/list">
+            {/* Frontend */}
             <li className="mb-12">
-              <div className="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
-                
-                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
-                  Janvier 2026
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
+                </div>                
+                <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  Frontend
                 </header>
-                
                 <div className="z-10 sm:col-span-6">
-                  <h3>
-                    <span className="inline-flex items-baseline font-medium leading-tight text-neutral-200 hover:text-forest-300 focus-visible:text-forest-300 group/link text-base">
-                      <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded lg:-inset-x-6 lg:block"></span>
-                      <span>Site Vitrine Next.js · SparqUp</span>
-                    </span>
-                  </h3>
-
-                  <p className="mt-2 text-sm leading-normal text-neutral-400">
-                    Frontend moderne avec architecture propre et SEO-friendly. Intégration de systèmes 
-                    automatisés internes (Make, Notion) pour la gestion de leads et l&apos;estimation de projets.
-                  </p>
-
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Make', 'Notion'].map(tech => (
-                      <li key={tech}>
-                        <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-xs font-medium leading-5 text-forest-100">
-                          {tech}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-4 space-y-6">
+                    {/* Liste compétences frontend */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <ul className="flex flex-wrap gap-2">
+                      {['Next.js (App router, API routes)', 'React', 'TypeScript', 'Tailwind CSS', 'HTML/CSS'].map(skill => (
+                        <li key={skill}>
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-2 border-forest-800 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                            {skill}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
-          </ul>
+
+            {/* Backend */}
+            <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
+                </div>                
+                <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  Backend
+                </header>
+                <div className="z-10 sm:col-span-6">
+                  <div className="mt-4 space-y-6">
+                    {/* Liste compétences Backend */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <ul className="flex flex-wrap gap-2">
+                      {['Node.js', 'Express','REST APIs', 'PostgreSQL', 'Authentification (JWT / sessions)', 'Webhooks & intégrations tierces' ].map(skill => (
+                          <li key={skill}>
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                              {skill}
+                          </div>
+                          </li>
+                      ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {/* Outils & écosystème */}
+            <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
+                </div>                
+                <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  Outils & écosystème
+                </header>
+                <div className="z-10 sm:col-span-6">
+                  <div className="mt-4 space-y-6">
+                    {/* Liste compétences Outils & écosystème */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <ul className="flex flex-wrap gap-2">
+                      {['Vercel', 'ESLint','Git / GitHub', 'Notion API', 'Resend (emails transactionnels)', 'Stripe (bases)' ].map(skill => (
+                          <li key={skill}>
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                              {skill}
+                          </div>
+                          </li>
+                      ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {/* CMS / plateformes */}
+            <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 ">
+                </div>                
+                <header className="flex items-center z-10 mb-2 mt-1 text-md font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  CMS / plateformes
+                </header>
+                <div className="z-10 sm:col-span-6">
+                  <div className="mt-4 space-y-6">
+                    {/* Liste compétences CMS / plateformes */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <ul className="flex flex-wrap gap-2">
+                      {['Shopify (customisation, intégrations)', 'LearnWorlds','Mailerlite', 'Zapier', 'Make' ].map(skill => (
+                          <li key={skill}>
+                          <div className="flex items-center rounded-full bg-forest-800/50 px-3 py-1 text-md font-medium leading-5 text-forest-100 border-1 border-forest-600 hover:scale-105 hover:bg-forest-100 hover:text-forest-900 transition duration-300 ease-in-out">
+                              {skill}
+                          </div>
+                          </li>
+                      ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          
         </section>
 
+        {/* Formation */}
+        <section id="formations" className="mb-16 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
+          <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
+            <h2 className="text-lg lg:text-3xl font-bold  tracking-widest text-neutral-200">
+              Formations
+            </h2>
+          </div>
+
+          <ol className="group/list">
+          <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
+                
+                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  2023 — Présent
+                </header>
+
+                <div className="z-10 sm:col-span-6"> 
+                    {/* Bac S */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <h4 className="text-md font-semibold text-neutral-300 mb-2">
+                        Parcours autodidacte en développement web
+                      </h4>
+                      <p className="text-sm leading-relaxed text-forest-400 mb-2">
+                        documentation officielle, projets réels, mise en production
+                      </p>
+                    </div>
+                </div>
+              </div>
+            </li>
+            <li className="mb-12">
+              <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-forest-800/20 "></div>
+                
+                <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 sm:col-span-2">
+                  2014
+                </header>
+
+                <div className="z-10 sm:col-span-6"> 
+                    {/* Bac S */}
+                    <div className="border-l-2 border-forest-700 pl-4 hover:border-forest-400 transition-colors">
+                      <h4 className="text-md font-semibold text-neutral-300 mb-2">
+                        Baccalauréat S
+                      </h4>
+                      <p className="text-sm leading-relaxed text-forest-400 mb-2">
+                        Lycée René Cassin - Oslo
+                      </p>
+                    </div>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </section>
+        {/* Infos complémentaires */}
+        <section id="infos-comp" className="mb-16 scroll-mt-16 lg:mb-32 lg:scroll-mt-24 h-[40vh]">
+          <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-forest-900/75 px-6 py-5 backdrop-blur">
+            <h2 className="text-lg lg:text-3xl font-bold tracking-widest text-neutral-200">
+              Informations complémentaires
+            </h2>
+          </div>
+          <div className='text-neutral-300 text-lg'>
+            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
+              <p>Forte autonomie et capacité d&apos;apprentissage rapide</p>
+            </div>
+            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
+              <p>Sens du produit et de la valeur métier</p>
+            </div>
+            <div className="my-4 p-4 border-1 border-forest-800 hover:bg-forest-800/20 hover:text-forest-100 hover:border-forest-900 hover:scale-105 rounded-lg transition-all ease-in-out">
+              <p>À l&apos;aise dans des environnements sans cadre académique classique</p>
+            </div>
+          </div>
+        </section>  
+
         {/* Footer */}
-        <footer className="max-w-md pb-16 text-sm text-neutral-500 pt-20 lg:pt-40 sm:pb-0">
+        <footer className="max-w-md text-sm text-neutral-500 pt-20 lg:pt-40 pb-0">
           <p>
             Développé avec <span className="text-neutral-400">Next.js</span> et{' '}
             <span className="text-neutral-400">Tailwind CSS</span>. Déployé sur{' '}

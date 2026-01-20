@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter, Fraunces } from 'next/font/google';
+import Script from 'next/dist/client/script';
 
 
 const fraunces = Fraunces({ 
@@ -38,6 +39,14 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="font-body antialiased">
           {children}
+          {/* Umami Analytics - Production only */}
+          {process.env.NODE_ENV === 'production' && (
+            <Script
+              src="https://cloud.umami.is/script.js"
+              data-website-id="d40ce924-8416-4320-bf60-9c8c3af02963"
+              strategy="afterInteractive"
+            />
+          )}
       </body>
     </html>
   );
