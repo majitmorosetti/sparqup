@@ -1,103 +1,97 @@
+// data/cv-data.ts
 import type { CVData } from '@/types/cv';
 
 export const cvData: CVData = {
   personal: {
-    name: 'Majit Morosetti',
-    title: 'Full-Stack Developer • Freelance • Spécialiste React & Next.js',
-    email: 'contact@sparqup.fr',
-    phone: '+33 6 XX XX XX XX',
+    name: 'Majit Mambetzhumayev',
+    title: 'Développeur Web Full Stack',
+    email: 'contact@sparqup.fr', 
+    phone: '+33 6 30 92 87 39', 
     location: 'Bordeaux, France',
     website: 'sparqup.fr',
-    github: 'github.com/majitmorosetti',
-    linkedin: 'linkedin.com/in/majitmorosetti',
+    github: 'https://github.com/majitmambetzhumayev',
+    linkedin: 'https://www.linkedin.com/in/majit-mambetzhumayev-95b4273a7/'
   },
   summary:
-    'Développeur full-stack avec 20 ans d\'expérience en développement web. Spécialisé dans la création d\'applications React/Next.js modernes, l\'automatisation de processus métier et l\'intégration d\'outils IA. Expertise en e-commerce, SaaS et solutions sur-mesure pour TPE/PME.',
+    'Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation. Habitué à travailler sans cadre académique classique, je compense par une capacité d\'apprentissage rapide, une approche pragmatique et une mise en production régulière de projets réels.',
   experience: [
     {
-      company: 'SparqUp',
-      position: 'Développeur Full-Stack & Consultant Freelance',
-      period: '2021 - Présent',
+      company: 'Projets freelance & produits web',
+      position: 'Développeur Web Full Stack',
+      period: '2023 - Présent',
       description: [
-        'Développement d\'applications web full-stack (React, Next.js, Node.js, Django, PostgreSQL)',
-        'Automatisation de workflows clients avec Make, Zapier et intégrations API tierces',
-        'Implémentation de solutions e-commerce Shopify avec optimisation conversion',
-        'Clients notables : Face Plastie (e-learning), UMAÏ (e-commerce ergonomique), Chez Joon (restauration)',
+        'Plateforme de génération de leads : questionnaire interactif avec backend Next.js pour traitement et automatisation vers Notion',
+        'E-commerce Umaï : customisation Shopify avec Liquid, optimisation parcours utilisateur',
+        'E-learning Faceplastie : migration LMS complexe avec préservation données de +2000 utilisateurs',
+        'API REST d\'ingestion de leads depuis plateformes externes (Malt, Codeur.com)',
       ],
     },
     {
-      company: 'Face Plastie',
-      position: 'Lead Developer',
-      period: '2022 - 2024',
+      company: 'Missions multi-clients',
+      position: 'Consultant Designer 3D',
+      period: '2018 - 2025',
       description: [
-        'Développement plateforme e-learning complète avec gestion de cours vidéo et espace membre',
-        'Intégration paiements Stripe et système d\'abonnement récurrent',
-        'Refonte UI/UX avec design system moderne (terra cotta/cream)',
-      ],
-    },
-    {
-      company: 'UMAÏ',
-      position: 'Consultant E-commerce & Marketing Digital',
-      period: '2023 - 2024',
-      description: [
-        'Développement et optimisation site e-commerce Shopify pour produits ergonomiques',
-        'Stratégie et gestion campagnes Meta Ads (Facebook/Instagram)',
-        'Email marketing automation et séquences de conversion',
+        'Interaction directe clients avec jalons structurés et points de décision',
+        'Projets industriels complexes pour grands comptes',
+        'Documentation technique et preuves de concept',
+        'Collaboration pluridisciplinaire avec standards stricts',
       ],
     },
   ],
   skills: {
     technical: [
+      'Next.js (App Router, API Routes)',
       'React',
-      'Next.js 15',
       'TypeScript',
       'Node.js',
-      'Django',
+      'Express',
       'PostgreSQL',
       'Tailwind CSS',
       'REST APIs',
     ],
     tools: [
-      'Git',
-      'Shopify',
-      'Make',
-      'Zapier',
-      'Notion',
       'Vercel',
-      'Meta Business Suite',
-      'Google Analytics',
+      'Git/GitHub',
+      'Shopify',
+      'LearnWorlds',
+      'Notion API',
+      'Resend',
       'Stripe',
+      'Zapier',
+      'Make',
     ],
-    languages: [
-      'Français (natif)',
-      'Anglais (professionnel)',
-    ],
+    languages: ['Français (natif)', 'Anglais (professionnel)'],
   },
   education: [
     {
-      degree: 'Autodidacte en Développement Web',
-      school: 'Formation continue et projets réels',
-      period: '2005 - Présent',
+      degree: 'Parcours autodidacte en développement web',
+      school: 'Documentation officielle, projets réels, mise en production',
+      period: '2023 - Présent',
+    },
+    {
+      degree: 'Baccalauréat S',
+      school: 'Lycée René Cassin - Oslo',
+      period: '2014',
     },
   ],
   projects: [
     {
-      name: 'SparqUp Questionnaire System',
+      name: 'Plateforme de génération de leads',
       description:
-        'Système de questionnaire intelligent avec logique de branchement conditionnelle et génération automatique de devis personnalisés pour clients TPE/Tech/Conseil.',
-      tech: ['Next.js', 'TypeScript', 'React Hook Form', 'Zod', 'Tailwind CSS'],
+        'Site vitrine avec questionnaire interactif pour estimation de projets. Backend Next.js avec automatisation vers Notion.',
+      tech: ['Next.js', 'TypeScript', 'Notion API', 'Vercel'],
     },
     {
-      name: 'Face Plastie Platform',
+      name: 'Umaï E-commerce',
       description:
-        'Plateforme e-learning complète avec gestion de cours vidéo, système de paiement Stripe, et espace membre sécurisé.',
-      tech: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Stripe API'],
+        'Plateforme e-commerce Shopify avec customisation Liquid et optimisation parcours utilisateur.',
+      tech: ['Shopify', 'Liquid', 'JavaScript', 'APIs tierces'],
     },
     {
-      name: 'UMAÏ E-commerce',
+      name: 'Faceplastie E-learning',
       description:
-        'Site e-commerce Shopify optimisé pour la conversion avec intégration Meta Pixel et email marketing automation.',
-      tech: ['Shopify Liquid', 'JavaScript', 'Meta Ads', 'Klaviyo'],
+        'Migration LMS complexe avec préservation des données de +2000 inscrits sur LearnWorlds.',
+      tech: ['LearnWorlds', 'Intégrations API', 'Migration de données'],
     },
   ],
 };

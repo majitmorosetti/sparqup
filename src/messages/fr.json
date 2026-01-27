@@ -14,8 +14,8 @@
     },
     "about": {
       "title": "À propos",
-      "p1": "Développeur web full stack orienté front, autodidacte, avec une forte appétence produit et automatisation.",
-      "p2": "Habitué à travailler sans cadre académique classique, je compense par une capacité d'apprentissage rapide, une approche pragmatique et une mise en production régulière de projets réels."
+      "p1": "Développeur full-stack (Next.js, TypeScript, React) bilingue anglais-français avec background technique en conception industrielle (7 ans).",
+      "p2": "Expérience en gestion autonome de projets, production de livrables normés et collaboration à distance. Spécialisé en développement web moderne depuis 2023. Recherche un CDI remote pour contribuer à un produit tech au sein d'une équipe distribuée."
     },
     "experiences": {
       "title": "Expérience professionnelle",
@@ -25,7 +25,12 @@
         "projects": {
           "leads": {
             "title": "Plateforme de génération de leads",
-            "description": "Conception et développement d'un site vitrine avec <highlight>questionnaire interactif</highlight> pour l'estimation de projets. Mise en place d'un <highlight>backend Next.js</highlight> pour la réception, le <highlight>traitement et l'automatisation des leads</highlight> vers Notion. Déploiement sur Vercel."
+            "description": {
+              "A": "Plateforme SaaS de génération de leads : questionnaire multi-étapes, API d&apos;ingestion, dashboard interne",
+              "B": "Développement d&apos;APIs REST (authentification, normalisation, webhooks)",
+              "C": "Automatisation des workflows (Notion, email transactionnel)",
+              "D": "Déploiement et exploitation en production"
+            }
           },
           "umai": {
             "title": "Plateforme e-commerce – Umaï",

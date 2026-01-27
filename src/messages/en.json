@@ -77,6 +77,7 @@
           "Webhooks & third-party integrations"
         ],
         "tools": [
+          "Linux (WSL)",
           "Vercel",
           "ESLint",
           "Git / GitHub",
