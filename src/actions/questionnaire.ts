@@ -2,6 +2,7 @@
 'use server';
 
 import { Resend } from 'resend';
+import { sql } from '@/lib/db';
 import { questionnaireSchema } from '@/lib/questionnaire/schema';
 import { z } from 'zod';
 
@@ -14,6 +15,24 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
   try {
     const validated = questionnaireSchema.parse(data);
 
+    const leadData = {
+      name: `${validated.contact.firstName} ${validated.contact.lastName}`,
+      email: validated.contact.email,
+      phone: validated.contact.phone || null,
+      company: validated.contact.company,
+      project_description: generateProjectDescription(validated),
+      budget_range: getBudgetRange(validated.budget),
+      source: 'questionnaire'
+    };
+
+    const result = await sql`
+      INSERT INTO leads (name, email, phone, company, project_description, budget_range, source)
+      VALUES (${leadData.name}, ${leadData.email}, ${leadData.phone}, ${leadData.company}, ${leadData.project_description}, ${leadData.budget_range}, ${leadData.source})
+      RETURNING id, created_at
+    `;
+
+    const leadId = result[0]?.id;
+    console.log('✅ Lead enregistré:', leadId);
     // ✅ Utilise ton domaine vérifié
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'contact@sparqup.fr';
 
@@ -59,8 +78,79 @@ export async function submitQuestionnaire(data: QuestionnaireData) {
   }
 }
 
+// ============================================
+// Helper pour générer description du projet
+// ============================================
+function generateProjectDescription(data: QuestionnaireData): string {
+  const projectTypeLabels: Record<string, string> = {
+    vitrine: 'Site vitrine',
+    ecommerce: 'Site e-commerce',
+    automatisation: 'Automatisation',
+    refonte: 'Refonte de site',
+    plateforme: 'Plateforme / App web',
+    tech: 'Projet technique',
+    conseil: 'Conseil'
+  };
 
+  let description = `Type: ${projectTypeLabels[data.projectType]}\n`;
+  
+  if (data.branch === 'tpe') {
+    description += `Fonctionnalités: ${data.features.join(', ')}\n`;
+    description += `Assets: ${data.assets.join(', ')}\n`;
+    description += `Outils: ${data.tools.join(', ')}\n`;
+    description += `Timeline: ${data.timeline}\n`;
+  }
+  
+  if (data.branch === 'tech' && data.techNature) {
+    description += `Nature: ${data.techNature}\n`;
+  }
+  
+  if (data.branch === 'conseil' && data.conseilObjectives) {
+    description += `Objectifs: ${data.conseilObjectives.join(', ')}\n`;
+  }
+  
+  if (data.contact.sector) {
+    description += `Secteur: ${data.contact.sector}\n`;
+  }
+  
+  if (data.contact.description) {
+    description += `\nDescription:\n${data.contact.description}`;
+  }
+  
+  return description;
+}
 
+// ============================================
+// Helper pour mapper le budget
+// ============================================
+type Budget = 
+  | '<2000' | '2000-5000' | '5000-10000' | '10000-20000' | '>20000' 
+  | '5000-15000' | '15000-30000' | '30000-50000' | '>50000'
+  | '<3000' | '3000-10000' | '>10000'
+  | 'tbd' | 'unknown' | null | undefined ;
+
+function getBudgetRange(budget: Budget): string {
+  if (!budget) return 'non spécifié';
+  
+  const budgetMap: Record<string, string> = {
+    '<2000': '0-2k',
+    '2000-5000': '2-5k',
+    '5000-10000': '5-10k',
+    '10000-20000': '10-20k',
+    '>20000': '20k+',
+    '5000-15000': '5-15k',
+    '15000-30000': '15-30k',
+    '30000-50000': '30-50k',
+    '>50000': '50k+',
+    '<3000': '0-3k',
+    '3000-10000': '3-10k',
+    '>10000': '10k+',
+    'tbd': 'à définir',
+    'unknown': 'inconnu'
+  };
+  
+  return budgetMap[budget] || budget;
+}
 
 // ============================================
 // Templates emails
