@@ -1,36 +1,26 @@
-// src/app/layout.tsx
-import localFont from "next/font/local";
-import "./globals.css";
-import Header from "@/components/shared/header/Header";
+// app/layout.tsx
+import type { Metadata } from 'next';
+import './globals.css';
+import { Inter, Fraunces } from 'next/font/google';
+import Script from 'next/script';
 
-const geistSans = localFont({
-  src: [
-    {
-      path: "./fonts/geist/Geist-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/geist/Geist-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-  variable: "--font-geist-sans",
-  display: "swap",
+const fraunces = Fraunces({ 
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: ['300','400','500', '600', '700', '800'],
+  display: 'swap'
 });
 
-const geistMono = localFont({
-  src: [
-    {
-      path: "./fonts/geist/GeistMono-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-geist-mono",
-  display: "swap",
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap'
 });
+
+export const metadata: Metadata = {
+  title: 'SparqUp - Web & Automatisation pour TPE',
+  description: 'Développement web & automatisation pour TPE/PME',
+};
 
 export default function RootLayout({
   children,
@@ -38,37 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-      suppressHydrationWarning
-    >
-      <head>
-        <meta name="color-scheme" content="light dark" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                  (function () {
-                    try {
-                      var root = document.documentElement;
-                      var stored = localStorage.getItem('theme');
-                      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                      var isDark = stored ? (stored === 'dark') : systemDark;
-                      if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
-                    } catch (e) {}
-                  })();
-                  `,
-          }}
-        />
-      </head>
-      <body className="min-h-screen bg-background text-foreground font-sans antialiased overflow-x-clip">
-        {/* Header en position: fixed (dans ton composant) */}
-        <Header />
-
-        {/* Spacer pour fixed: utilise --header-h (définie via ResizeObserver dans Header) */}
-        <main id="main" style={{ paddingTop: "var(--header-h, 56px)" }}>
-          {children}
-        </main>
+    <html lang="fr" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="font-body antialiased">
+        {children}
+        
+        {/* ✅ Umami Analytics - Production only */}
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="d40ce924-8416-4320-bf60-9c8c3af02963"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

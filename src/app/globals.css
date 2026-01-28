@@ -1,85 +1,158 @@
 @import "tailwindcss";
 
-/* --- défaut : clair --- */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
-  --font-mono: var(--font-geist-mono, ui-monospace, monospace);
-  --halo: rgba(255 255 255 / 0.7);
+/* ============================================
+   DESIGN TOKENS — Monochrome
+   ============================================ */
+
+@theme {
+  /* ============================================
+     TYPOGRAPHIE
+     ============================================ */
+
+  /* ============================================
+     PALETTE FOREST (Hero & Accents)
+     ============================================ */
+
+  --color-forest-50: oklch(0.98 0.02 155); /* Très léger (backgrounds) */
+  --color-forest-100: oklch(0.94 0.05 155); /* Léger (tips, notifications) */
+  --color-forest-400: oklch(
+    0.72 0.12 155
+  ); /* Accent clair (texte sur sombre) */
+  --color-forest-500: oklch(0.65 0.15 155); /* Hover buttons */
+  --color-forest-600: oklch(0.55 0.13 155); /* Buttons primaires */
+  --color-forest-700: oklch(0.45 0.12 155); /* Accents forts */
+  --color-forest-800: oklch(0.32 0.08 155); /* Sections alternées */
+  --color-forest-900: oklch(0.22 0.06 155); /* Hero background */
+  --color-forest-950: oklch(0.15 0.04 155); /* très sombre*/
+
+  /* ============================================
+     NEUTRAL (Textes & UI)
+     ============================================ */
+
+  --color-neutral-50: oklch(0.99 0 0);
+  --color-neutral-100: oklch(0.97 0 0);
+  --color-neutral-200: oklch(0.93 0 0);
+  --color-neutral-300: oklch(0.87 0 0);
+  --color-neutral-400: oklch(0.7 0 0);
+  --color-neutral-500: oklch(0.6 0 0);
+  --color-neutral-600: oklch(0.5 0 0);
+  --color-neutral-700: oklch(0.4 0 0);
+  --color-neutral-800: oklch(0.28 0 0);
+  --color-neutral-900: oklch(0.18 0 0);
+  --color-neutral-950: oklch(0.08 0 0);
+
+  /* ============================================
+     SEMANTIC (Success, Warning, Error)
+     ============================================ */
+
+  /* Success (utilise forest) */
+  --color-success-50: var(--color-forest-50);
+  --color-success-600: var(--color-forest-600);
+  --color-success-700: var(--color-forest-700);
+
+  /* Warning */
+  --color-warning-50: oklch(0.95 0.08 85);
+  --color-warning-600: oklch(0.65 0.15 75);
+  --color-warning-700: oklch(0.5 0.15 70);
+
+  /* Error */
+  --color-error-50: oklch(0.95 0.08 25);
+  --color-error-600: oklch(0.6 0.18 25);
+  --color-error-700: oklch(0.48 0.18 25);
+
+  /* ============================================
+     BASE COLORS
+     ============================================ */
+
+  --color-white: oklch(1 0 0);
+  --color-black: oklch(0 0 0);
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================ */
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ============================================
+     SPACING (optionnel si tu veux custom)
+     ============================================ */
+
+  /* Tailwind gère déjà, mais tu peux override */
+  /* --spacing-xs: 0.5rem; */
 }
 
-/* Déclare tes alias Tailwind depuis ces tokens */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-white text-neutral-700 font-sans;
+  }
 }
 
-/* --- dark via classe .dark sur <html> --- */
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --halo: rgba(0 0 0 / 0.55);
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@layer utilities {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  body,
+  p,
+  span,
+  a,
+  li {
+    font-family: var(--font-body);
+  }
 }
 
-html,
-body {
-  height: 100%;
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-/* Surfaces & border adaptatives (light/dark) */
-:root {
-  /* couleurs calculées à partir des tokens existants */
-  --surface-1: color-mix(in oklab, var(--background), var(--foreground) 4%);
-  --surface-2: color-mix(in oklab, var(--background), var(--foreground) 7%);
-  --border: color-mix(in oklab, var(--foreground), transparent 88%);
-  --muted: color-mix(in oklab, var(--foreground), var(--background) 70%);
-  /* teinte translucide pour le frosted */
-  --header-tint: rgba(255 255 255 / 0.4);
-  /* traits/ombres adaptés au fond clair */
-  --header-divider: color-mix(in oklab, #000, transparent 86%);
-  --header-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
-  /* halo léger autour du header pour diffuser les bords */
-  --header-halo: radial-gradient(
-    120% 60% at 50% -10%,
-    rgba(0, 0, 0, 0.1),
-    transparent 60%
-  );
-  /* fibre — light */
-  --fiber-core: oklch(0.65 0.08 230); /* bleu/gris froid net */
-  --fiber-clad: oklch(0.7 0.03 230); /* gaine neutre froide */
-  --fiber-sheen: oklch(0.85 0.02 230 / 0.8); /* reflet très doux */
-}
-.dark {
-  --surface-1: color-mix(in oklab, var(--background), var(--foreground) 8%);
-  --surface-2: color-mix(in oklab, var(--background), var(--foreground) 12%);
-  --border: color-mix(in oklab, var(--foreground), transparent 82%);
-  --muted: color-mix(in oklab, var(--foreground), var(--background) 60%);
-
-  /* teinte noire pour frosted dark */
-  --header-tint: rgba(0 0 0 / 0.45);
-  /* traits/ombres adaptés au fond sombre */
-  --header-divider: color-mix(in oklab, #fff, transparent 88%);
-  --header-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.22);
-  --header-halo: radial-gradient(
-    120% 60% at 50% -10%,
-    rgba(255, 255, 255, 0.06),
-    transparent 60%
-  );
-  /* fibre — dark (un peu plus claire pour rester lisible sur fond sombre) */
-  --fiber-core: oklch(0.82 0.06 230);
-  --fiber-clad: oklch(0.78 0.03 230);
-  --fiber-sheen: oklch(0.92 0.02 230 / 0.7);
+.animate-marquee {
+  animation: marquee 40s linear infinite;
 }
 
-/* Expose-les à Tailwind (comme tu l’as déjà fait pour background/foreground) */
-@theme inline {
-  --color-surface-1: var(--surface-1);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px 300px;
+  }
+}
+
+.animate-grid-scroll {
+  animation: grid-scroll 60s linear infinite;
 }
