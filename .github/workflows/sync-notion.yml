@@ -1,0 +1,32 @@
+name: Sync Notion
+
+on:
+  schedule:
+    # Toutes les 15 minutes
+    - cron: "*/15 * * * *"
+
+  # Permet de trigger manuellement depuis GitHub
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync leads to Notion
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X GET "${{ secrets.SYNC_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "Response: $body"
+          echo "HTTP Code: $http_code"
+
+          if [ "$http_code" -ne 200 ]; then
+            echo "❌ Sync failed with status $http_code"
+            exit 1
+          fi
+
+          echo "✅ Sync completed successfully"
